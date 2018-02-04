@@ -2,73 +2,79 @@
 <sheet>
     <page title="Cars">
         <data>
-            <td x="0" y="0" fgColor="#000000" bgColor="#729fcf" colwidth="100" rowwidth="30">Ford</td>
-            <td x="0" y="1" fgColor="#000000" bgColor="#babdb6" colwidth="100" rowwidth="30">Honda</td>
-            <td x="0" y="2" fgColor="#00cc00" bgColor="#ffffff" colwidth="100" rowwidth="30">Chevy</td>
-            <td x="0" y="3" fgColor="#000000" bgColor="#fcaf3e" colwidth="100" rowwidth="30">Jeep</td>
-            <td x="0" y="4" fgColor="#000000" bgColor="#ef2929" colwidth="100" rowwidth="30">Dodge</td>
-            <td x="0" y="5" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Toyota</td>
-            <td x="1" y="0" fgColor="#cc0000" bgColor="#ffffff" tooltip="" colwidth="100" rowwidth="30">Expedition</td>
-            <td x="1" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Accord</td>
-            <td x="1" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Suburban</td>
-            <td x="1" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Wrangler</td>
-            <td x="1" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Ram</td>
-            <td x="1" y="5" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Prius</td>
-            <td x="2" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Explorer</td>
-            <td x="2" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">CR-V</td>
-            <td x="2" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Silverado</td>
-            <td x="2" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Cherokee</td>
-            <td x="2" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Charger</td>
-            <td x="3" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Fusion</td>
-            <td x="3" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Pilot</td>
-            <td x="3" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Curze</td>
-            <td x="3" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Scramble</td>
-            <td x="3" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Magnum</td>
-            <td x="4" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">F-150</td>
-            <td x="4" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">HR-V</td>
-            <td x="4" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Impala</td>
-            <td x="4" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Challenger</td>
-            <td x="5" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">F-250</td>
-            <td x="5" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Civic</td>
-            <td x="5" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Cruze</td>
-            <td x="6" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">F-350</td>
-            <td x="7" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">F-450</td>
-            <td x="8" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">F-550</td>
-            <td x="9" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">F-650</td>
-            <td x="10" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">F-750</td>
-            <td x="11" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Van</td>
-            <td x="12" y="0" fgColor="#000000" bgColor="#ffffff" tooltip="An offroad version of the F-150" colwidth="100" rowwidth="30">Raptor</td>
+            <td x="0" y="0" fgColor="#000000" bgColor="#729fcf" colwidth="100" rowwidth="30" spanx="1" spany="1">Ford</td>
+            <td x="0" y="1" fgColor="#000000" bgColor="#babdb6" colwidth="100" rowwidth="30" spanx="1" spany="1">Honda</td>
+            <td x="0" y="2" fgColor="#00cc00" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Chevy</td>
+            <td x="0" y="3" fgColor="#000000" bgColor="#fcaf3e" colwidth="100" rowwidth="30" spanx="1" spany="1">Jeep</td>
+            <td x="0" y="4" fgColor="#000000" bgColor="#ef2929" colwidth="100" rowwidth="30" spanx="1" spany="1">Dodge</td>
+            <td x="0" y="5" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Toyota</td>
+            <td x="1" y="0" fgColor="#cc0000" bgColor="#ffffff" tooltip="" colwidth="100" rowwidth="30" spanx="1" spany="1">Expedition</td>
+            <td x="1" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Accord</td>
+            <td x="1" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Suburban</td>
+            <td x="1" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Wrangler</td>
+            <td x="1" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Ram</td>
+            <td x="1" y="5" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Prius</td>
+            <td x="2" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Explorer</td>
+            <td x="2" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">CR-V</td>
+            <td x="2" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Silverado</td>
+            <td x="2" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Cherokee</td>
+            <td x="2" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Charger</td>
+            <td x="3" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Fusion</td>
+            <td x="3" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Pilot</td>
+            <td x="3" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Curze</td>
+            <td x="3" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Scramble</td>
+            <td x="3" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Magnum</td>
+            <td x="4" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-150</td>
+            <td x="4" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">HR-V</td>
+            <td x="4" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Impala</td>
+            <td x="4" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Challenger</td>
+            <td x="5" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-250</td>
+            <td x="5" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Civic</td>
+            <td x="5" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Cruze</td>
+            <td x="6" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-350</td>
+            <td x="7" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-450</td>
+            <td x="8" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-550</td>
+            <td x="9" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-650</td>
+            <td x="10" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-750</td>
+            <td x="11" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Van</td>
+            <td x="12" y="0" fgColor="#000000" bgColor="#ffffff" tooltip="An offroad version of the F-150" colwidth="100" rowwidth="30" spanx="1" spany="1">Raptor</td>
         </data>
         <math/>
     </page>
     <page title="Airplanes">
         <data>
-            <td x="0" y="0" fgColor="#000000" bgColor="#9999ff" colwidth="100" rowwidth="30">Cessna</td>
-            <td x="0" y="1" fgColor="#000000" bgColor="#9999ff" colwidth="100" rowwidth="30">Piper</td>
-            <td x="1" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Cub</td>
-            <td x="2" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Cherokee</td>
+            <td x="0" y="0" fgColor="#000000" bgColor="#9999ff" colwidth="100" rowwidth="30" spanx="1" spany="1">Cessna</td>
+            <td x="0" y="1" fgColor="#000000" bgColor="#9999ff" colwidth="100" rowwidth="30" spanx="1" spany="1">Piper</td>
+            <td x="1" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Cub</td>
+            <td x="2" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Cherokee</td>
         </data>
         <math/>
     </page>
     <page title="Math Page">
         <data>
-            <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44">8</td>
-            <td x="0" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44">222</td>
-            <td x="0" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44">7</td>
-            <td x="0" y="3" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="44">-221</td>
-            <td x="0" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="263" rowwidth="44">Thin</td>
-            <td x="1" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">4</td>
-            <td x="1" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">0</td>
-            <td x="2" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">7</td>
-            <td x="2" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">1</td>
-            <td x="3" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">88</td>
-            <td x="4" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">99</td>
-            <td x="5" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">77</td>
-            <td x="6" y="0" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="30">283</td>
+            <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44" spanx="1" spany="1">8</td>
+            <td x="0" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44" spanx="1" spany="1">222</td>
+            <td x="0" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44" spanx="1" spany="1">7</td>
+            <td x="0" y="3" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="44" spanx="1" spany="1">-221</td>
+            <td x="0" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="263" rowwidth="44" spanx="1" spany="1">Thin</td>
+            <td x="1" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">4</td>
+            <td x="1" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">0</td>
+            <td x="2" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">7</td>
+            <td x="2" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">1</td>
+            <td x="3" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">88</td>
+            <td x="4" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">99</td>
+            <td x="5" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">77</td>
+            <td x="6" y="0" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="30" spanx="1" spany="1">283</td>
         </data>
         <math>
             <equ x="6" y="0">=sum(y)[1][6]</equ>
             <equ x="0" y="3">=sub(x)[1][3]</equ>
         </math>
+    </page>
+    <page title="Merge Page">
+        <math/>
+        <data>
+            <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="2">Hello!</td>
+        </data>
     </page>
 </sheet>
