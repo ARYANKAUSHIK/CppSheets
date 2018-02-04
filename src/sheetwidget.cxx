@@ -7,6 +7,7 @@
 
 SheetWidget::SheetWidget(QString path)
     : layout(new QVBoxLayout),
+      currentData(new QLineEdit),
       tabs(new QTabWidget)
 {
     filePath = path;
@@ -18,8 +19,13 @@ SheetWidget::SheetWidget(QString path)
     if (path=="untitled") {
         TableWidget *table = new TableWidget;
         connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
+        connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
         tabs->addTab(new TableWidget(),"page 1");
     }
+
+    connect(currentData,&QLineEdit::returnPressed,this,&SheetWidget::onCurrentDataEnterPressed);
+
+    layout->addWidget(currentData,0,Qt::AlignTop);
     layout->addWidget(tabs);
 
     addTab = new QToolButton;
@@ -40,6 +46,7 @@ void SheetWidget::loadFile() {
     for (int i = 0; i<pageList.size(); i++) {
         TableWidget *table = new TableWidget;
         connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
+        connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
         tabs->addTab(table,pageList.at(i));
 
         auto itemList = Parser::allItems(filePath,pageList.at(i));
@@ -152,6 +159,23 @@ QTableWidgetItem *SheetWidget::currentCell() {
 
 void SheetWidget::onCellChanged() {
     saved = false;
+}
+
+void SheetWidget::onCellLocoChanged(QTableWidgetItem *current, QTableWidgetItem *last) {
+    if (current==nullptr) {
+        currentData->setText("");
+    } else {
+        currentData->setText(current->text());
+    }
+}
+
+void SheetWidget::onCurrentDataEnterPressed() {
+    QTableWidgetItem *item = currentCell();
+    item->setText(currentData->text());
+
+    int row = item->row()+1;
+    int col = item->column();
+    currentTable()->setCurrentCell(row,col);
 }
 
 void SheetWidget::onAddTabClicked() {

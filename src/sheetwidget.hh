@@ -2,6 +2,7 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
+#include <QLineEdit>
 #include <QTabWidget>
 #include <QString>
 #include <QToolButton>
@@ -29,11 +30,14 @@ public:
     QTableWidgetItem *currentCell();
 private:
     QVBoxLayout *layout;
+    QLineEdit *currentData;
     QTabWidget *tabs;
     QToolButton *addTab;
     QString filePath;
     bool saved = true;
 private slots:
     void onCellChanged();
+    void onCellLocoChanged(QTableWidgetItem *current, QTableWidgetItem *last);
+    void onCurrentDataEnterPressed();
     void onAddTabClicked();
 };
