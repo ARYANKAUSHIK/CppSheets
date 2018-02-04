@@ -1,5 +1,7 @@
+#include <QVBoxLayout>
+
 #include "window.hh"
-#include "maintoolbar.hh"
+#include "ribbon.hh"
 #include "tabwidget.hh"
 
 Window::Window() {
@@ -7,10 +9,16 @@ Window::Window() {
     this->resize(800,600);
 
     TabWidget *tabs = new TabWidget;
-    MainToolbar *toolbar = new MainToolbar;
+    Ribbon *ribbon = new Ribbon;
 
-    this->addToolBar(toolbar);
-    this->setCentralWidget(tabs);
+    QWidget *centerWidget = new QWidget;
+    QVBoxLayout *centerLayout = new QVBoxLayout;
+    centerLayout->setContentsMargins(0,0,0,0);
+    centerWidget->setLayout(centerLayout);
+    this->setCentralWidget(centerWidget);
+
+    centerLayout->addWidget(ribbon,0,Qt::AlignTop);
+    centerLayout->addWidget(tabs);
 }
 
 Window::~Window() {

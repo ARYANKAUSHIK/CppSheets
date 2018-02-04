@@ -1,10 +1,7 @@
 #include <QIcon>
-#include <QFileDialog>
-#include <QFileInfo>
 
 #include "maintoolbar.hh"
-#include "tabwidget.hh"
-#include "parser.hh"
+#include "actions.hh"
 
 MainToolbar::MainToolbar()
     : newFile(new QToolButton),
@@ -31,40 +28,13 @@ MainToolbar::~MainToolbar() {
 }
 
 void MainToolbar::onNewFileClicked() {
-    TabWidget::addNewTab();
+    Actions::newFile();
 }
 
 void MainToolbar::onOpenClicked() {
-    QFileDialog dialog;
-    dialog.setWindowTitle("Open File");
-    dialog.setAcceptMode(QFileDialog::AcceptOpen);
-    if (dialog.exec()) {
-        if (dialog.selectedFiles().size()==0) {
-            return;
-        }
-        QString selected = dialog.selectedFiles().at(0);
-        if (TabWidget::currentWidget()->isUntitled()&&TabWidget::currentWidget()->isSaved()) {
-            TabWidget::currentWidget()->setFile(selected);
-            TabWidget::currentWidget()->loadFile();
-            TabWidget::setCurrentTitle(QFileInfo(selected).fileName());
-        } else {
-            TabWidget::addNewTab(selected);
-        }
-    }
+    Actions::openFile();
 }
 
 void MainToolbar::onSaveClicked() {
-    if (TabWidget::currentWidget()->isUntitled()) {
-        //Save as
-        return;
-    }
-    auto pages = TabWidget::currentWidget()->allPages();
-    QString filePath = TabWidget::currentWidget()->file();
-    for (int i = 0; i<pages.size(); i++) {
-        auto data = TabWidget::currentWidget()->data(pages.at(i));
-        if (!Parser::pageExists(filePath,pages.at(i))) {
-            Parser::createPage(filePath,pages.at(i));
-        }
-        Parser::setData(filePath,pages.at(i),data);
-    }
+    Actions::saveFile();
 }

@@ -10,6 +10,8 @@ set(SRC
         maintoolbar.cxx
         tabwidget.cxx
         rsc.qrc
+        actions.cxx
+        ribbon.cxx
 )
 
 add_executable(CppSheets ${SRC})
