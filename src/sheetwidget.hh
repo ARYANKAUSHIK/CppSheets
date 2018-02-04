@@ -7,8 +7,10 @@
 #include <QToolButton>
 #include <QVector>
 #include <QStringList>
+#include <QTableWidgetItem>
 
 #include "parser.hh"
+#include "tablewidget.hh"
 
 class SheetWidget : public QWidget {
     Q_OBJECT
@@ -23,6 +25,8 @@ public:
     bool isUntitled();
     void setSaved(bool s);
     bool isSaved();
+    TableWidget *currentTable();
+    QTableWidgetItem *currentCell();
 private:
     QVBoxLayout *layout;
     QTabWidget *tabs;

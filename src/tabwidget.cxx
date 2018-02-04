@@ -11,6 +11,7 @@ TabWidget::TabWidget()
     this->setLayout(layout);
 
     tabs = new QTabWidget;
+    tabs->setTabBarAutoHide(true);
     tabs->setTabsClosable(true);
     tabs->setMovable(true);
 

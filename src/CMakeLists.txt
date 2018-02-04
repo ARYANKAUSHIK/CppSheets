@@ -12,6 +12,7 @@ set(SRC
         rsc.qrc
         actions.cxx
         ribbon.cxx
+        homebar.cxx
 )
 
 add_executable(CppSheets ${SRC})

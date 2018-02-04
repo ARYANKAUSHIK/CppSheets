@@ -134,6 +134,22 @@ bool SheetWidget::isSaved() {
     return saved;
 }
 
+TableWidget *SheetWidget::currentTable() {
+    TableWidget *table = static_cast<TableWidget *>(tabs->currentWidget());
+    return table;
+}
+
+QTableWidgetItem *SheetWidget::currentCell() {
+    QTableWidgetItem *item = currentTable()->currentItem();
+    int x = currentTable()->currentRow();
+    int y = currentTable()->currentColumn();
+    if (item==nullptr) {
+        item = new QTableWidgetItem;
+    }
+    currentTable()->setItem(x,y,item);
+    return item;
+}
+
 void SheetWidget::onCellChanged() {
     saved = false;
 }
