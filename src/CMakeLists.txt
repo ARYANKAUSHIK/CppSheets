@@ -13,6 +13,7 @@ set(SRC
         actions.cxx
         ribbon.cxx
         homebar.cxx
+        math.cxx
 )
 
 add_executable(CppSheets ${SRC})
