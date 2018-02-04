@@ -131,6 +131,14 @@ QVector<SheetItem> Parser::allItems(QString file, QString page) {
         int rowWidth = QVariant(rowWidthStr).toInt();
         item.rowWidth = rowWidth;
 
+        QString sSpanX = QString(td->Attribute("spanx"));
+        int spanX = QVariant(sSpanX).toInt();
+        item.spanx = spanX;
+
+        QString sSpanY = QString(td->Attribute("spany"));
+        int spanY = QVariant(sSpanY).toInt();
+        item.spany = spanY;
+
         if ((!sx.isNull())||(!sy.isNull())||(!text.isNull())) {
             item.x = QVariant(sx).toInt();
             item.y = QVariant(sy).toInt();

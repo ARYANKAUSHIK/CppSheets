@@ -18,6 +18,8 @@ struct SheetItem {
     QString tooltip;
     int colWidth;
     int rowWidth;
+    int spanx;
+    int spany;
 };
 
 struct MathItem {

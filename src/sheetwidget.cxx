@@ -72,6 +72,8 @@ void SheetWidget::loadFile() {
 
             table->setColumnWidth(y,itemList.at(j).colWidth);
             table->setRowHeight(x,itemList.at(j).rowWidth);
+
+            table->setSpan(x,y,itemList.at(j).spanx,itemList.at(j).spany);
         }
     }
 }
