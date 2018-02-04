@@ -184,6 +184,8 @@ void SheetWidget::onCurrentDataEnterPressed() {
         mitem.equation = data;
         currentTable()->addMathItem(mitem);
         currentTable()->updateMath();
+    } else if (data.startsWith("-{")) {
+        item->setToolTip(data.replace("-{",""));
     } else {
         item->setText(currentData->text());
     }
