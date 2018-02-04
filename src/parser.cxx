@@ -109,6 +109,10 @@ QVector<SheetItem> Parser::allItems(QString file, QString page) {
             item.tooltip = tooltip;
         }
 
+        QString colWidthStr = QString(td->Attribute("colwidth"));
+        int colWidth = QVariant(colWidthStr).toInt();
+        item.colWidth = colWidth;
+
         if ((!sx.isNull())||(!sy.isNull())||(!text.isNull())) {
             item.x = QVariant(sx).toInt();
             item.y = QVariant(sy).toInt();
@@ -247,6 +251,10 @@ void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
         if (!tooltip.isNull()) {
             td->SetAttribute("tooltip",tooltip.toStdString().c_str());
         }
+
+        int colWidth = current.colWidth;
+        QString colWidthStr = QVariant(colWidth).toString();
+        td->SetAttribute("colwidth",colWidthStr.toStdString().c_str());
     }
 
     doc->SaveFile(file.toStdString().c_str());

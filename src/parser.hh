@@ -16,6 +16,7 @@ struct SheetItem {
     QColor bgColor;
     QColor fgColor;
     QString tooltip;
+    int colWidth;
 };
 
 struct MathItem {
