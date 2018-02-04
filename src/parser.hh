@@ -33,5 +33,6 @@ public:
     static bool pageExists(QString file, QString pageName);
     static void removePage(QString file, QString page);
     static void setData(QString file, QString page, QVector<SheetItem> items);
+    static void setMathData(QString file, QString page, QVector<MathItem> items);
     static XMLElement *getPageElement(XMLElement *root, QString title);
 };

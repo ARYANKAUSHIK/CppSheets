@@ -19,6 +19,10 @@ void TableWidget::addMathItem(MathItem item) {
     mathItems.push_back(item);
 }
 
+QVector<MathItem> TableWidget::allMathItems() {
+    return mathItems;
+}
+
 void TableWidget::updateMath() {
     Math::updateMath(mathItems,this);
 }

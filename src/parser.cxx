@@ -252,6 +252,42 @@ void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
     doc->SaveFile(file.toStdString().c_str());
 }
 
+void Parser::setMathData(QString file, QString page, QVector<MathItem> items) {
+    XMLDocument *doc = new XMLDocument;
+    doc->LoadFile(file.toStdString().c_str());
+
+    XMLElement *root = doc->FirstChildElement("sheet");
+    if (root==nullptr) {
+        return;
+    }
+
+    XMLElement *pageElement = getPageElement(root,page);
+    if (pageElement==nullptr) {
+        return;
+    }
+
+    XMLElement *mathElement = pageElement->FirstChildElement("math");
+    if (mathElement==nullptr) {
+        return;
+    }
+    mathElement->DeleteChildren();
+
+    for (int i = 0; i<items.size(); i++) {
+        MathItem current = items.at(i);
+        QString sx = QVariant(current.x).toString();
+        QString sy = QVariant(current.y).toString();
+
+        XMLElement *td = doc->NewElement("equ");
+        mathElement->InsertEndChild(td);
+
+        td->SetAttribute("x",sx.toStdString().c_str());
+        td->SetAttribute("y",sy.toStdString().c_str());
+        td->SetText(current.equation.toStdString().c_str());
+    }
+
+    doc->SaveFile(file.toStdString().c_str());
+}
+
 XMLElement *Parser::getPageElement(XMLElement *root, QString title) {
     XMLElement *pageElement = root->FirstChildElement("page");
     XMLElement *oldPage;
