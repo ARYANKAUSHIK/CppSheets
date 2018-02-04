@@ -113,6 +113,10 @@ QVector<SheetItem> Parser::allItems(QString file, QString page) {
         int colWidth = QVariant(colWidthStr).toInt();
         item.colWidth = colWidth;
 
+        QString rowWidthStr = QString(td->Attribute("rowwidth"));
+        int rowWidth = QVariant(rowWidthStr).toInt();
+        item.rowWidth = rowWidth;
+
         if ((!sx.isNull())||(!sy.isNull())||(!text.isNull())) {
             item.x = QVariant(sx).toInt();
             item.y = QVariant(sy).toInt();
@@ -255,6 +259,10 @@ void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
         int colWidth = current.colWidth;
         QString colWidthStr = QVariant(colWidth).toString();
         td->SetAttribute("colwidth",colWidthStr.toStdString().c_str());
+
+        int rowWidth = current.rowWidth;
+        QString rowWidthStr = QVariant(rowWidth).toString();
+        td->SetAttribute("rowwidth",rowWidthStr.toStdString().c_str());
     }
 
     doc->SaveFile(file.toStdString().c_str());
