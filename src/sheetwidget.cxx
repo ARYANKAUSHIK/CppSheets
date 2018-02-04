@@ -20,7 +20,7 @@ SheetWidget::SheetWidget(QString path)
         TableWidget *table = new TableWidget;
         connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
         connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
-        tabs->addTab(new TableWidget(),"page 1");
+        tabs->addTab(table,"page 1");
     }
 
     connect(currentData,&QLineEdit::returnPressed,this,&SheetWidget::onCurrentDataEnterPressed);
