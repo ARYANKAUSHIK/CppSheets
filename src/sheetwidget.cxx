@@ -1,5 +1,6 @@
 #include <QTableWidgetItem>
 #include <QInputDialog>
+#include <QMessageBox>
 #include <iostream>
 
 #include "sheetwidget.hh"
@@ -17,6 +18,8 @@ SheetWidget::SheetWidget(QString path)
     this->setLayout(layout);
 
     tabs->setTabPosition(QTabWidget::South);
+    tabs->setTabsClosable(true);
+
     if (path=="untitled") {
         TableWidget *table = new TableWidget;
         connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
@@ -26,6 +29,7 @@ SheetWidget::SheetWidget(QString path)
 
     connect(currentData,&QLineEdit::returnPressed,this,&SheetWidget::onCurrentDataEnterPressed);
     connect(tabs,SIGNAL(tabBarDoubleClicked(int)),this,SLOT(onTabDoubleClick(int)));
+    connect(tabs,SIGNAL(tabCloseRequested(int)),this,SLOT(onTabClose(int)));
 
     layout->addWidget(currentData,0,Qt::AlignTop);
     layout->addWidget(tabs);
@@ -165,6 +169,15 @@ QTableWidgetItem *SheetWidget::currentCell() {
     return item;
 }
 
+void SheetWidget::addNewTab(int no) {
+    int count = tabs->count();
+    TableWidget *table = new TableWidget;
+    connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
+    connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
+    tabs->addTab(new TableWidget(),"page "+QVariant(no).toString());
+    tabs->setCurrentIndex(count);
+}
+
 void SheetWidget::onCellChanged() {
     saved = false;
 }
@@ -203,11 +216,7 @@ void SheetWidget::onCurrentDataEnterPressed() {
 }
 
 void SheetWidget::onAddTabClicked() {
-    int count = tabs->count();
-    TableWidget *table = new TableWidget;
-    connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
-    tabs->addTab(new TableWidget(),"page "+QVariant(tabs->count()+1).toString());
-    tabs->setCurrentIndex(count);
+    addNewTab(tabs->count()+1);
     saved = false;
 }
 
@@ -226,5 +235,31 @@ void SheetWidget::onTabDoubleClick(int index) {
     }
 
     tabs->setTabText(index,dialog.textValue());
+
+    saved = false;
+}
+
+void SheetWidget::onTabClose(int index) {
+    QMessageBox msg;
+    msg.setWindowTitle("Confirm");
+    msg.setText("This will delete the page you have selected.\n"
+                "Are you sure you wish to continue?");
+    msg.setIcon(QMessageBox::Warning);
+    msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    int ret = msg.exec();
+
+    if (ret==QMessageBox::No) {
+        return;
+    }
+
+    if (tabs->count()==1) {
+        this->addNewTab(1);
+    }
+
+    QString title = tabs->tabText(index);
+    delete tabs->widget(index);
+    Parser::removePage(filePath,title);
+
+    saved = false;
 }
 

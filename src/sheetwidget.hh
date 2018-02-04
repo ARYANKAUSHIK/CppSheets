@@ -35,10 +35,12 @@ private:
     QToolButton *addTab;
     QString filePath;
     bool saved = true;
+    void addNewTab(int no);
 private slots:
     void onCellChanged();
     void onCellLocoChanged(QTableWidgetItem *current, QTableWidgetItem *last);
     void onCurrentDataEnterPressed();
     void onAddTabClicked();
     void onTabDoubleClick(int index);
+    void onTabClose(int index);
 };
