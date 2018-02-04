@@ -220,6 +220,14 @@ void SheetWidget::mergeSelected() {
     currentTable()->setSpan(sx,sy,ex,ey);
 }
 
+void SheetWidget::unMergeSelected() {
+    QTableWidgetItem *item = currentCell();
+    int x = item->row();
+    int y = item->column();
+
+    currentTable()->setSpan(x,y,1,1);
+}
+
 TableWidget *SheetWidget::currentTable() {
     TableWidget *table = static_cast<TableWidget *>(tabs->currentWidget());
     return table;
