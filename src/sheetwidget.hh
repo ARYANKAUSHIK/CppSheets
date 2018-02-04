@@ -40,4 +40,5 @@ private slots:
     void onCellLocoChanged(QTableWidgetItem *current, QTableWidgetItem *last);
     void onCurrentDataEnterPressed();
     void onAddTabClicked();
+    void onTabDoubleClick(int index);
 };

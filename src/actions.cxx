@@ -44,6 +44,13 @@ void Actions::saveFile() {
         Parser::setData(filePath,pages.at(i),data);
         Parser::setMathData(filePath,pages.at(i),mathData);
     }
+
+    auto filePages = Parser::pages(filePath);
+    for (int i = 0; i<filePages.size(); i++) {
+        if (!pages.contains(filePages.at(i))) {
+            Parser::removePage(filePath,filePages.at(i));
+        }
+    }
 }
 
 void Actions::saveFileAs() {

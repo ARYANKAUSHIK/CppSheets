@@ -1,4 +1,5 @@
 #include <QTableWidgetItem>
+#include <QInputDialog>
 #include <iostream>
 
 #include "sheetwidget.hh"
@@ -24,6 +25,7 @@ SheetWidget::SheetWidget(QString path)
     }
 
     connect(currentData,&QLineEdit::returnPressed,this,&SheetWidget::onCurrentDataEnterPressed);
+    connect(tabs,SIGNAL(tabBarDoubleClicked(int)),this,SLOT(onTabDoubleClick(int)));
 
     layout->addWidget(currentData,0,Qt::AlignTop);
     layout->addWidget(tabs);
@@ -208,3 +210,21 @@ void SheetWidget::onAddTabClicked() {
     tabs->setCurrentIndex(count);
     saved = false;
 }
+
+void SheetWidget::onTabDoubleClick(int index) {
+    if (index==-1) {
+        return;
+    }
+
+    QInputDialog dialog;
+    dialog.setWindowTitle("Rename Page");
+    dialog.setLabelText("Enter name for your page:");
+    dialog.setTextValue(tabs->tabText(index));
+
+    if (!dialog.exec()) {
+        return;
+    }
+
+    tabs->setTabText(index,dialog.textValue());
+}
+
