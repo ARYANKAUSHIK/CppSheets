@@ -11,6 +11,8 @@ class TableWidget : public QTableWidget {
 public:
     TableWidget();
     void setMathItems(QVector<MathItem> items);
+    void addMathItem(MathItem item);
+    void updateMath();
 private:
     QVector<MathItem> mathItems;
 private slots:

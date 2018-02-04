@@ -20,11 +20,11 @@ void TableWidget::setMathItems(QVector<MathItem> items) {
     mathItems = items;
 }
 
-void TableWidget::onCellChanged() {
-    emit cellModified();
+void TableWidget::addMathItem(MathItem item) {
+    mathItems.push_back(item);
 }
 
-void TableWidget::onItemChanged(QTableWidgetItem *item) {
+void TableWidget::updateMath() {
     for (int i = 0; i<mathItems.size(); i++) {
         int x = mathItems.at(i).x;
         int y = mathItems.at(i).y;
@@ -114,4 +114,12 @@ void TableWidget::onItemChanged(QTableWidgetItem *item) {
         item->setText(strResult);
         this->setItem(x,y,item);
     }
+}
+
+void TableWidget::onCellChanged() {
+    emit cellModified();
+}
+
+void TableWidget::onItemChanged(QTableWidgetItem *item) {
+    updateMath();
 }

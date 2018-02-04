@@ -172,11 +172,23 @@ void SheetWidget::onCellLocoChanged(QTableWidgetItem *current, QTableWidgetItem 
 
 void SheetWidget::onCurrentDataEnterPressed() {
     QTableWidgetItem *item = currentCell();
-    item->setText(currentData->text());
+    QString data = currentData->text();
+    if (data.startsWith("=")) {
+        MathItem mitem;
+        mitem.x = item->row();
+        mitem.y = item->column();
+        mitem.equation = data;
+        currentTable()->addMathItem(mitem);
+        currentTable()->updateMath();
+    } else {
+        item->setText(currentData->text());
+    }
 
     int row = item->row()+1;
     int col = item->column();
     currentTable()->setCurrentCell(row,col);
+
+    currentData->setText("");
 }
 
 void SheetWidget::onAddTabClicked() {
