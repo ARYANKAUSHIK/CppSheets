@@ -28,6 +28,7 @@ struct MathItem {
 
 class Parser {
 public:
+    static void createFile(QString filePath);
 	static QStringList pages(QString file);
     static QVector<SheetItem> allItems(QString file, QString page);
     static QVector<MathItem> allMathItems(QString file, QString page);

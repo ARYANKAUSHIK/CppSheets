@@ -51,8 +51,23 @@ void Actions::saveFile() {
             Parser::removePage(filePath,filePages.at(i));
         }
     }
+
+    TabWidget::currentWidget()->setSaved(true);
 }
 
 void Actions::saveFileAs() {
+    QFileDialog dialog;
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    dialog.setWindowTitle("Save As");
+    if (dialog.exec()) {
+        if (dialog.selectedFiles().size()==0) {
+            return;
+        }
+        QString selected = dialog.selectedFiles().at(0);
+        TabWidget::currentWidget()->setFile(selected);
+        TabWidget::setCurrentTitle(QFileInfo(selected).fileName());
+        Parser::createFile(selected);
 
+        saveFile();
+    }
 }

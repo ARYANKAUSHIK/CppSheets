@@ -1,7 +1,21 @@
+#include <QFile>
+#include <QTextStream>
 #include <QVariant>
 #include <iostream>
 
 #include "parser.hh"
+
+void Parser::createFile(QString filePath) {
+    QFile file(filePath);
+    if (file.open(QFile::ReadWrite | QFile::Truncate)) {
+        QTextStream writer(&file);
+        QString content = "<?xml version=\"1.0\"?>\n"
+                          "<sheet>\n</sheet>\n";
+        writer << content;
+        writer.flush();
+        file.close();
+    }
+}
 
 QStringList Parser::pages(QString file) {
 	QStringList list;
@@ -190,6 +204,9 @@ void Parser::createPage(QString file, QString page) {
 
     XMLElement *newData = doc->NewElement("data");
     newPage->InsertFirstChild(newData);
+
+    XMLElement *newMath = doc->NewElement("math");
+    newPage->InsertFirstChild(newMath);
 
     doc->SaveFile(file.toStdString().c_str());
 }
