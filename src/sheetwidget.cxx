@@ -188,10 +188,6 @@ void SheetWidget::onCurrentDataEnterPressed() {
         item->setText(currentData->text());
     }
 
-    int row = item->row()+1;
-    int col = item->column();
-    currentTable()->setCurrentCell(row,col);
-
     currentData->setText("");
 }
 

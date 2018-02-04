@@ -25,7 +25,9 @@ void TableWidget::addMathItem(MathItem item) {
             break;
         }
     }
-    mathItems.push_back(item);
+    if (item.equation!="=\\") {
+        mathItems.push_back(item);
+    }
 }
 
 QVector<MathItem> TableWidget::allMathItems() {
