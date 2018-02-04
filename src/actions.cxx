@@ -37,7 +37,7 @@ void Actions::saveFile() {
     QString filePath = TabWidget::currentWidget()->file();
     for (int i = 0; i<pages.size(); i++) {
         auto data = TabWidget::currentWidget()->data(pages.at(i));
-        auto mathData = TabWidget::currentWidget()->currentTable()->allMathItems();
+        auto mathData = TabWidget::currentWidget()->mathData(pages.at(i));
         if (!Parser::pageExists(filePath,pages.at(i))) {
             Parser::createPage(filePath,pages.at(i));
         }

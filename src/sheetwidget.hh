@@ -21,6 +21,7 @@ public:
     void loadFile();
     QStringList allPages();
     QVector<SheetItem> data(QString page);
+    QVector<MathItem> mathData(QString page);
     void setFile(QString path);
     QString file();
     bool isUntitled();

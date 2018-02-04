@@ -129,6 +129,20 @@ QVector<SheetItem> SheetWidget::data(QString page) {
     return items;
 }
 
+QVector<MathItem> SheetWidget::mathData(QString page) {
+    QVector<MathItem> items;
+
+    for (int i = 0; i<tabs->count(); i++ ) {
+        if (tabs->tabText(i)==page) {
+            TableWidget *table = static_cast<TableWidget *>(tabs->widget(i));
+            items = table->allMathItems();
+            break;
+        }
+    }
+
+    return items;
+}
+
 void SheetWidget::setFile(QString path) {
     filePath = path;
 }
