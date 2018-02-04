@@ -39,6 +39,7 @@
             <td x="11" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Van</td>
             <td x="12" y="0" fgColor="#000000" bgColor="#ffffff" tooltip="An offroad version of the F-150" colwidth="100" rowwidth="30">Raptor</td>
         </data>
+        <math/>
     </page>
     <page title="Airplanes">
         <data>
@@ -47,22 +48,27 @@
             <td x="1" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Cub</td>
             <td x="2" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">Cherokee</td>
         </data>
+        <math/>
     </page>
     <page title="Math Page">
         <data>
-            <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44">100</td>
-            <td x="0" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44">100</td>
-            <td x="0" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44">99</td>
-            <td x="0" y="3" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="44">-299</td>
+            <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44">8</td>
+            <td x="0" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44">222</td>
+            <td x="0" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44">7</td>
+            <td x="0" y="3" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="44">-221</td>
             <td x="0" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="263" rowwidth="44">Thin</td>
-            <td x="1" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">2</td>
+            <td x="1" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">4</td>
             <td x="1" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">0</td>
-            <td x="2" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">88</td>
+            <td x="2" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">7</td>
             <td x="2" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">1</td>
             <td x="3" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">88</td>
-            <td x="4" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">3</td>
+            <td x="4" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">99</td>
             <td x="5" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30">77</td>
-            <td x="6" y="0" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="30">80</td>
+            <td x="6" y="0" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="30">283</td>
         </data>
+        <math>
+            <equ x="6" y="0">=sum(y)[1][6]</equ>
+            <equ x="0" y="3">=sub(x)[1][3]</equ>
+        </math>
     </page>
 </sheet>
