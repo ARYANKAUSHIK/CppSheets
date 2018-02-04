@@ -288,6 +288,12 @@ void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
         int rowWidth = current.rowWidth;
         QString rowWidthStr = QVariant(rowWidth).toString();
         td->SetAttribute("rowwidth",rowWidthStr.toStdString().c_str());
+
+        QString spanX = QVariant(current.spanx).toString();
+        td->SetAttribute("spanx",spanX.toStdString().c_str());
+
+        QString spanY = QVariant(current.spany).toString();
+        td->SetAttribute("spany",spanY.toStdString().c_str());
     }
 
     doc->SaveFile(file.toStdString().c_str());

@@ -112,6 +112,8 @@ QVector<SheetItem> SheetWidget::data(QString page) {
             sitem.data = item->text();
             sitem.colWidth = table->columnWidth(y);
             sitem.rowWidth = table->rowHeight(x);
+            sitem.spanx = table->rowSpan(x,y);
+            sitem.spany = table->columnSpan(x,y);
             QString bgRole = item->data(Qt::BackgroundRole).toString();
             if (bgRole.isEmpty()) {
                 sitem.bgColor = Qt::white;
