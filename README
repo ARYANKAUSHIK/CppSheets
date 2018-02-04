@@ -1,0 +1,13 @@
+CppSheets
+
+Guide on how to use command line:
+=sum( )[ ][ ]	Addition
+=sub( )[ ][ ]	Subtraction
+=mp( )[ ][ ]	Multiplication
+=div( )[ ][ ]	Division
+=\				Kill the formula
+-{				Create a tooltip
+
+Syntax
+(x,y)-> Specifies whether to perform the operation in the x or the y direction.
+[ ][ ]-> Starting cell, ending cell
