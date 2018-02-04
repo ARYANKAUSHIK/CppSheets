@@ -3,6 +3,7 @@
 #include <QTableWidget>
 #include <QVector>
 #include <QTableWidgetItem>
+#include <QModelIndexList>
 
 #include "parser.hh"
 
@@ -16,6 +17,7 @@ public:
     void updateMath();
     bool isMath(int row, int col);
     QString formula(int row, int col);
+    QModelIndexList currentSelectedItems();
 private:
     QVector<MathItem> mathItems;
 private slots:

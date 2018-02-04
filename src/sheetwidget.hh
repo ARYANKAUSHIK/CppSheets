@@ -27,6 +27,7 @@ public:
     bool isUntitled();
     void setSaved(bool s);
     bool isSaved();
+    void mergeSelected();
     TableWidget *currentTable();
     QTableWidgetItem *currentCell();
 private:

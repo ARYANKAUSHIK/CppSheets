@@ -70,6 +70,10 @@ QString TableWidget::formula(int row, int col) {
     return str;
 }
 
+QModelIndexList TableWidget::currentSelectedItems() {
+    return this->selectedIndexes();
+}
+
 void TableWidget::onCellChanged() {
     emit cellModified();
 }

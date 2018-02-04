@@ -169,6 +169,57 @@ bool SheetWidget::isSaved() {
     return saved;
 }
 
+void SheetWidget::mergeSelected() {
+    QVector<int> cols, rows;
+
+    auto list = currentTable()->currentSelectedItems();
+    for (int i = 0; i<list.size(); i++) {
+        cols.push_back(list.at(i).column());
+        rows.push_back(list.at(i).row());
+    }
+
+    int sx = rows.at(0);
+    int sy = cols.at(0);
+    int lx = 0;
+    int ly = 0;
+
+    //Smallest y value
+    for (int i = 0; i<cols.size(); i++) {
+        if (cols.at(i)<sy) {
+            sy = cols.at(i);
+        }
+    }
+
+    //Smallest x value
+    for (int i = 0; i<rows.size(); i++) {
+        if (rows.at(i)<sx) {
+            sx = rows.at(i);
+        }
+    }
+
+    //Largest y value
+    for (int i = 0; i<cols.size(); i++) {
+        if (cols.at(i)>ly) {
+            ly = cols.at(i);
+        }
+    }
+
+    //Largest x value
+    for (int i = 0; i<rows.size(); i++) {
+        if (rows.at(i)>lx) {
+            lx = rows.at(i);
+        }
+    }
+
+    lx++;
+    ly++;
+
+    int ex = lx-sx;
+    int ey = ly-sy;
+
+    currentTable()->setSpan(sx,sy,ex,ey);
+}
+
 TableWidget *SheetWidget::currentTable() {
     TableWidget *table = static_cast<TableWidget *>(tabs->currentWidget());
     return table;

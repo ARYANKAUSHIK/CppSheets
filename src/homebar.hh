@@ -9,8 +9,9 @@ public:
     HomeBar();
     ~HomeBar();
 private:
-    QToolButton *cellColor;
+    QToolButton *cellColor, *merge;
 private slots:
     void onBgColorClicked();
     void onFgColorClicked();
+    void onMergeClicked();
 };
