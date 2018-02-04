@@ -14,6 +14,8 @@ public:
     void addMathItem(MathItem item);
     QVector<MathItem> allMathItems();
     void updateMath();
+    bool isMath(int row, int col);
+    QString formula(int row, int col);
 private:
     QVector<MathItem> mathItems;
 private slots:

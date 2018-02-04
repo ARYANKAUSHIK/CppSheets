@@ -166,7 +166,11 @@ void SheetWidget::onCellLocoChanged(QTableWidgetItem *current, QTableWidgetItem 
     if (current==nullptr) {
         currentData->setText("");
     } else {
-        currentData->setText(current->text());
+        if (currentTable()->isMath(currentTable()->currentRow(),currentTable()->currentColumn())) {
+             currentData->setText(currentTable()->formula(currentTable()->currentRow(),currentTable()->currentColumn()));
+        } else {
+            currentData->setText(current->text());
+        }
     }
 }
 
