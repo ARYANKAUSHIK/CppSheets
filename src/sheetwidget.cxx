@@ -47,6 +47,7 @@ void SheetWidget::loadFile() {
         TableWidget *table = new TableWidget;
         connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
         connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
+        table->setMathItems(Parser::allMathItems(filePath,pageList.at(i)));
         tabs->addTab(table,pageList.at(i));
 
         auto itemList = Parser::allItems(filePath,pageList.at(i));

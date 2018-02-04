@@ -123,6 +123,50 @@ QVector<SheetItem> Parser::allItems(QString file, QString page) {
     return items;
 }
 
+QVector<MathItem> Parser::allMathItems(QString file, QString page) {
+    QVector<MathItem> items;
+
+    XMLDocument *doc = new XMLDocument;
+    doc->LoadFile(file.toStdString().c_str());
+
+    XMLElement *root = doc->FirstChildElement("sheet");
+    if (root==nullptr) {
+        return items;
+    }
+
+    XMLElement *pageElement = getPageElement(root,page);
+    if (pageElement==nullptr) {
+        return items;
+    }
+
+    XMLElement *mathElement = pageElement->FirstChildElement("math");
+    if (mathElement==nullptr) {
+        return items;
+    }
+
+    XMLElement *td = mathElement->FirstChildElement("equ");
+    XMLElement *tdOld;
+
+    while (td!=nullptr) {
+        MathItem item;
+        QString sx = QString(td->Attribute("x"));
+        QString sy = QString(td->Attribute("y"));
+        QString equation = QString(td->GetText());
+
+        if ((!sx.isNull())||(!sy.isNull())||(!equation.isNull())) {
+            item.x = QVariant(sx).toInt();
+            item.y = QVariant(sy).toInt();
+            item.equation = equation;
+            items.push_back(item);
+        }
+
+        tdOld = td;
+        td = tdOld->NextSiblingElement("equ");
+    }
+
+    return items;
+}
+
 void Parser::createPage(QString file, QString page) {
     XMLDocument *doc = new XMLDocument;
     doc->LoadFile(file.toStdString().c_str());
