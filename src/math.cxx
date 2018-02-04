@@ -61,16 +61,16 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
             }
         }
 
-        int result = 0;
+        double result = 0;
         int s = 0;
         if ((math=="sub")||(math=="div")) {
             if (cellNumbers.size()!=0) {
-                result = QVariant(cellNumbers.at(0)).toInt();
+                result = QVariant(cellNumbers.at(0)).toDouble();
                 s = 1;
             }
         }
         for (int j = s; j<cellNumbers.size(); j++) {
-            int current = QVariant(cellNumbers.at(j)).toInt();
+            double current = QVariant(cellNumbers.at(j)).toDouble();
             if (math=="sum") {
                 result+=current;
             } else if (math=="sub") {
