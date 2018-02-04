@@ -1,0 +1,11 @@
+TabWidget::pane {
+	border:none;
+}
+
+QTableWidget::item:selected { 
+	background-color:white; 
+	color:black;
+	border-color: blue;
+	border-style:solid;	
+	border-width:2px; 
+}
