@@ -41,12 +41,12 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
             }
         }
 
-        int r1 = QVariant(range1).toInt();
-        int r2 = QVariant(range2).toInt();
+        int r1 = QVariant(range1).toInt()-1;
+        int r2 = QVariant(range2).toInt()-1;
         QStringList cellNumbers;
 
         for (int j = r1; j<=r2; j++) {
-            if (dir=="x") {
+            if (dir=="y") {
                 QTableWidgetItem *item = table->item(j,y);
                 if (item==nullptr) {
                     continue;
