@@ -18,4 +18,6 @@ public:
 private:
     QVBoxLayout *layout;
     static QTabWidget *tabs;
+private slots:
+    void onCurrentChanged();
 };

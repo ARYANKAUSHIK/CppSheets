@@ -6,8 +6,6 @@ Ribbon::Ribbon()
 {
     this->addTab(fileBar,"File");
     this->addTab(homeBar,"Home");
-
-    this->setCurrentIndex(1);
 }
 
 Ribbon::~Ribbon() {

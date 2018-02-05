@@ -25,6 +25,7 @@ void Actions::openFile() {
         } else {
             TabWidget::addNewTab(selected);
         }
+        TabWidget::currentWidget()->setSaved(true);
     }
 }
 

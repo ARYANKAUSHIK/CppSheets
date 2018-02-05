@@ -14,6 +14,7 @@ set(SRC
         ribbon.cxx
         homebar.cxx
         math.cxx
+        statusbar.cxx
 )
 
 add_executable(CppSheets ${SRC})

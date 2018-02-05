@@ -6,6 +6,7 @@
 #include "sheetwidget.hh"
 #include "tablewidget.hh"
 #include "parser.hh"
+#include "window.hh"
 
 SheetWidget::SheetWidget(QString path)
     : layout(new QVBoxLayout),
@@ -149,6 +150,7 @@ QVector<MathItem> SheetWidget::mathData(QString page) {
 
 void SheetWidget::setFile(QString path) {
     filePath = path;
+    Window::setCurrentPath(path);
 }
 
 QString SheetWidget::file() {
@@ -165,6 +167,7 @@ bool SheetWidget::isUntitled() {
 
 void SheetWidget::setSaved(bool s) {
     saved = s;
+    Window::setCurrentSaved(s);
 }
 
 bool SheetWidget::isSaved() {
@@ -257,6 +260,7 @@ void SheetWidget::addNewTab(int no) {
 
 void SheetWidget::onCellChanged() {
     saved = false;
+    Window::setCurrentSaved(false);
 }
 
 void SheetWidget::onCellLocoChanged(QTableWidgetItem *current, QTableWidgetItem *last) {
@@ -295,6 +299,7 @@ void SheetWidget::onCurrentDataEnterPressed() {
 void SheetWidget::onAddTabClicked() {
     addNewTab(tabs->count()+1);
     saved = false;
+    Window::setCurrentSaved(false);
 }
 
 void SheetWidget::onTabDoubleClick(int index) {
@@ -314,6 +319,7 @@ void SheetWidget::onTabDoubleClick(int index) {
     tabs->setTabText(index,dialog.textValue());
 
     saved = false;
+    Window::setCurrentSaved(false);
 }
 
 void SheetWidget::onTabClose(int index) {
@@ -338,5 +344,6 @@ void SheetWidget::onTabClose(int index) {
     Parser::removePage(filePath,title);
 
     saved = false;
+    Window::setCurrentSaved(false);
 }
 

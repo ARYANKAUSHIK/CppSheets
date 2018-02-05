@@ -4,6 +4,8 @@
 #include "ribbon.hh"
 #include "tabwidget.hh"
 
+StatusBar *Window::statusbar;
+
 Window::Window() {
     this->setWindowTitle("CppSheets");
     this->resize(800,600);
@@ -19,7 +21,18 @@ Window::Window() {
 
     centerLayout->addWidget(ribbon,0,Qt::AlignTop);
     centerLayout->addWidget(tabs);
+
+    statusbar = new StatusBar;
+    this->setStatusBar(statusbar);
 }
 
 Window::~Window() {
+}
+
+void Window::setCurrentPath(QString path) {
+    statusbar->setPathLabel(path);
+}
+
+void Window::setCurrentSaved(bool saved) {
+    statusbar->setSavedLabel(saved);
 }

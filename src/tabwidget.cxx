@@ -1,6 +1,7 @@
 #include <QFileInfo>
 
 #include "tabwidget.hh"
+#include "window.hh"
 
 QTabWidget *TabWidget::tabs;
 
@@ -17,6 +18,8 @@ TabWidget::TabWidget()
 
     tabs->addTab(new SheetWidget("untitled"),"untitled");
     layout->addWidget(tabs);
+
+    connect(tabs,&QTabWidget::currentChanged,this,&TabWidget::onCurrentChanged);
 }
 
 TabWidget::~TabWidget() {
@@ -27,6 +30,9 @@ void TabWidget::addNewTab() {
     int count = tabs->count();
     tabs->addTab(new SheetWidget("untitled"),"untitled");
     tabs->setCurrentIndex(count);
+
+    Window::setCurrentPath("untitled");
+    Window::setCurrentSaved(true);
 }
 
 void TabWidget::addNewTab(QString file) {
@@ -35,6 +41,9 @@ void TabWidget::addNewTab(QString file) {
     sheet->loadFile();
     tabs->addTab(sheet,QFileInfo(file).fileName());
     tabs->setCurrentIndex(count);
+
+    Window::setCurrentPath(file);
+    Window::setCurrentSaved(true);
 }
 
 SheetWidget *TabWidget::currentWidget() {
@@ -44,4 +53,9 @@ SheetWidget *TabWidget::currentWidget() {
 
 void TabWidget::setCurrentTitle(QString title) {
     tabs->setTabText(tabs->currentIndex(),title);
+}
+
+void TabWidget::onCurrentChanged() {
+    Window::setCurrentPath(currentWidget()->file());
+    Window::setCurrentSaved(currentWidget()->isSaved());
 }
