@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 
     Window win;
     win.setStyleSheet(style);
-    win.show();
+    win.showMaximized();
 
     return app.exec();
 }

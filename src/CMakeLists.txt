@@ -12,7 +12,7 @@ set(SRC
         rsc.qrc
         actions.cxx
         ribbon.cxx
-        homebar.cxx
+        cellbar.cxx
         math.cxx
         statusbar.cxx
 )

@@ -2,10 +2,10 @@
 #include <QAction>
 #include <QColorDialog>
 
-#include "homebar.hh"
+#include "cellbar.hh"
 #include "tabwidget.hh"
 
-HomeBar::HomeBar()
+CellBar::CellBar()
     : cellColor(new QToolButton),
       merge(new QToolButton),
       unmerge(new QToolButton)
@@ -27,31 +27,31 @@ HomeBar::HomeBar()
     this->addWidget(merge);
     this->addWidget(unmerge);
 
-    connect(bg,&QAction::triggered,this,&HomeBar::onBgColorClicked);
-    connect(fg,&QAction::triggered,this,&HomeBar::onFgColorClicked);
-    connect(merge,&QToolButton::clicked,this,&HomeBar::onMergeClicked);
-    connect(unmerge,&QToolButton::clicked,this,&HomeBar::onUnMergeClicked);
+    connect(bg,&QAction::triggered,this,&CellBar::onBgColorClicked);
+    connect(fg,&QAction::triggered,this,&CellBar::onFgColorClicked);
+    connect(merge,&QToolButton::clicked,this,&CellBar::onMergeClicked);
+    connect(unmerge,&QToolButton::clicked,this,&CellBar::onUnMergeClicked);
 }
 
-HomeBar::~HomeBar() {
+CellBar::~CellBar() {
     delete cellColor;
     delete merge;
 }
 
-void HomeBar::onBgColorClicked() {
+void CellBar::onBgColorClicked() {
     QColor color = QColorDialog::getColor();
     TabWidget::currentWidget()->currentCell()->setBackgroundColor(color);
 }
 
-void HomeBar::onFgColorClicked() {
+void CellBar::onFgColorClicked() {
     QColor color = QColorDialog::getColor(Qt::black);
     TabWidget::currentWidget()->currentCell()->setTextColor(color);
 }
 
-void HomeBar::onMergeClicked() {
+void CellBar::onMergeClicked() {
     TabWidget::currentWidget()->mergeSelected();
 }
 
-void HomeBar::onUnMergeClicked() {
+void CellBar::onUnMergeClicked() {
     TabWidget::currentWidget()->unMergeSelected();
 }

@@ -2,13 +2,13 @@
 
 Ribbon::Ribbon()
     : fileBar(new MainToolbar),
-      homeBar(new HomeBar)
+      cellBar(new CellBar)
 {
     this->addTab(fileBar,"File");
-    this->addTab(homeBar,"Home");
+    this->addTab(cellBar,"Cells");
 }
 
 Ribbon::~Ribbon() {
     delete fileBar;
-    delete homeBar;
+    delete cellBar;
 }

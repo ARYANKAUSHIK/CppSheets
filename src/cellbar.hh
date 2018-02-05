@@ -3,11 +3,11 @@
 #include <QToolBar>
 #include <QToolButton>
 
-class HomeBar : public QToolBar {
+class CellBar : public QToolBar {
     Q_OBJECT
 public:
-    HomeBar();
-    ~HomeBar();
+    CellBar();
+    ~CellBar();
 private:
     QToolButton *cellColor, *merge, *unmerge;
 private slots:
