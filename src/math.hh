@@ -5,10 +5,11 @@
 #include "parser.hh"
 #include "tablewidget.hh"
 
-enum ParseType {
-    TYPE,
-    DIR,
-    RANGE
+enum OPERATION {
+    ADD,
+    SUB,
+    MP,
+    DIV
 };
 
 class Math {

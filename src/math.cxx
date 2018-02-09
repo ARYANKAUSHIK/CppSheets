@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "math.hh"
 
 void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
@@ -6,79 +8,80 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
         int y = mathItems.at(i).y;
         QString equ = mathItems.at(i).equation;
 
-        QString math = "";
-        QString dir = "";
-        QString range1 = "";
-        QString range2 = "";
-        bool range1B = true;
-        ParseType type = ParseType::TYPE;
-
-        for (int j = 1; j<equ.size(); j++) {
-            if (equ.at(j)=='(') {
-                type = ParseType::DIR;
-                continue;
-            } else if (equ.at(j)==')') {
-                continue;
-            } else if (equ.at(j)=='[') {
-                type = ParseType::RANGE;
-            } else if (equ.at(j)==']') {
-                if (range1B) {
-                    range1B = false;
-                }
-                continue;
-            } else {
-                switch (type) {
-                case ParseType::TYPE: math+=equ.at(j); break;
-                case ParseType::DIR: dir+=equ.at(j); break;
-                case ParseType::RANGE: {
-                    if (range1B) {
-                        range1+=equ.at(j);
-                    } else {
-                        range2+=equ.at(j);
-                    }
-                } break;
-                }
-            }
-        }
-
-        int r1 = QVariant(range1).toInt()-1;
-        int r2 = QVariant(range2).toInt()-1;
-        QStringList cellNumbers;
-
-        for (int j = r1; j<=r2; j++) {
-            if (dir=="y") {
-                QTableWidgetItem *item = table->item(j,y);
-                if (item==nullptr) {
-                    continue;
-                }
-                cellNumbers.push_back(item->text());
-            } else {
-                QTableWidgetItem *item = table->item(x,j);
-                if (item==nullptr) {
-                    continue;
-                }
-                cellNumbers.push_back(item->text());
-            }
-        }
-
+        QString newEqu = equ.remove(0,1);
+        bool foundSign = false;
+        bool parse = false;
+        bool foundComma = false;
         double result = 0;
-        int s = 0;
-        if ((math=="sub")||(math=="div")) {
-            if (cellNumbers.size()!=0) {
-                result = QVariant(cellNumbers.at(0)).toDouble();
-                s = 1;
-            }
-        }
-        for (int j = s; j<cellNumbers.size(); j++) {
-            double current = QVariant(cellNumbers.at(j)).toDouble();
-            if (math=="sum") {
-                result+=current;
-            } else if (math=="sub") {
-                result-=current;
-            } else if (math=="mp") {
-                result*=current;
-            } else if (math=="div") {
-                result/=current;
+        OPERATION op = OPERATION::ADD;
+        QString cxStr = "";
+        QString cyStr = "";
+        int cx = 0;
+        int cy = 0;
+        double no = 0;
+
+        std::cout << newEqu.toStdString() << std::endl;
+
+        for (int i = 0; i<newEqu.size(); i++) {
+            QChar c = newEqu.at(i);
+            if (c=='+') {
+                foundSign = true;
+                op = OPERATION::ADD;
+            } else if (c=='-') {
+                foundSign = true;
+                op = OPERATION::SUB;
+            } else if (c=='x') {
+                foundSign = true;
+                op = OPERATION::MP;
+            } else if (c=='/') {
+                foundSign = true;
+                op = OPERATION::DIV;
+            } else if (c=='(') {
+                parse = true;
+            } else if (c==')') {
+                cx = QVariant(cxStr).toInt();
+                cy = QVariant(cyStr).toInt();
+                cx--;
+                cy--;
+
+                QTableWidgetItem *item = table->item(cx,cy);
+                if (item!=nullptr) {
+                    std::cout << QString(item->text()).toStdString() << std::endl;
+                    if (foundSign) {
+                        no = QVariant(item->text()).toDouble();
+                        std::cout << "No: " << no << std::endl;
+                        if (op==OPERATION::ADD) {
+                            result+=no;
+                        } else if (op==OPERATION::SUB) {
+                            result-=no;
+                        } else if (op==OPERATION::MP) {
+                            result*=no;
+                        } else if (op==OPERATION::DIV) {
+                            result/=no;
+                        }
+                    } else {
+                        result = QVariant(item->text()).toDouble();
+                        std::cout << "Result: " << result << std::endl;
+                    }
+                }
+
+                cx = cy = no = 0;
+                cxStr = "";
+                cyStr = "";
+
+                parse = false;
+                foundComma = false;
+            } else if (c==',') {
+                foundComma = true;
+            } else {
+                if (parse==false) {
+                    continue;
+                }
+                if (foundComma) {
+                    cyStr+=c;
+                } else {
+                    cxStr+=c;
+                }
             }
         }
 
