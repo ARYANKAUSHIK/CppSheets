@@ -15,4 +15,5 @@ enum OPERATION {
 class Math {
 public:
     static void updateMath(QVector<MathItem> mathItems, TableWidget *table);
+    static void applyColumnFormula(MathItem mathItem, TableWidget *table);
 };
