@@ -126,7 +126,7 @@ void Math::applyBulkFormula(MathItem mathItem, TableWidget *table) {
     }
 
     int s = 0;
-    if ((op==OPERATION::SUB)||(op==OPERATION::DIV)) {
+    if ((op==OPERATION::MP)||(op==OPERATION::DIV)) {
         result = QVariant(noStrList.at(0)).toDouble();
         s = 1;
     }
