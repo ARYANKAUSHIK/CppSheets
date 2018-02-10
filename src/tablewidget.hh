@@ -4,6 +4,7 @@
 #include <QVector>
 #include <QTableWidgetItem>
 #include <QModelIndexList>
+#include <QKeyEvent>
 
 #include "parser.hh"
 
@@ -18,6 +19,8 @@ public:
     bool isMath(int row, int col);
     QString formula(int row, int col);
     QModelIndexList currentSelectedItems();
+private:
+    void keyPressEvent(QKeyEvent *event);
 private:
     QVector<MathItem> mathItems;
 private slots:

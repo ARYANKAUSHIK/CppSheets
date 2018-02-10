@@ -66,12 +66,21 @@ QString TableWidget::formula(int row, int col) {
             break;
         }
     }
-
     return str;
 }
 
 QModelIndexList TableWidget::currentSelectedItems() {
     return this->selectedIndexes();
+}
+
+void TableWidget::keyPressEvent(QKeyEvent *event) {
+    if ((event->key()==Qt::Key_Enter)||(event->key()==Qt::Key_Return)) {
+        QTableWidget::keyPressEvent(event);
+        int x = this->currentRow()+1;
+        int y = this->currentColumn();
+        this->setCurrentCell(x,y);
+    }
+    QTableWidget::keyPressEvent(event);
 }
 
 void TableWidget::onCellChanged() {
