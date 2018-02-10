@@ -293,7 +293,9 @@ void SheetWidget::onCurrentDataEnterPressed() {
         item->setText(currentData->text());
     }
 
-    currentData->setText("");
+    int x = item->row()+1;
+    int y = item->column();
+    currentTable()->setCurrentCell(x,y);
 }
 
 void SheetWidget::onAddTabClicked() {
