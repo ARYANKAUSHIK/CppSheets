@@ -12,6 +12,7 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
         bool foundSign = false;
         bool parse = false;
         bool foundComma = false;
+        bool inBracket = false;
         double result = 0;
         OPERATION op = OPERATION::ADD;
         QString cxStr = "";
@@ -36,9 +37,12 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
             } else if (c=='/') {
                 foundSign = true;
                 op = OPERATION::DIV;
+            } else if (c=='[') {
+                inBracket = true;
+                parse = true;
             } else if (c=='(') {
                 parse = true;
-            } else if (c==')') {
+            } else if ((c==')')||(c==']')) {
                 cx = QVariant(cxStr).toInt();
                 cy = QVariant(cyStr).toInt();
                 cx--;
@@ -46,23 +50,23 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
 
                 QTableWidgetItem *item = table->item(cx,cy);
                 if (item!=nullptr) {
-                    std::cout << QString(item->text()).toStdString() << std::endl;
-                    if (foundSign) {
-                        no = QVariant(item->text()).toDouble();
-                        std::cout << "No: " << no << std::endl;
-                        if (op==OPERATION::ADD) {
-                            result+=no;
-                        } else if (op==OPERATION::SUB) {
-                            result-=no;
-                        } else if (op==OPERATION::MP) {
-                            result*=no;
-                        } else if (op==OPERATION::DIV) {
-                            result/=no;
-                        }
-                    } else {
-                        result = QVariant(item->text()).toDouble();
-                        std::cout << "Result: " << result << std::endl;
+                    no = QVariant(item->text()).toDouble();
+                } else {
+                    no = QVariant(cxStr).toDouble();
+                }
+
+                if (foundSign) {
+                    if (op==OPERATION::ADD) {
+                        result+=no;
+                    } else if (op==OPERATION::SUB) {
+                        result-=no;
+                    } else if (op==OPERATION::MP) {
+                        result*=no;
+                    } else if (op==OPERATION::DIV) {
+                        result/=no;
                     }
+                } else {
+                    result = QVariant(no).toDouble();
                 }
 
                 cx = cy = no = 0;
@@ -71,13 +75,16 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
 
                 parse = false;
                 foundComma = false;
+                inBracket = false;
             } else if (c==',') {
                 foundComma = true;
             } else {
                 if (parse==false) {
                     continue;
                 }
-                if (foundComma) {
+                if (inBracket) {
+                    cxStr+=c;
+                } else if (foundComma) {
                     cyStr+=c;
                 } else {
                     cxStr+=c;
