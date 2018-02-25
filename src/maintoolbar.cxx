@@ -1,4 +1,4 @@
-#include <QIcon>
+#include <QPixmap>
 
 #include "maintoolbar.hh"
 #include "actions.hh"
@@ -8,9 +8,13 @@ MainToolbar::MainToolbar()
       open(new QToolButton),
       save(new QToolButton)
 {
-    newFile->setIcon(QIcon::fromTheme("document-new"));
-    open->setIcon(QIcon::fromTheme("document-open"));
-    save->setIcon(QIcon::fromTheme("document-save"));
+    newFile->setIcon(QPixmap(":/icons/document-new.png"));
+    open->setIcon(QPixmap(":/icons/document-open.png"));
+    save->setIcon(QPixmap(":/icons/document-save.png"));
+
+    newFile->setToolTip("New Speadsheet");
+    open->setToolTip("Open Sheet");
+    save->setToolTip("Save Sheet");
 
     connect(newFile,&QToolButton::clicked,this,&MainToolbar::onNewFileClicked);
     connect(open,&QToolButton::clicked,this,&MainToolbar::onOpenClicked);

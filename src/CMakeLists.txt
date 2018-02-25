@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0.0)
 
 set(SRC
+    rsc.qrc
+    icons.qrc
 	main.cxx
 	parser.cxx
 	tinyxml2.cpp
@@ -9,7 +11,6 @@ set(SRC
         window.cxx
         maintoolbar.cxx
         tabwidget.cxx
-        rsc.qrc
         actions.cxx
         ribbon.cxx
         cellbar.cxx
