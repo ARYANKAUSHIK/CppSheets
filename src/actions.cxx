@@ -13,6 +13,7 @@ void Actions::openFile() {
     QFileDialog dialog;
     dialog.setWindowTitle("Open File");
     dialog.setAcceptMode(QFileDialog::AcceptOpen);
+    dialog.setDirectory(QDir::homePath());
     if (dialog.exec()) {
         if (dialog.selectedFiles().size()==0) {
             return;
