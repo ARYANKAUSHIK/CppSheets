@@ -1,6 +1,7 @@
 #include <QMenu>
 #include <QAction>
 #include <QColorDialog>
+#include <iostream>
 
 #include "cellbar.hh"
 #include "tabwidget.hh"
@@ -40,7 +41,24 @@ CellBar::~CellBar() {
 
 void CellBar::onBgColorClicked() {
     QColor color = QColorDialog::getColor();
-    TabWidget::currentWidget()->currentCell()->setBackgroundColor(color);
+    SheetWidget *current = TabWidget::currentWidget();
+    if (current->currentTable()->currentSelectedItems().size()==1) {
+        TabWidget::currentWidget()->currentCell()->setBackgroundColor(color);
+    } else {
+        auto list = current->currentTable()->currentSelectedItems();
+        for (int i = 0; i<list.size(); i++) {
+            auto item = list.at(i);
+            int col = item.column();
+            int row = item.row();
+
+            QTableWidgetItem *tItem = current->currentTable()->item(row,col);
+            if (tItem==nullptr) {
+                tItem = new QTableWidgetItem();
+                current->currentTable()->setItem(row,col,tItem);
+            }
+            tItem->setBackgroundColor(color);
+        }
+    }
 }
 
 void CellBar::onFgColorClicked() {
