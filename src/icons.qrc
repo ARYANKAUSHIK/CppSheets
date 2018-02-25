@@ -3,5 +3,6 @@
         <file>icons/document-new.png</file>
         <file>icons/document-open.png</file>
         <file>icons/document-save.png</file>
+        <file>icons/kspread.png</file>
     </qresource>
 </RCC>
