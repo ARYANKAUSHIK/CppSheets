@@ -9,9 +9,10 @@ public:
     MainToolbar();
     ~MainToolbar();
 private:
-    QToolButton *newFile, *open, *save;
+    QToolButton *newFile, *open, *save, *saveAs;
 private slots:
     void onNewFileClicked();
     void onOpenClicked();
     void onSaveClicked();
+    void onSaveAsClicked();
 };
