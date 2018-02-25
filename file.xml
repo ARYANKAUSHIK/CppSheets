@@ -32,6 +32,7 @@
             <td x="5" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Civic</td>
             <td x="5" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Cruze</td>
             <td x="6" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-350</td>
+            <td x="6" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1"/>
             <td x="7" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-450</td>
             <td x="8" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-550</td>
             <td x="9" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">F-650</td>
@@ -45,6 +46,7 @@
         <data>
             <td x="0" y="0" fgColor="#000000" bgColor="#9999ff" colwidth="100" rowwidth="30" spanx="1" spany="1">Cessna</td>
             <td x="0" y="1" fgColor="#000000" bgColor="#9999ff" colwidth="100" rowwidth="30" spanx="1" spany="1">Piper</td>
+            <td x="1" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">172</td>
             <td x="1" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Cub</td>
             <td x="2" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">Cherokee</td>
         </data>
@@ -52,29 +54,73 @@
     </page>
     <page title="Math Page">
         <data>
-            <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44" spanx="1" spany="1">8</td>
+            <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44" spanx="1" spany="1">55</td>
             <td x="0" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44" spanx="1" spany="1">222</td>
             <td x="0" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="44" spanx="1" spany="1">7</td>
             <td x="0" y="3" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="44" spanx="1" spany="1">-221</td>
             <td x="0" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="263" rowwidth="44" spanx="1" spany="1">Thin</td>
-            <td x="1" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">4</td>
+            <td x="1" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">5</td>
             <td x="1" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">0</td>
-            <td x="2" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">7</td>
+            <td x="2" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">3</td>
             <td x="2" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">1</td>
-            <td x="3" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">88</td>
-            <td x="4" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">99</td>
-            <td x="5" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">77</td>
-            <td x="6" y="0" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="30" spanx="1" spany="1">283</td>
+            <td x="3" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">5</td>
+            <td x="4" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">5</td>
+            <td x="5" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">5</td>
+            <td x="6" y="0" fgColor="#000000" bgColor="#d3d7cf" colwidth="100" rowwidth="30" spanx="1" spany="1">78</td>
         </data>
         <math>
-            <equ x="6" y="0">=sum(y)[1][6]</equ>
-            <equ x="0" y="3">=sub(x)[1][3]</equ>
+            <equ x="6" y="0">=add&gt;(1,1):(6,1)</equ>
         </math>
     </page>
     <page title="Merge Page">
         <math/>
         <data>
             <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="2">Hello!</td>
+        </data>
+    </page>
+    <page title="Grade Sheet">
+        <math>
+            <equ x="1" y="7">=(1,7)/(2,7)</equ>
+            <equ x="3" y="6">=(4,2)+(4,3)+(4,4)+(4,5)+(4,6)</equ>
+            <equ x="4" y="6">=(5,2)+(5,3)+(5,4)+(5,5)+(5,6)</equ>
+            <equ x="0" y="7">=(1,7)/(2,7)x[100]</equ>
+            <equ x="3" y="7">=(4,7)/(5,7)x[100]</equ>
+            <equ x="0" y="6">=add&gt;(1,2):(1,6)</equ>
+            <equ x="1" y="6">=add&gt;(2,2):(2,6)</equ>
+        </math>
+        <data>
+            <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="5" spany="1">Math</td>
+            <td x="0" y="1" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">30</td>
+            <td x="0" y="2" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">30</td>
+            <td x="0" y="3" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">30</td>
+            <td x="0" y="4" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">23</td>
+            <td x="0" y="5" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">30</td>
+            <td x="0" y="6" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">143</td>
+            <td x="0" y="7" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="1">95.33333333333334</td>
+            <td x="1" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">30</td>
+            <td x="1" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">30</td>
+            <td x="1" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">30</td>
+            <td x="1" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">30</td>
+            <td x="1" y="5" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">30</td>
+            <td x="1" y="6" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">150</td>
+            <td x="1" y="7" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="1">0.9533333333333334</td>
+            <td x="2" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1"/>
+            <td x="3" y="1" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">20</td>
+            <td x="3" y="2" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">20</td>
+            <td x="3" y="3" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">20</td>
+            <td x="3" y="4" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">20</td>
+            <td x="3" y="5" fgColor="#000000" bgColor="#fdecb6" colwidth="100" rowwidth="30" spanx="1" spany="1">17</td>
+            <td x="3" y="6" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">97</td>
+            <td x="3" y="7" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="1">97</td>
+            <td x="4" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">20</td>
+            <td x="4" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">20</td>
+            <td x="4" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">20</td>
+            <td x="4" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">20</td>
+            <td x="4" y="5" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">20</td>
+            <td x="4" y="6" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1">100</td>
+            <td x="4" y="7" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="1">4</td>
+            <td x="5" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1"/>
+            <td x="6" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1"/>
         </data>
     </page>
 </sheet>
