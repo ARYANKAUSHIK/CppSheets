@@ -112,3 +112,15 @@ void Actions::bold() {
     }
     item->setFont(font);
 }
+
+void Actions::italic() {
+    SheetWidget *sheet = TabWidget::currentWidget();
+    QTableWidgetItem *item = sheet->currentCell();
+    QFont font = item->font();
+    if (font.italic()) {
+        font.setItalic(false);
+    } else {
+        font.setItalic(true);
+    }
+    item->setFont(font);
+}

@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>style.css</file>
         <file>icons/format-text-bold.png</file>
+        <file>icons/format-text-italic.png</file>
     </qresource>
 </RCC>

@@ -34,25 +34,29 @@ MainToolbar::MainToolbar()
       open(new QToolButton),
       save(new QToolButton),
       saveAs(new QToolButton),
-      bold(new QToolButton)
+      bold(new QToolButton),
+      italic(new QToolButton)
 {
     newFile->setIcon(QPixmap(":/icons/document-new.png"));
     open->setIcon(QPixmap(":/icons/document-open.png"));
     save->setIcon(QPixmap(":/icons/document-save.png"));
     saveAs->setIcon(QPixmap(":/icons/document-save-as.png"));
     bold->setIcon(QPixmap(":/icons/format-text-bold.png"));
+    italic->setIcon(QPixmap(":/icons/format-text-italic.png"));
 
     newFile->setToolTip("New Speadsheet");
     open->setToolTip("Open Sheet");
     save->setToolTip("Save Sheet");
     saveAs->setToolTip("Save As");
     bold->setToolTip("Bold");
+    italic->setToolTip("Italic");
 
     connect(newFile,&QToolButton::clicked,this,&MainToolbar::onNewFileClicked);
     connect(open,&QToolButton::clicked,this,&MainToolbar::onOpenClicked);
     connect(save,&QToolButton::clicked,this,&MainToolbar::onSaveClicked);
     connect(saveAs,&QToolButton::clicked,this,&MainToolbar::onSaveAsClicked);
     connect(bold,&QToolButton::clicked,this,&MainToolbar::onBoldClicked);
+    connect(italic,&QToolButton::clicked,this,&MainToolbar::onItalicClicked);
 
     this->addWidget(newFile);
     this->addWidget(open);
@@ -60,6 +64,7 @@ MainToolbar::MainToolbar()
     this->addWidget(saveAs);
     this->addSeparator();
     this->addWidget(bold);
+    this->addWidget(italic);
 }
 
 MainToolbar::~MainToolbar() {
@@ -68,6 +73,7 @@ MainToolbar::~MainToolbar() {
     delete save;
     delete saveAs;
     delete bold;
+    delete italic;
 }
 
 void MainToolbar::onNewFileClicked() {
@@ -88,4 +94,8 @@ void MainToolbar::onSaveAsClicked() {
 
 void MainToolbar::onBoldClicked() {
     Actions::bold();
+}
+
+void MainToolbar::onItalicClicked() {
+    Actions::italic();
 }
