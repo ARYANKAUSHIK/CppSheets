@@ -61,8 +61,6 @@ void Math::applyBulkFormula(MathItem mathItem, TableWidget *table) {
     Cell startCell, endCell;
     double result = 0;
 
-    std::cout << "Bulk Equation: " << newEqu.toStdString() << std::endl;
-
     for (int i = 0; i<newEqu.size(); i++) {
         QChar c = newEqu.at(i);
         if (c=='>') {
@@ -114,12 +112,6 @@ void Math::applyBulkFormula(MathItem mathItem, TableWidget *table) {
         }
     }
 
-    std::cout << "Operation: " << opStr.toStdString() << std::endl;
-    std::cout << "StartCell x: " << startCell.x << std::endl;
-    std::cout << "StartCell y: " << startCell.y << std::endl;
-    std::cout << "EndCell x: " << endCell.x << std::endl;
-    std::cout << "EndCell y: " << endCell.y << std::endl;
-
     bool getRows = true;
     int start = startCell.y;
     int end = endCell.y;
@@ -128,9 +120,6 @@ void Math::applyBulkFormula(MathItem mathItem, TableWidget *table) {
         start = startCell.x;
         end = endCell.x;
     }
-
-    std::cout << "start: " << start << std::endl;
-    std::cout << "end: " << end << std::endl;
 
     QStringList noStrList;
 
@@ -196,8 +185,6 @@ void Math::applyColumnFormula(MathItem mathItem, TableWidget *table) {
     int cx = 0;
     int cy = 0;
     double no = 0;
-
-    std::cout << newEqu.toStdString() << std::endl;
 
     for (int i = 0; i<newEqu.size(); i++) {
         QChar c = newEqu.at(i);
