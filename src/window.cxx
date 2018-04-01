@@ -26,6 +26,7 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QVBoxLayout>
 #include <QPixmap>
+#include <QMessageBox>
 
 #include "window.hh"
 #include "ribbon.hh"
@@ -63,4 +64,33 @@ void Window::setCurrentPath(QString path) {
 
 void Window::setCurrentSaved(bool saved) {
     statusbar->setSavedLabel(saved);
+}
+
+bool Window::checkSave() {
+    int count = TabWidget::tabs->count();
+    for (int i = 0; i<count; i++) {
+        SheetWidget *sheet = TabWidget::widgetAt(i);
+        if (!sheet->isSaved()) {
+            QMessageBox msg;
+            msg.setWindowTitle("Warning");
+            msg.setText("You have unsaved files!\nDo you wish to exit?");
+            msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            msg.setIcon(QMessageBox::Warning);
+            int ret = msg.exec();
+            if (ret==QMessageBox::Yes) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void Window::closeEvent(QCloseEvent *event) {
+    if (checkSave()) {
+        event->accept();
+    } else {
+        event->ignore();
+    }
 }

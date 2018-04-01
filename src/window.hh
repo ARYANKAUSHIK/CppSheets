@@ -27,6 +27,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QCloseEvent>
 
 #include "statusbar.hh"
 
@@ -37,6 +38,9 @@ public:
     ~Window();
     static void setCurrentPath(QString path);
     static void setCurrentSaved(bool saved);
+    static bool checkSave();
+protected:
+    void closeEvent(QCloseEvent *event);
 private:
     static StatusBar *statusbar;
 };

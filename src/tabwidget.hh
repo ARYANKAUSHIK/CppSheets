@@ -40,10 +40,11 @@ public:
     static void addNewTab();
     static void addNewTab(QString file);
     static SheetWidget *currentWidget();
+    static SheetWidget *widgetAt(int index);
     static void setCurrentTitle(QString title);
+    static QTabWidget *tabs;
 private:
     QVBoxLayout *layout;
-    static QTabWidget *tabs;
 private slots:
     void onCurrentChanged();
 };

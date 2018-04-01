@@ -77,6 +77,11 @@ SheetWidget *TabWidget::currentWidget() {
     return widget;
 }
 
+SheetWidget *TabWidget::widgetAt(int index) {
+    SheetWidget *widget = static_cast<SheetWidget *>(tabs->widget(index));
+    return widget;
+}
+
 void TabWidget::setCurrentTitle(QString title) {
     tabs->setTabText(tabs->currentIndex(),title);
 }
