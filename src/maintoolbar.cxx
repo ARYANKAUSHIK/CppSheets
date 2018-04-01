@@ -35,7 +35,8 @@ MainToolbar::MainToolbar()
       save(new QToolButton),
       saveAs(new QToolButton),
       bold(new QToolButton),
-      italic(new QToolButton)
+      italic(new QToolButton),
+      underline(new QToolButton)
 {
     newFile->setIcon(QPixmap(":/icons/document-new.png"));
     open->setIcon(QPixmap(":/icons/document-open.png"));
@@ -43,6 +44,7 @@ MainToolbar::MainToolbar()
     saveAs->setIcon(QPixmap(":/icons/document-save-as.png"));
     bold->setIcon(QPixmap(":/icons/format-text-bold.png"));
     italic->setIcon(QPixmap(":/icons/format-text-italic.png"));
+    underline->setIcon(QPixmap(":/icons/format-text-underline.png"));
 
     newFile->setToolTip("New Speadsheet");
     open->setToolTip("Open Sheet");
@@ -50,6 +52,7 @@ MainToolbar::MainToolbar()
     saveAs->setToolTip("Save As");
     bold->setToolTip("Bold");
     italic->setToolTip("Italic");
+    underline->setToolTip("Underline");
 
     connect(newFile,&QToolButton::clicked,this,&MainToolbar::onNewFileClicked);
     connect(open,&QToolButton::clicked,this,&MainToolbar::onOpenClicked);
@@ -57,6 +60,7 @@ MainToolbar::MainToolbar()
     connect(saveAs,&QToolButton::clicked,this,&MainToolbar::onSaveAsClicked);
     connect(bold,&QToolButton::clicked,this,&MainToolbar::onBoldClicked);
     connect(italic,&QToolButton::clicked,this,&MainToolbar::onItalicClicked);
+    connect(underline,&QToolButton::clicked,this,&MainToolbar::onUnderlineClicked);
 
     this->addWidget(newFile);
     this->addWidget(open);
@@ -65,6 +69,7 @@ MainToolbar::MainToolbar()
     this->addSeparator();
     this->addWidget(bold);
     this->addWidget(italic);
+    this->addWidget(underline);
 }
 
 MainToolbar::~MainToolbar() {
@@ -98,4 +103,8 @@ void MainToolbar::onBoldClicked() {
 
 void MainToolbar::onItalicClicked() {
     Actions::italic();
+}
+
+void MainToolbar::onUnderlineClicked() {
+    Actions::underline();
 }

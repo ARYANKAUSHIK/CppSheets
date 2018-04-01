@@ -34,4 +34,5 @@ public:
     static void saveFileAs();
     static void bold();
     static void italic();
+    static void underline();
 };

@@ -124,3 +124,15 @@ void Actions::italic() {
     }
     item->setFont(font);
 }
+
+void Actions::underline() {
+    SheetWidget *sheet = TabWidget::currentWidget();
+    QTableWidgetItem *item = sheet->currentCell();
+    QFont font = item->font();
+    if (font.underline()) {
+        font.setUnderline(false);
+    } else {
+        font.setUnderline(true);
+    }
+    item->setFont(font);
+}

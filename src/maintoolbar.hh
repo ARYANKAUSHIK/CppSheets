@@ -36,7 +36,7 @@ public:
     ~MainToolbar();
 private:
     QToolButton *newFile, *open, *save, *saveAs;
-    QToolButton *bold, *italic;
+    QToolButton *bold, *italic, *underline;
 private slots:
     void onNewFileClicked();
     void onOpenClicked();
@@ -44,4 +44,5 @@ private slots:
     void onSaveAsClicked();
     void onBoldClicked();
     void onItalicClicked();
+    void onUnderlineClicked();
 };

@@ -3,5 +3,6 @@
         <file>style.css</file>
         <file>icons/format-text-bold.png</file>
         <file>icons/format-text-italic.png</file>
+        <file>icons/format-text-underline.png</file>
     </qresource>
 </RCC>
