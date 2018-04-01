@@ -32,4 +32,5 @@ public:
     static void openFile();
     static void saveFile();
     static void saveFileAs();
+    static void bold();
 };

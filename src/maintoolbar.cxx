@@ -28,8 +28,6 @@
 
 #include "maintoolbar.hh"
 #include "actions.hh"
-#include "tabwidget.hh"
-#include "sheetwidget.hh"
 
 MainToolbar::MainToolbar()
     : newFile(new QToolButton),
@@ -89,13 +87,5 @@ void MainToolbar::onSaveAsClicked() {
 }
 
 void MainToolbar::onBoldClicked() {
-    SheetWidget *sheet = TabWidget::currentWidget();
-    QTableWidgetItem *item = sheet->currentCell();
-    QFont font = item->font();
-    if (font.bold()) {
-        font.setBold(false);
-    } else {
-        font.setBold(true);
-    }
-    item->setFont(font);
+    Actions::bold();
 }

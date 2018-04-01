@@ -30,6 +30,7 @@
 #include "actions.hh"
 #include "tabwidget.hh"
 #include "parser.hh"
+#include "sheetwidget.hh"
 
 void Actions::newFile() {
     TabWidget::addNewTab();
@@ -98,4 +99,16 @@ void Actions::saveFileAs() {
 
         saveFile();
     }
+}
+
+void Actions::bold() {
+    SheetWidget *sheet = TabWidget::currentWidget();
+    QTableWidgetItem *item = sheet->currentCell();
+    QFont font = item->font();
+    if (font.bold()) {
+        font.setBold(false);
+    } else {
+        font.setBold(true);
+    }
+    item->setFont(font);
 }
