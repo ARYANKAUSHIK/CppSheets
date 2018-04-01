@@ -1,4 +1,4 @@
-CppSheets
+## CppSheets
 
 CppSheets is a simple, proof-of-concept spreadsheet application. I made this program as a hobby project primarily for the sake of making something different and challenging. This program has its own XML-based file format (see "file.xml" for more information); it contains an example of all possible values. Basic formulas, cell formatting, and a few other features are supported. 
 
@@ -9,8 +9,7 @@ Guide on how to use command line:
 -{				Create a tooltip
 -{\				Clears tooltip
 
-===============================================
-Formulas:
+#### Formulas:
 There are two ways to apply formulas: individual cells, and the bulk method. Please note that all formulas must start with an equals ("=") sign. Also note that formulas must be entered in the command line (make sure you are typing in the command line, not in the cell. If you are in the cell, it will be treated as text). 
 
 Individual cells can simply be added, subtracted, multiplied, or divided by using one of the following operators: "+", "-", "x", "/". To specify your cells, put the coordinates in parentheses with the row followed by the column (separated with a comma). Below is an example:
@@ -24,8 +23,7 @@ Bulk formulas allow you to apply a mathematical operating to all cells within a 
 
 A long-time MS Excel user would probably find these formulas inferior and cumbersome. This is understandable. But again, this program is meant to be experimental and proof-of-concept, not the next alternative to Excel. 
 
-===============================================
-The file format:
+#### The file format:
 Our custom file format is actually quite simple. It is fully XML based. 
 
 The root element must always be title "sheet". Nothing more is needed.
