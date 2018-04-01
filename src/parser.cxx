@@ -165,6 +165,16 @@ QVector<SheetItem> Parser::allItems(QString file, QString page) {
         int spanY = QVariant(sSpanY).toInt();
         item.spany = spanY;
 
+        QString sBold = QString(td->Attribute("bold"));
+        QString sItalic = QString(td->Attribute("italic"));
+        QString sUnderline = QString(td->Attribute("underline"));
+
+        QFont font;
+        font.setBold(QVariant(sBold).toBool());
+        font.setItalic(QVariant(sItalic).toBool());
+        font.setUnderline(QVariant(sUnderline).toBool());
+        item.font = font;
+
         if ((!sx.isNull())||(!sy.isNull())||(!text.isNull())) {
             item.x = QVariant(sx).toInt();
             item.y = QVariant(sy).toInt();
@@ -320,6 +330,24 @@ void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
 
         QString spanY = QVariant(current.spany).toString();
         td->SetAttribute("spany",spanY.toStdString().c_str());
+
+        if (current.font.bold()) {
+            td->SetAttribute("bold","true");
+        } else {
+            td->SetAttribute("bold","false");
+        }
+
+        if (current.font.italic()) {
+            td->SetAttribute("italic","true");
+        } else {
+            td->SetAttribute("italic","false");
+        }
+
+        if (current.font.underline()) {
+            td->SetAttribute("underline","true");
+        } else {
+            td->SetAttribute("underline","false");
+        }
     }
 
     doc->SaveFile(file.toStdString().c_str());

@@ -95,6 +95,7 @@ void SheetWidget::loadFile() {
             }
             item->setBackgroundColor(itemList.at(j).bgColor);
             item->setTextColor(itemList.at(j).fgColor);
+            item->setFont(itemList.at(j).font);
             table->setItem(x,y,item);
 
             table->setColumnWidth(y,itemList.at(j).colWidth);
@@ -141,6 +142,7 @@ QVector<SheetItem> SheetWidget::data(QString page) {
             sitem.rowWidth = table->rowHeight(x);
             sitem.spanx = table->rowSpan(x,y);
             sitem.spany = table->columnSpan(x,y);
+            sitem.font = item->font();
             QString bgRole = item->data(Qt::BackgroundRole).toString();
             if (bgRole.isEmpty()) {
                 sitem.bgColor = Qt::white;

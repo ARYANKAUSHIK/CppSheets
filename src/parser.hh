@@ -30,6 +30,7 @@
 #include <QStringList>
 #include <QVector>
 #include <QColor>
+#include <QFont>
 
 #include "tinyxml2.h"
 
@@ -46,6 +47,7 @@ struct SheetItem {
     int rowWidth;
     int spanx;
     int spany;
+    QFont font;
 };
 
 struct MathItem {
