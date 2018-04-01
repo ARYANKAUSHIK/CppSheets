@@ -28,32 +28,40 @@
 
 #include "maintoolbar.hh"
 #include "actions.hh"
+#include "tabwidget.hh"
+#include "sheetwidget.hh"
 
 MainToolbar::MainToolbar()
     : newFile(new QToolButton),
       open(new QToolButton),
       save(new QToolButton),
-      saveAs(new QToolButton)
+      saveAs(new QToolButton),
+      bold(new QToolButton)
 {
     newFile->setIcon(QPixmap(":/icons/document-new.png"));
     open->setIcon(QPixmap(":/icons/document-open.png"));
     save->setIcon(QPixmap(":/icons/document-save.png"));
     saveAs->setIcon(QPixmap(":/icons/document-save-as.png"));
+    bold->setIcon(QPixmap(":/icons/format-text-bold.png"));
 
     newFile->setToolTip("New Speadsheet");
     open->setToolTip("Open Sheet");
     save->setToolTip("Save Sheet");
     saveAs->setToolTip("Save As");
+    bold->setToolTip("Bold");
 
     connect(newFile,&QToolButton::clicked,this,&MainToolbar::onNewFileClicked);
     connect(open,&QToolButton::clicked,this,&MainToolbar::onOpenClicked);
     connect(save,&QToolButton::clicked,this,&MainToolbar::onSaveClicked);
     connect(saveAs,&QToolButton::clicked,this,&MainToolbar::onSaveAsClicked);
+    connect(bold,&QToolButton::clicked,this,&MainToolbar::onBoldClicked);
 
     this->addWidget(newFile);
     this->addWidget(open);
     this->addWidget(save);
     this->addWidget(saveAs);
+    this->addSeparator();
+    this->addWidget(bold);
 }
 
 MainToolbar::~MainToolbar() {
@@ -61,6 +69,7 @@ MainToolbar::~MainToolbar() {
     delete open;
     delete save;
     delete saveAs;
+    delete bold;
 }
 
 void MainToolbar::onNewFileClicked() {
@@ -77,4 +86,16 @@ void MainToolbar::onSaveClicked() {
 
 void MainToolbar::onSaveAsClicked() {
     Actions::saveFileAs();
+}
+
+void MainToolbar::onBoldClicked() {
+    SheetWidget *sheet = TabWidget::currentWidget();
+    QTableWidgetItem *item = sheet->currentCell();
+    QFont font = item->font();
+    if (font.bold()) {
+        font.setBold(false);
+    } else {
+        font.setBold(true);
+    }
+    item->setFont(font);
 }
