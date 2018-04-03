@@ -24,4 +24,5 @@ add_executable(CppSheets ${SRC})
 target_link_libraries(CppSheets
     Qt5::Core
     Qt5::Widgets
+    xlnt
 )
