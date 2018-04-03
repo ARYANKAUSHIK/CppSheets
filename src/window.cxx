@@ -27,6 +27,7 @@
 #include <QVBoxLayout>
 #include <QPixmap>
 #include <QMessageBox>
+#include <QMenuBar>
 
 #include "window.hh"
 #include "ribbon.hh"
@@ -51,11 +52,15 @@ Window::Window() {
     centerLayout->addWidget(ribbon,0,Qt::AlignTop);
     centerLayout->addWidget(tabs);
 
+    filemenu = new FileMenu;
+    this->menuBar()->addMenu(filemenu);
+
     statusbar = new StatusBar;
     this->setStatusBar(statusbar);
 }
 
 Window::~Window() {
+    delete filemenu;
 }
 
 void Window::setCurrentPath(QString path) {

@@ -29,6 +29,7 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 
+#include "filemenu.hh"
 #include "statusbar.hh"
 
 class Window : public QMainWindow {
@@ -42,5 +43,6 @@ public:
 protected:
     void closeEvent(QCloseEvent *event);
 private:
+    FileMenu *filemenu;
     static StatusBar *statusbar;
 };

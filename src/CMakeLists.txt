@@ -16,6 +16,7 @@ set(SRC
     cellbar.cxx
     math.cxx
     statusbar.cxx
+    filemenu.cxx
 )
 
 add_executable(CppSheets ${SRC})
