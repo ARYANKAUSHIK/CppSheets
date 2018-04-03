@@ -12,4 +12,5 @@ find_package(Qt5 REQUIRED COMPONENTS
 
 add_compile_options(-std=c++11)
 
+add_subdirectory(xlnt)
 add_subdirectory(src)

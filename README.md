@@ -1,5 +1,9 @@
 ## CppSheets
 
+#### xlsx branch
+You are on the xlsx branch. In this branch, I am working to add some Excel file compatibility with this program. I am using the xlnt (https://github.com/tfussell/xlnt) library, and to make development easy, the code is being included directly in mine. All credit to the original author.
+
+#### Introduction
 CppSheets is a simple, proof-of-concept spreadsheet application. I made this program as a hobby project primarily for the sake of making something different and challenging. This program has its own XML-based file format (see "file.xml" for more information); it contains an example of all possible values. Basic formulas, cell formatting, and a few other features are supported. 
 
 Please note that this program is very experimental. In fact, virtually its only purpose is to provide an example of what a simple spreadsheet application could look like. I would not recommend using it for any kind of production purposes. Also, the file format is specific to this program.
