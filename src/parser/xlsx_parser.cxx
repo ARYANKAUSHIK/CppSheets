@@ -24,6 +24,7 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <xlnt/xlnt.hpp>
 #include <iostream>
 
 #include "xlsx_parser.hh"
@@ -34,7 +35,17 @@ void XlsxParser::createFile(QString filePath) {
 
 QStringList XlsxParser::pages(QString file) {
 	QStringList pages;
-	std::cout << "Excel" << std::endl;
+
+    xlnt::workbook wb;
+    wb.load(file.toStdString());
+    int no = wb.sheet_count();
+
+    for (int i = 0; i<no; i++) {
+        std::string strTitle = wb.sheet_by_index(i).title();
+        QString str = QString::fromStdString(strTitle);
+        pages.push_back(str);
+    }
+
 	return pages;
 }
 
