@@ -96,6 +96,8 @@ void SheetWidget::loadFile() {
                 for (auto cell : row) {
                     QTableWidgetItem *item = new QTableWidgetItem(QString::fromStdString(cell.to_string()));
                     table->setItem(r,c,item);
+                    table->setColumnWidth(c,cell.width()*10);
+                    table->setRowHeight(r,cell.height());
                     c++;
                 }
                 r++;
