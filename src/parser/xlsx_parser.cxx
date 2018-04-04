@@ -50,8 +50,22 @@ QStringList XlsxParser::pages(QString file) {
 }
 
 bool XlsxParser::pageExists(QString file, QString pageName) {
-	std::cout << "Excel" << std::endl;
-	return false;
+    bool found = false;
+
+    xlnt::workbook wb;
+    wb.load(file.toStdString());
+    int no = wb.sheet_count();
+
+    for (int i = 0; i<no; i++) {
+        std::string strTitle = wb.sheet_by_index(i).title();
+        QString str = QString::fromStdString(strTitle);
+        if (str==pageName) {
+            found = true;
+            break;
+        }
+    }
+
+    return found;
 }
 
 QVector<SheetItem> XlsxParser::allItems(QString file, QString page) {
