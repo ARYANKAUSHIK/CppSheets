@@ -28,10 +28,11 @@
 
 #include "parser.hh"
 #include "xml_parser.hh"
+#include "xlsx_parser.hh"
 
 void Parser::createFile(QString filePath) {
 	if (isXlsx(filePath)) {
-		std::cout << "Excel" << std::endl;
+		XlsxParser::createFile(filePath);
 	} else {
 		XmlParser::createFile(filePath);
 	}
@@ -39,35 +40,39 @@ void Parser::createFile(QString filePath) {
 
 QStringList Parser::pages(QString file) {
 	if (isXlsx(file)) {
-		std::cout << "Excel" << std::endl;
+		return XlsxParser::pages(file);
+	} else {
+		return XmlParser::pages(file);
 	}
-	return XmlParser::pages(file);
 }
 
 bool Parser::pageExists(QString file, QString pageName) {
 	if (isXlsx(file)) {
-		std::cout << "Excel" << std::endl;
+		return XlsxParser::pageExists(file,pageName);
+	} else {
+		return XmlParser::pageExists(file,pageName);
 	}
-	return XmlParser::pageExists(file,pageName);
 }
 
 QVector<SheetItem> Parser::allItems(QString file, QString page) {
 	if (isXlsx(file)) {
-		std::cout << "Excel" << std::endl;
+		return XlsxParser::allItems(file,page);
+	} else {
+		return XmlParser::allItems(file,page);
 	}
-	return XmlParser::allItems(file,page);
 }
 
 QVector<MathItem> Parser::allMathItems(QString file, QString page) {
 	if (isXlsx(file)) {
-		std::cout << "Excel" << std::endl;
+		return XlsxParser::allMathItems(file,page);
+	} else {
+		return XmlParser::allMathItems(file,page);
 	}
-	return XmlParser::allMathItems(file,page);
 }
 
 void Parser::createPage(QString file, QString page) {
 	if (isXlsx(file)) {
-		std::cout << "Excel" << std::endl;
+		XlsxParser::createPage(file,page);
 	} else {
 		XmlParser::createPage(file,page);
 	}	
@@ -75,7 +80,7 @@ void Parser::createPage(QString file, QString page) {
 
 void Parser::removePage(QString file, QString page) {
 	if (isXlsx(file)) {
-		std::cout << "Excel" << std::endl;
+		XlsxParser::removePage(file,page);
 	} else {
 		XmlParser::removePage(file,page);
 	}
@@ -83,7 +88,7 @@ void Parser::removePage(QString file, QString page) {
 
 void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
 	if (isXlsx(file)) {
-		std::cout << "Excel" << std::endl;
+		XlsxParser::setData(file,page,items);
 	} else {
 		XmlParser::setData(file,page,items);
 	}
@@ -91,7 +96,7 @@ void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
 
 void Parser::setMathData(QString file, QString page, QVector<MathItem> items) {
 	if (isXlsx(file)) {
-		std::cout << "Excel" << std::endl;
+		XlsxParser::setMathData(file,page,items);
 	} else {
 		XmlParser::setMathData(file,page,items);
 	}

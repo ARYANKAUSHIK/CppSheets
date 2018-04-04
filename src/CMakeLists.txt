@@ -20,6 +20,7 @@ set(SRC
 set(PARSER_SRC
 	parser/parser.cxx
 	parser/xml_parser.cxx
+	parser/xlsx_parser.cxx
 	parser/tinyxml2.cpp
 )
 
