@@ -98,6 +98,19 @@ void SheetWidget::loadFile() {
                     table->setItem(r,c,item);
                     table->setColumnWidth(c,cell.width()*10);
                     table->setRowHeight(r,cell.height());
+
+                    QFont font;
+                    if (cell.font().bold()) {
+                        font.setBold(true);
+                    }
+                    if (cell.font().italic()) {
+                        font.setItalic(true);
+                    }
+                    if (cell.font().underlined()) {
+                        font.setUnderline(true);
+                    }
+                    item->setFont(font);
+
                     c++;
                 }
                 r++;
