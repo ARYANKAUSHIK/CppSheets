@@ -28,7 +28,6 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <iostream>
-#include <xlnt/xlnt.hpp>
 
 #include "sheetwidget.hh"
 #include "tablewidget.hh"
@@ -76,75 +75,33 @@ void SheetWidget::loadFile() {
         delete tabs->widget(i);
     }
 
-    if (filePath.endsWith(".xlsx")) {
-        xlnt::workbook wb;
-        wb.load(filePath.toStdString());
+    auto pageList = Parser::pages(filePath);
+    for (int i = 0; i<pageList.size(); i++) {
+        TableWidget *table = new TableWidget;
+        connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
+        connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
+        table->setMathItems(Parser::allMathItems(filePath,pageList.at(i)));
+        tabs->addTab(table,pageList.at(i));
 
-        int noSheets = wb.sheet_count();
-        for (int i = 0; i<noSheets; i++) {
-            auto sheet = wb.sheet_by_index(i);
+        auto itemList = Parser::allItems(filePath,pageList.at(i));
+        for (int j = 0; j<itemList.size(); j++) {
+            int x = itemList.at(j).x;
+            int y = itemList.at(j).y;
+            QString text = itemList.at(j).data;
 
-            TableWidget *table = new TableWidget;
-            connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
-            connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
-            tabs->addTab(table,QString::fromStdString(sheet.title()));
-
-            int r = 0;
-            int c = 0;
-            for (auto row : sheet.rows()) {
-                c = 0;
-                for (auto cell : row) {
-                    QTableWidgetItem *item = new QTableWidgetItem(QString::fromStdString(cell.to_string()));
-                    table->setItem(r,c,item);
-                    table->setColumnWidth(c,cell.width()*10);
-                    table->setRowHeight(r,cell.height());
-
-                    QFont font;
-                    if (cell.font().bold()) {
-                        font.setBold(true);
-                    }
-                    if (cell.font().italic()) {
-                        font.setItalic(true);
-                    }
-                    if (cell.font().underlined()) {
-                        font.setUnderline(true);
-                    }
-                    item->setFont(font);
-
-                    c++;
-                }
-                r++;
+            QTableWidgetItem *item = new QTableWidgetItem(text);
+            if (!itemList.at(j).tooltip.isNull()) {
+                item->setToolTip(itemList.at(j).tooltip);
             }
-        }
-    } else {
-        auto pageList = Parser::pages(filePath);
-        for (int i = 0; i<pageList.size(); i++) {
-            TableWidget *table = new TableWidget;
-            connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
-            connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
-            table->setMathItems(Parser::allMathItems(filePath,pageList.at(i)));
-            tabs->addTab(table,pageList.at(i));
+            item->setBackgroundColor(itemList.at(j).bgColor);
+            item->setTextColor(itemList.at(j).fgColor);
+            item->setFont(itemList.at(j).font);
+            table->setItem(x,y,item);
 
-            auto itemList = Parser::allItems(filePath,pageList.at(i));
-            for (int j = 0; j<itemList.size(); j++) {
-                int x = itemList.at(j).x;
-                int y = itemList.at(j).y;
-                QString text = itemList.at(j).data;
+            table->setColumnWidth(y,itemList.at(j).colWidth);
+            table->setRowHeight(x,itemList.at(j).rowWidth);
 
-                QTableWidgetItem *item = new QTableWidgetItem(text);
-                if (!itemList.at(j).tooltip.isNull()) {
-                    item->setToolTip(itemList.at(j).tooltip);
-                }
-                item->setBackgroundColor(itemList.at(j).bgColor);
-                item->setTextColor(itemList.at(j).fgColor);
-                item->setFont(itemList.at(j).font);
-                table->setItem(x,y,item);
-
-                table->setColumnWidth(y,itemList.at(j).colWidth);
-                table->setRowHeight(x,itemList.at(j).rowWidth);
-
-                table->setSpan(x,y,itemList.at(j).spanx,itemList.at(j).spany);
-            }
+            table->setSpan(x,y,itemList.at(j).spanx,itemList.at(j).spany);
         }
     }
 }
