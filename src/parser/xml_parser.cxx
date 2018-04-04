@@ -31,7 +31,7 @@
 
 #include "xml_parser.hh"
 
-void Parser::createFile(QString filePath) {
+void XmlParser::createFile(QString filePath) {
     QFile file(filePath);
     if (file.open(QFile::ReadWrite | QFile::Truncate)) {
         QTextStream writer(&file);
@@ -43,7 +43,7 @@ void Parser::createFile(QString filePath) {
     }
 }
 
-QStringList Parser::pages(QString file) {
+QStringList XmlParser::pages(QString file) {
 	QStringList list;
 	
 	XMLDocument *doc = new XMLDocument;
@@ -70,7 +70,7 @@ QStringList Parser::pages(QString file) {
 	return list;
 }
 
-bool Parser::pageExists(QString file, QString pageName) {
+bool XmlParser::pageExists(QString file, QString pageName) {
     bool ret = false;
 
     XMLDocument *doc = new XMLDocument;
@@ -100,7 +100,7 @@ bool Parser::pageExists(QString file, QString pageName) {
     return ret;
 }
 
-QVector<SheetItem> Parser::allItems(QString file, QString page) {
+QVector<SheetItem> XmlParser::allItems(QString file, QString page) {
     QVector<SheetItem> items;
 
     XMLDocument *doc = new XMLDocument;
@@ -189,7 +189,7 @@ QVector<SheetItem> Parser::allItems(QString file, QString page) {
     return items;
 }
 
-QVector<MathItem> Parser::allMathItems(QString file, QString page) {
+QVector<MathItem> XmlParser::allMathItems(QString file, QString page) {
     QVector<MathItem> items;
 
     XMLDocument *doc = new XMLDocument;
@@ -233,7 +233,7 @@ QVector<MathItem> Parser::allMathItems(QString file, QString page) {
     return items;
 }
 
-void Parser::createPage(QString file, QString page) {
+void XmlParser::createPage(QString file, QString page) {
     XMLDocument *doc = new XMLDocument;
     doc->LoadFile(file.toStdString().c_str());
 
@@ -255,7 +255,7 @@ void Parser::createPage(QString file, QString page) {
     doc->SaveFile(file.toStdString().c_str());
 }
 
-void Parser::removePage(QString file, QString page) {
+void XmlParser::removePage(QString file, QString page) {
     XMLDocument *doc = new XMLDocument;
     doc->LoadFile(file.toStdString().c_str());
 
@@ -270,7 +270,7 @@ void Parser::removePage(QString file, QString page) {
     doc->SaveFile(file.toStdString().c_str());
 }
 
-void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
+void XmlParser::setData(QString file, QString page, QVector<SheetItem> items) {
     XMLDocument *doc = new XMLDocument;
     doc->LoadFile(file.toStdString().c_str());
 
@@ -353,7 +353,7 @@ void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
     doc->SaveFile(file.toStdString().c_str());
 }
 
-void Parser::setMathData(QString file, QString page, QVector<MathItem> items) {
+void XmlParser::setMathData(QString file, QString page, QVector<MathItem> items) {
     XMLDocument *doc = new XMLDocument;
     doc->LoadFile(file.toStdString().c_str());
 
@@ -389,7 +389,7 @@ void Parser::setMathData(QString file, QString page, QVector<MathItem> items) {
     doc->SaveFile(file.toStdString().c_str());
 }
 
-XMLElement *Parser::getPageElement(XMLElement *root, QString title) {
+XMLElement *XmlParser::getPageElement(XMLElement *root, QString title) {
     XMLElement *pageElement = root->FirstChildElement("page");
     XMLElement *oldPage;
     while (pageElement!=nullptr) {

@@ -29,7 +29,7 @@
 
 #include "actions.hh"
 #include "tabwidget.hh"
-#include "parser/xml_parser.hh"
+#include "parser/parser.hh"
 #include "sheetwidget.hh"
 
 void Actions::newFile() {

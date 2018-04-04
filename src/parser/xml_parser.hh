@@ -37,7 +37,7 @@
 
 using namespace tinyxml2;
 
-class Parser {
+class XmlParser {
 public:
     static void createFile(QString filePath);
 	static QStringList pages(QString file);

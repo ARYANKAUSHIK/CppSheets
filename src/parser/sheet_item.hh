@@ -26,6 +26,10 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
+#include <QString>
+#include <QColor>
+#include <QFont>
+
 struct SheetItem {
     int x;
     int y;
