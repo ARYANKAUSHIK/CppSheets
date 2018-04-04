@@ -29,7 +29,7 @@
 #include <QVariant>
 #include <iostream>
 
-#include "parser.hh"
+#include "xml_parser.hh"
 
 void Parser::createFile(QString filePath) {
     QFile file(filePath);

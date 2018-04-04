@@ -32,7 +32,7 @@
 #include <QModelIndexList>
 #include <QKeyEvent>
 
-#include "parser.hh"
+#include "parser/xml_parser.hh"
 
 class TableWidget : public QTableWidget {
     Q_OBJECT

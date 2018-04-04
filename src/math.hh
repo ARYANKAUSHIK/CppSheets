@@ -28,7 +28,7 @@
 
 #include <QVector>
 
-#include "parser.hh"
+#include "parser/xml_parser.hh"
 #include "tablewidget.hh"
 
 enum OPERATION {

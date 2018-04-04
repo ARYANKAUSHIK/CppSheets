@@ -36,7 +36,7 @@
 #include <QStringList>
 #include <QTableWidgetItem>
 
-#include "parser.hh"
+#include "parser/xml_parser.hh"
 #include "tablewidget.hh"
 
 class SheetWidget : public QWidget {

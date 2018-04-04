@@ -32,7 +32,7 @@
 
 #include "sheetwidget.hh"
 #include "tablewidget.hh"
-#include "parser.hh"
+#include "parser/xml_parser.hh"
 #include "window.hh"
 
 SheetWidget::SheetWidget(QString path)

@@ -4,8 +4,6 @@ set(SRC
     rsc.qrc
     icons.qrc
     main.cxx
-    parser.cxx
-    tinyxml2.cpp
     tablewidget.cxx
     sheetwidget.cxx
     window.cxx
@@ -19,7 +17,15 @@ set(SRC
     filemenu.cxx
 )
 
-add_executable(CppSheets ${SRC})
+set(PARSER_SRC
+	parser/xml_parser.cxx
+	parser/tinyxml2.cpp
+)
+
+add_executable(CppSheets 
+	${SRC}
+	${PARSER_SRC}
+)
 
 target_link_libraries(CppSheets
     Qt5::Core
