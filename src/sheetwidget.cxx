@@ -77,25 +77,29 @@ void SheetWidget::loadFile() {
     }
 
     if (filePath.endsWith(".xlsx")) {
-        TableWidget *table = new TableWidget;
-        connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
-        connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
-        tabs->addTab(table,"Page 1");
-
         xlnt::workbook wb;
         wb.load(filePath.toStdString());
-        auto sheet = wb.active_sheet();
 
-        int r = 0;
-        int c = 0;
-        for (auto row : sheet.rows()) {
-            c = 0;
-            for (auto cell : row) {
-                QTableWidgetItem *item = new QTableWidgetItem(QString::fromStdString(cell.to_string()));
-                table->setItem(r,c,item);
-                c++;
+        int noSheets = wb.sheet_count();
+        for (int i = 0; i<noSheets; i++) {
+            auto sheet = wb.sheet_by_index(i);
+
+            TableWidget *table = new TableWidget;
+            connect(table,&TableWidget::cellModified,this,&SheetWidget::onCellChanged);
+            connect(table,SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),this,SLOT(onCellLocoChanged(QTableWidgetItem*,QTableWidgetItem*)));
+            tabs->addTab(table,QString::fromStdString(sheet.title()));
+
+            int r = 0;
+            int c = 0;
+            for (auto row : sheet.rows()) {
+                c = 0;
+                for (auto cell : row) {
+                    QTableWidgetItem *item = new QTableWidgetItem(QString::fromStdString(cell.to_string()));
+                    table->setItem(r,c,item);
+                    c++;
+                }
+                r++;
             }
-            r++;
         }
     } else {
         auto pageList = Parser::pages(filePath);
