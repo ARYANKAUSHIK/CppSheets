@@ -98,8 +98,16 @@ void SheetWidget::loadFile() {
             item->setFont(itemList.at(j).font);
             table->setItem(x,y,item);
 
-            table->setColumnWidth(y,itemList.at(j).colWidth);
-            table->setRowHeight(x,itemList.at(j).rowWidth);
+            int width = itemList.at(j).colWidth;
+            int height = itemList.at(j).rowWidth;
+            if (width<70) {
+                width=70;
+            }
+            if (height<20) {
+                height=20;
+            }
+            table->setColumnWidth(y,width);
+            table->setRowHeight(x,height);
 
             table->setSpan(x,y,itemList.at(j).spanx,itemList.at(j).spany);
         }

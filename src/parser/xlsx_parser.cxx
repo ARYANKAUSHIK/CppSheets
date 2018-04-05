@@ -70,13 +70,41 @@ bool XlsxParser::pageExists(QString file, QString pageName) {
 
 QVector<SheetItem> XlsxParser::allItems(QString file, QString page) {
 	QVector<SheetItem> items;
-	std::cout << "Excel" << std::endl;
+
+    xlnt::workbook wb;
+    wb.load(file.toStdString());
+    if (!pageExists(file,page)) {
+        return items;
+    }
+
+    auto sheet = wb.sheet_by_title(page.toStdString());
+    int c = 0;
+    int r = 0;
+    for (auto row : sheet.rows()) {
+        c = 0;
+        for (auto cell : row) {
+            SheetItem item;
+            item.data = QString::fromStdString(cell.to_string());
+            item.x = r;
+            item.y = c;
+            item.bgColor = Qt::white;
+            item.fgColor = Qt::black;
+            item.spanx = 1;
+            item.spany = 1;
+            item.colWidth = cell.width();
+            item.rowWidth = cell.height();
+            items.push_back(item);
+            c++;
+        }
+        r++;
+    }
+
 	return items;
 }
 
 QVector<MathItem> XlsxParser::allMathItems(QString file, QString page) {
 	QVector<MathItem> items;
-	std::cout << "Excel" << std::endl;
+    std::cout << "Not supported yet." << std::endl;
 	return items;
 }
 
