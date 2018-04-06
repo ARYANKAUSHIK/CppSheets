@@ -1,13 +1,21 @@
 ## CppSheets
 
-#### xlsx branch
-You are on the xlsx branch. In this branch, I am working to add some Excel file compatibility with this program. I am using the xlnt (https://github.com/tfussell/xlnt) library, and to make development easy, the code is being included directly in mine. All credit to the original author.
-
 #### Introduction
-CppSheets is a simple, proof-of-concept spreadsheet application. I made this program as a hobby project primarily for the sake of making something different and challenging. This program has its own XML-based file format (see "file.xml" for more information); it contains an example of all possible values. Basic formulas, cell formatting, and a few other features are supported. 
+CppSheets is a simple spreadsheet application. This program has its own XML-based file format (see "file.xml" for more information); it contains an example of all possible values. Basic formulas, cell formatting, and a few other features are supported.
 
-Please note that this program is very experimental. In fact, virtually its only purpose is to provide an example of what a simple spreadsheet application could look like. I would not recommend using it for any kind of production purposes. Also, the file format is specific to this program.
+Why did I make this? The answer is because I was looking for something challenging to do. I was getting bored with some of my other programs, so after playing around with the QTableWidget, I got to thinking that I could probably make some sort of spreadsheet application with it. After a few experimental programs, I began this project. I do not intend on making the next alternative to Microsoft Excel. My goal is simply to make a working spreadsheet application with as many features found in other programs as possible. The ultimate purpose is to have fun! I have thoroughly enjoyed working on this project, and I continue to enjoy working on it.
 
+#### CppSheets files
+CppSheets files are nothing special; they are simply XML files. However, the XML has to follow specific rules in order for it to be loaded. More information on the file format can be found below. These files are specific to this program. Because this program is mainly a hobby project, it may not be wise to use this for any production purposes- at least for now. If you want to, then go for it! While the file format is unlikely to change, you can expect constant GUI changes.
+
+#### Excel files
+CppSheets has experimental xlsx (Microsoft Excel) file compatibility. This is made possible through the xlnt (https://github.com/tfussell/xlnt) library. To make things easier, the code is included (unmodified) directly in this project. All credit to the original author.
+
+Xlsx compatibility at this point is very, very limited. CppSheets is able to load text data from xlsx files and cell height/width attributes. All sheets contained in an Excel workbook are also able to be loaded. As far as saving goes, xlsx files can be saved to a limited extent. Only text data and new sheets are saved; formatting is not. Both mechanisms, especially the saving mechanism, are buggy.
+
+CppSheets is currently not an alternative for Microsoft Excel, or any other office suite such as LibreOffice or WPS Office. Save workbooks using this program at your own risk; I am not responsible for mangled spreadsheets. Opening workbooks should not damage them.
+
+#### Command Line
 Guide on how to use command line:
 =\				Kill the formula
 -{				Create a tooltip
