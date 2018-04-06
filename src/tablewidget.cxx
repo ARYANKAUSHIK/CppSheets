@@ -24,6 +24,9 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <QStringList>
+#include <QFile>
+#include <QTextStream>
 #include <iostream>
 
 #include "tablewidget.hh"
@@ -32,9 +35,24 @@
 TableWidget::TableWidget() {
     this->setColumnCount(1000);
     this->setRowCount(1000);
+    this->loadHeaders();
 
     connect(this,&TableWidget::cellChanged,this,&TableWidget::onCellChanged);
     connect(this,SIGNAL(itemChanged(QTableWidgetItem*)),this,SLOT(onItemChanged(QTableWidgetItem*)));
+}
+
+void TableWidget::loadHeaders() {
+    QStringList letters;
+
+    QFile file(":/headers.txt");
+    if (file.open(QFile::ReadOnly)) {
+        QTextStream reader(&file);
+        while (!reader.atEnd()) {
+            letters.push_back(reader.readLine());
+        }
+    }
+
+    this->setHorizontalHeaderLabels(letters);
 }
 
 void TableWidget::setMathItems(QVector<MathItem> items) {

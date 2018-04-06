@@ -38,6 +38,7 @@ class TableWidget : public QTableWidget {
     Q_OBJECT
 public:
     TableWidget();
+    void loadHeaders();
     void setMathItems(QVector<MathItem> items);
     void addMathItem(MathItem item);
     QVector<MathItem> allMathItems();
