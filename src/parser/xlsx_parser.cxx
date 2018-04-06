@@ -26,8 +26,10 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <xlnt/xlnt.hpp>
 #include <iostream>
+#include <QTableWidget>
 
 #include "xlsx_parser.hh"
+#include "../tabwidget.hh"
 
 void XlsxParser::createFile(QString filePath) {
 	std::cout << "Excel" << std::endl;
@@ -126,20 +128,11 @@ void XlsxParser::setData(QString file, QString page, QVector<SheetItem> items) {
     auto sheet = wb.sheet_by_title(page.toStdString());
 
     for (SheetItem item : items) {
-        std::cout << item.data.toStdString() << std::endl;
-        int c = 0;
-        int r = 0;
-        for (auto row : sheet.rows(false)) {
-            c = 0;
-            for (auto cell : row) {
-                std::cout << item.x << " " << item.y << std::endl;
-                if (r==item.x && c==item.y) {
-                    cell.value(item.data.toStdString());
-                }
-                c++;
-            }
-            r++;
-        }
+        QTableWidget *current = TabWidget::currentWidget()->currentTable();
+        QString cellStr = current->horizontalHeaderItem(item.y)->text();
+        cellStr+=QString::number(item.x+1);
+        auto cell = sheet.cell(cellStr.toStdString());
+        cell.value(item.data.toStdString());
     }
 
     wb.save(file.toStdString());
