@@ -29,7 +29,7 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 
-#include "filemenu.hh"
+#include "menubar/filemenu.hh"
 #include "statusbar.hh"
 
 class Window : public QMainWindow {

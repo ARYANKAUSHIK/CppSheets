@@ -28,7 +28,7 @@
 #include <QApplication>
 
 #include "filemenu.hh"
-#include "actions.hh"
+#include "../actions.hh"
 
 FileMenu::FileMenu() {
     this->setTitle("File");

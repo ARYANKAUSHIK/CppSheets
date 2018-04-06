@@ -14,18 +14,22 @@ set(SRC
     cellbar.cxx
     math.cxx
     statusbar.cxx
-    filemenu.cxx
+)
+
+set(MENUBAR_SRC
+    menubar/filemenu.cxx
 )
 
 set(PARSER_SRC
-	parser/parser.cxx
-	parser/xml_parser.cxx
-	parser/xlsx_parser.cxx
-	parser/tinyxml2.cpp
+    parser/parser.cxx
+    parser/xml_parser.cxx
+    parser/xlsx_parser.cxx
+    parser/tinyxml2.cpp
 )
 
 add_executable(CppSheets 
 	${SRC}
+        ${MENUBAR_SRC}
 	${PARSER_SRC}
 )
 
