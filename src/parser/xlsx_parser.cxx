@@ -109,7 +109,11 @@ QVector<MathItem> XlsxParser::allMathItems(QString file, QString page) {
 }
 
 void XlsxParser::createPage(QString file, QString page) {
-	std::cout << "Excel" << std::endl;
+    xlnt::workbook wb;
+    wb.load(file.toStdString());
+    auto sheet = wb.create_sheet();
+    sheet.title(page.toStdString());
+    wb.save(file.toStdString());
 }
 
 void XlsxParser::removePage(QString file, QString page) {
@@ -117,7 +121,28 @@ void XlsxParser::removePage(QString file, QString page) {
 }
 
 void XlsxParser::setData(QString file, QString page, QVector<SheetItem> items) {
-	std::cout << "Excel" << std::endl;
+    xlnt::workbook wb;
+    wb.load(file.toStdString());
+    auto sheet = wb.sheet_by_title(page.toStdString());
+
+    for (SheetItem item : items) {
+        std::cout << item.data.toStdString() << std::endl;
+        int c = 0;
+        int r = 0;
+        for (auto row : sheet.rows(false)) {
+            c = 0;
+            for (auto cell : row) {
+                std::cout << item.x << " " << item.y << std::endl;
+                if (r==item.x && c==item.y) {
+                    cell.value(item.data.toStdString());
+                }
+                c++;
+            }
+            r++;
+        }
+    }
+
+    wb.save(file.toStdString());
 }
 
 void XlsxParser::setMathData(QString file, QString page, QVector<MathItem> items) {
