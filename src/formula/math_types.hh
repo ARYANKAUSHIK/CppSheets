@@ -26,18 +26,14 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-#include <QVector>
+enum OPERATION {
+    ADD,
+    SUB,
+    MP,
+    DIV
+};
 
-#include "math_types.hh"
-#include "../parser/sheet_item.hh"
-#include "../tablewidget.hh"
-
-class Math {
-public:
-    static void updateMath(QVector<MathItem> mathItems, TableWidget *table);
-    static void applyBulkFormula(MathItem mathItem, TableWidget *table);
-    static void applyColumnFormula(MathItem mathItem, TableWidget *table);
-    static double solve(QStringList objects);
-    static bool isOperator(QString s);
-    static QString transAndGetContent(QString loco);
+struct Cell {
+    int x;
+    int y;
 };
