@@ -102,6 +102,16 @@ QVector<SheetItem> XlsxParser::allItems(QString file, QString page) {
             font.setUnderline(cell.font().underlined());
             item.font = font;
 
+            if (cell.has_format()) {
+                try {
+                    std::string bgColor = "#"+cell.format().fill().pattern_fill()
+                            .background().get().rgb().hex_string();
+                    item.bgColor = QColor(QString::fromStdString(bgColor));
+                } catch (xlnt::exception &e) {
+                    std::cout << e.what() << std::endl;
+                }
+            }
+
             items.push_back(item);
             c++;
         }
