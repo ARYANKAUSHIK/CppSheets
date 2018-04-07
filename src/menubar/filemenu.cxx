@@ -25,6 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QKeySequence>
+#include <QPixmap>
 #include <QApplication>
 
 #include "filemenu.hh"
@@ -44,6 +45,12 @@ FileMenu::FileMenu() {
     save->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_S));
     saveAs->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_S));
     quit->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_Q));
+
+    newFile->setIcon(QPixmap(":/icons/document-new.png"));
+    open->setIcon(QPixmap(":/icons/document-open.png"));
+    save->setIcon(QPixmap(":/icons/document-save.png"));
+    saveAs->setIcon(QPixmap(":/icons/document-save-as.png"));
+    quit->setIcon(QPixmap(":/icons/application-exit.png"));
 
     connect(newFile,&QAction::triggered,this,&FileMenu::onNewFileClicked);
     connect(open,&QAction::triggered,this,&FileMenu::onOpenClicked);
