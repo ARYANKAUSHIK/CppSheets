@@ -83,10 +83,6 @@ void SheetWidget::loadFile() {
         table->setMathItems(Parser::allMathItems(filePath,pageList.at(i)));
         tabs->addTab(table,pageList.at(i));
 
-        if (filePath.endsWith(".xlsx")) {
-            table->loadHeaders();
-        }
-
         auto itemList = Parser::allItems(filePath,pageList.at(i));
         for (int j = 0; j<itemList.size(); j++) {
             int x = itemList.at(j).x;

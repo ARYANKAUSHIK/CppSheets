@@ -106,7 +106,31 @@ QVector<SheetItem> XlsxParser::allItems(QString file, QString page) {
 
 QVector<MathItem> XlsxParser::allMathItems(QString file, QString page) {
 	QVector<MathItem> items;
-    std::cout << "Not supported yet." << std::endl;
+
+    xlnt::workbook wb;
+    wb.load(file.toStdString());
+    if (!pageExists(file,page)) {
+        return items;
+    }
+
+    auto sheet = wb.sheet_by_title(page.toStdString());
+    int c = 0;
+    int r = 0;
+    for (auto row : sheet.rows()) {
+        c = 0;
+        for (auto cell : row) {
+            if (cell.has_formula()) {
+                MathItem item;
+                item.equation = "="+QString::fromStdString(cell.formula());
+                item.x = r;
+                item.y = c;
+                items.push_back(item);
+            }
+            c++;
+        }
+        r++;
+    }
+
 	return items;
 }
 
