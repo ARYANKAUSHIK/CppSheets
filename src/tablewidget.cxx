@@ -42,6 +42,7 @@ TableWidget::TableWidget() {
 
 void TableWidget::loadHeaders() {
     QStringList letters;
+    QStringList headers;
 
     QFile file(":/headers.txt");
     if (file.open(QFile::ReadOnly)) {
@@ -51,7 +52,29 @@ void TableWidget::loadHeaders() {
         }
     }
 
-    this->setHorizontalHeaderLabels(letters);
+    int index = 0;
+    int len = letters.length();
+    int currentFirst = -1;
+    for (int i = 0; i<1000; i++) {
+        if (i>0) {
+            if (i%len==0) {
+                currentFirst++;
+                index = 0;
+            }
+        }
+        QString result = "";
+        if (currentFirst>-1) {
+            if (currentFirst==len) {
+                break;
+            }
+            result+=letters.at(currentFirst);
+        }
+        result+=letters.at(index);
+        headers.push_back(result);
+        index++;
+    }
+
+    this->setHorizontalHeaderLabels(headers);
 }
 
 void TableWidget::setMathItems(QVector<MathItem> items) {
