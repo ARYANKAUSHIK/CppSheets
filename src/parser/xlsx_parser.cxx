@@ -163,6 +163,18 @@ void XlsxParser::setData(QString file, QString page, QVector<SheetItem> items) {
 }
 
 void XlsxParser::setMathData(QString file, QString page, QVector<MathItem> items) {
-	std::cout << "Excel" << std::endl;
+    xlnt::workbook wb;
+    wb.load(file.toStdString());
+    auto sheet = wb.sheet_by_title(page.toStdString());
+
+    for (MathItem item : items) {
+        QTableWidget *current = TabWidget::currentWidget()->currentTable();
+        QString cellStr = current->horizontalHeaderItem(item.y)->text();
+        cellStr+=QString::number(item.x+1);
+        auto cell = sheet.cell(cellStr.toStdString());
+        cell.formula(item.equation.toStdString());
+    }
+
+    wb.save(file.toStdString());
 }
 
