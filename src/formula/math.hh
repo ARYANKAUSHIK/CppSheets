@@ -28,8 +28,8 @@
 
 #include <QVector>
 
-#include "parser/xml_parser.hh"
-#include "tablewidget.hh"
+#include "../parser/sheet_item.hh"
+#include "../tablewidget.hh"
 
 enum OPERATION {
     ADD,

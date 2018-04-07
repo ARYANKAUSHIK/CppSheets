@@ -30,7 +30,7 @@
 #include <iostream>
 
 #include "tablewidget.hh"
-#include "math.hh"
+#include "formula/math.hh"
 
 TableWidget::TableWidget() {
     this->setColumnCount(1000);

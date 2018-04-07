@@ -12,8 +12,11 @@ set(SRC
     actions.cxx
     ribbon.cxx
     cellbar.cxx
-    math.cxx
     statusbar.cxx
+)
+
+set(FORMULA_SRC
+	formula/math.cxx
 )
 
 set(MENUBAR_SRC
@@ -29,7 +32,8 @@ set(PARSER_SRC
 
 add_executable(CppSheets 
 	${SRC}
-        ${MENUBAR_SRC}
+	${FORMULA_SRC}
+	${MENUBAR_SRC}
 	${PARSER_SRC}
 )
 

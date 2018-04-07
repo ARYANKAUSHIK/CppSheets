@@ -28,8 +28,8 @@
 #include <iostream>
 
 #include "math.hh"
-#include "sheetwidget.hh"
-#include "tabwidget.hh"
+#include "../sheetwidget.hh"
+#include "../tabwidget.hh"
 
 void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
     for (int i = 0; i<mathItems.size(); i++) {
