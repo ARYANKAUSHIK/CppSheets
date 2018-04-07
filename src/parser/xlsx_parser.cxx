@@ -95,6 +95,13 @@ QVector<SheetItem> XlsxParser::allItems(QString file, QString page) {
             item.spany = 1;
             item.colWidth = cell.width();
             item.rowWidth = cell.height();
+
+            QFont font;
+            font.setBold(cell.font().bold());
+            font.setItalic(cell.font().italic());
+            font.setUnderline(cell.font().underlined());
+            item.font = font;
+
             items.push_back(item);
             c++;
         }
