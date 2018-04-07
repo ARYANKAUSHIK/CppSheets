@@ -48,4 +48,7 @@ public:
     static void updateMath(QVector<MathItem> mathItems, TableWidget *table);
     static void applyBulkFormula(MathItem mathItem, TableWidget *table);
     static void applyColumnFormula(MathItem mathItem, TableWidget *table);
+    static double solve(QStringList objects);
+    static bool isOperator(QString s);
+    static QString transAndGetContent(QString loco);
 };

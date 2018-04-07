@@ -24,9 +24,12 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <QHeaderView>
 #include <iostream>
 
 #include "math.hh"
+#include "sheetwidget.hh"
+#include "tabwidget.hh"
 
 void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
     for (int i = 0; i<mathItems.size(); i++) {
@@ -172,94 +175,122 @@ void Math::applyColumnFormula(MathItem mathItem, TableWidget *table) {
     int x = mathItem.x;
     int y = mathItem.y;
     QString equ = mathItem.equation;
+    equ = equ.remove(0,1);
 
-    QString newEqu = equ.remove(0,1);
-    bool foundSign = false;
-    bool parse = false;
-    bool foundComma = false;
-    bool inBracket = false;
-    double result = 0;
-    OPERATION op = OPERATION::ADD;
-    QString cxStr = "";
-    QString cyStr = "";
-    int cx = 0;
-    int cy = 0;
-    double no = 0;
+    QString no;
+    QStringList objects;
 
-    for (int i = 0; i<newEqu.size(); i++) {
-        QChar c = newEqu.at(i);
-        if (c=='+') {
-            foundSign = true;
-            op = OPERATION::ADD;
-        } else if (c=='-') {
-            foundSign = true;
-            op = OPERATION::SUB;
-        } else if (c=='x') {
-            foundSign = true;
-            op = OPERATION::MP;
-        } else if (c=='/') {
-            foundSign = true;
-            op = OPERATION::DIV;
-        } else if (c=='[') {
-            inBracket = true;
-            parse = true;
-        } else if (c=='(') {
-            parse = true;
-        } else if ((c==')')||(c==']')) {
-            cx = QVariant(cxStr).toInt();
-            cy = QVariant(cyStr).toInt();
-            cx--;
-            cy--;
-
-            QTableWidgetItem *item = table->item(cx,cy);
-            if (item!=nullptr) {
-                no = QVariant(item->text()).toDouble();
-            } else {
-                no = QVariant(cxStr).toDouble();
-            }
-
-            if (foundSign) {
-                if (op==OPERATION::ADD) {
-                    result+=no;
-                } else if (op==OPERATION::SUB) {
-                    result-=no;
-                } else if (op==OPERATION::MP) {
-                    result*=no;
-                } else if (op==OPERATION::DIV) {
-                    result/=no;
-                }
-            } else {
-                result = QVariant(no).toDouble();
-            }
-
-            cx = cy = no = 0;
-            cxStr = "";
-            cyStr = "";
-
-            parse = false;
-            foundComma = false;
-            inBracket = false;
-        } else if (c==',') {
-            foundComma = true;
+    for (int i = 0; i<equ.length(); i++) {
+        if (equ.at(i)=='+') {
+            no = transAndGetContent(no);
+            objects.push_back(no);
+            objects.push_back("+");
+            no = "";
+        } else if (equ.at(i)=='-') {
+            no = transAndGetContent(no);
+            objects.push_back(no);
+            objects.push_back("-");
+            no = "";
+        } else if (equ.at(i)=='*') {
+            no = transAndGetContent(no);
+            objects.push_back(no);
+            objects.push_back("*");
+            no = "";
+        } else if (equ.at(i)=='/') {
+            no = transAndGetContent(no);
+            objects.push_back(no);
+            objects.push_back("/");
+            no = "";
         } else {
-            if (parse==false) {
-                continue;
-            }
-            if (inBracket) {
-                cxStr+=c;
-            } else if (foundComma) {
-                cyStr+=c;
-            } else {
-                cxStr+=c;
-            }
+            no+=equ.at(i);
         }
     }
+    no = transAndGetContent(no);
+    objects.push_back(no);
 
-    QString strResult = QVariant(result).toString();
+    double result = solve(objects);
+
     QTableWidgetItem *item = table->item(x,y);
     if (item==nullptr) {
         item = new QTableWidgetItem;
     }
-    item->setText(strResult);
+    QString resultStr = QString::number(result);
+    item->setText(resultStr);
     table->setItem(x,y,item);
+}
+
+double Math::solve(QStringList objects) {
+    double result = QVariant(objects.at(0)).toDouble();
+
+    int len = objects.length();
+    for (int i = 1; i<len; i+=2) {
+        double no = QVariant(objects.at(i+1)).toDouble();
+        QString op = objects.at(i);
+        if (op=="+") {
+            result+=no;
+        } else if (op=="-") {
+            result-=no;
+        } else if (op=="*") {
+            result*=no;
+        } else if (op=="/") {
+            result/=no;
+        }
+    }
+
+    return result;
+}
+
+bool Math::isOperator(QString s) {
+    if (s=="+") {
+        return true;
+    } else if (s=="-") {
+        return true;
+    } else if (s=="*") {
+        return true;
+    } else if (s=="/") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+QString Math::transAndGetContent(QString loco) {
+    QString ret = "";
+
+    if (loco.at(0).isNumber() || loco.at(0)=='(' || loco.at(0)==')') {
+        ret = loco;
+        return ret;
+    }
+
+    QString letter = "";
+    QString no = "";
+    for (int i = 0; i<loco.length(); i++) {
+        if (loco.at(i).isLetter()) {
+            letter+=loco.at(i);
+        } else if (loco.at(i).isNumber()) {
+            no+=loco.at(i);
+        }
+    }
+
+    int x = 0;
+    int y = QVariant(no).toInt();
+
+    QTableWidget *current = TabWidget::currentWidget()->currentTable();
+    int count = current->horizontalHeader()->count();
+    for (int i = 0; i<count; i++) {
+        if (current->horizontalHeaderItem(i)->text()==letter) {
+            x = i;
+            break;
+        }
+    }
+
+    y--;
+
+    QTableWidgetItem *item = current->item(y,x);
+    if (item==nullptr) {
+        return ret;
+    }
+    ret = item->text();
+
+    return ret;
 }

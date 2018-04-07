@@ -35,6 +35,7 @@
 TableWidget::TableWidget() {
     this->setColumnCount(1000);
     this->setRowCount(1000);
+    this->loadHeaders();
 
     connect(this,&TableWidget::cellChanged,this,&TableWidget::onCellChanged);
     connect(this,SIGNAL(itemChanged(QTableWidgetItem*)),this,SLOT(onItemChanged(QTableWidgetItem*)));
