@@ -17,6 +17,7 @@ set(SRC
 
 set(FORMULA_SRC
 	formula/math.cxx
+	formula/formula_utils.cxx
 )
 
 set(MENUBAR_SRC

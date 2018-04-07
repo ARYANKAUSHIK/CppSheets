@@ -26,15 +26,12 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-#include <QVector>
+#include <QString>
 
 #include "math_types.hh"
-#include "../parser/sheet_item.hh"
-#include "../tablewidget.hh"
 
-class Math {
+class FormulaUtils {
 public:
-    static void updateMath(QVector<MathItem> mathItems, TableWidget *table);
-    static void applyBulkFormula(MathItem mathItem, TableWidget *table);
-    static void applyColumnFormula(MathItem mathItem, TableWidget *table);
+	static QString transAndGetContent(QString loco);
+	static double solve(QStringList objects);
 };

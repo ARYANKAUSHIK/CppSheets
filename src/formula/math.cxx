@@ -28,6 +28,7 @@
 #include <iostream>
 
 #include "math.hh"
+#include "formula_utils.hh"
 #include "../sheetwidget.hh"
 #include "../tabwidget.hh"
 
@@ -182,22 +183,22 @@ void Math::applyColumnFormula(MathItem mathItem, TableWidget *table) {
 
     for (int i = 0; i<equ.length(); i++) {
         if (equ.at(i)=='+') {
-            no = transAndGetContent(no);
+            no = FormulaUtils::transAndGetContent(no);
             objects.push_back(no);
             objects.push_back("+");
             no = "";
         } else if (equ.at(i)=='-') {
-            no = transAndGetContent(no);
+            no = FormulaUtils::transAndGetContent(no);
             objects.push_back(no);
             objects.push_back("-");
             no = "";
         } else if (equ.at(i)=='*') {
-            no = transAndGetContent(no);
+            no = FormulaUtils::transAndGetContent(no);
             objects.push_back(no);
             objects.push_back("*");
             no = "";
         } else if (equ.at(i)=='/') {
-            no = transAndGetContent(no);
+            no = FormulaUtils::transAndGetContent(no);
             objects.push_back(no);
             objects.push_back("/");
             no = "";
@@ -205,10 +206,10 @@ void Math::applyColumnFormula(MathItem mathItem, TableWidget *table) {
             no+=equ.at(i);
         }
     }
-    no = transAndGetContent(no);
+    no = FormulaUtils::transAndGetContent(no);
     objects.push_back(no);
 
-    double result = solve(objects);
+    double result = FormulaUtils::solve(objects);
 
     QTableWidgetItem *item = table->item(x,y);
     if (item==nullptr) {
@@ -219,78 +220,3 @@ void Math::applyColumnFormula(MathItem mathItem, TableWidget *table) {
     table->setItem(x,y,item);
 }
 
-double Math::solve(QStringList objects) {
-    double result = QVariant(objects.at(0)).toDouble();
-
-    int len = objects.length();
-    for (int i = 1; i<len; i+=2) {
-        double no = QVariant(objects.at(i+1)).toDouble();
-        QString op = objects.at(i);
-        if (op=="+") {
-            result+=no;
-        } else if (op=="-") {
-            result-=no;
-        } else if (op=="*") {
-            result*=no;
-        } else if (op=="/") {
-            result/=no;
-        }
-    }
-
-    return result;
-}
-
-bool Math::isOperator(QString s) {
-    if (s=="+") {
-        return true;
-    } else if (s=="-") {
-        return true;
-    } else if (s=="*") {
-        return true;
-    } else if (s=="/") {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-QString Math::transAndGetContent(QString loco) {
-    QString ret = "";
-
-    if (loco.at(0).isNumber() || loco.at(0)=='(' || loco.at(0)==')') {
-        ret = loco;
-        return ret;
-    }
-
-    QString letter = "";
-    QString no = "";
-    for (int i = 0; i<loco.length(); i++) {
-        if (loco.at(i).isLetter()) {
-            letter+=loco.at(i);
-        } else if (loco.at(i).isNumber()) {
-            no+=loco.at(i);
-        }
-    }
-
-    int x = 0;
-    int y = QVariant(no).toInt();
-
-    QTableWidget *current = TabWidget::currentWidget()->currentTable();
-    int count = current->horizontalHeader()->count();
-    for (int i = 0; i<count; i++) {
-        if (current->horizontalHeaderItem(i)->text()==letter) {
-            x = i;
-            break;
-        }
-    }
-
-    y--;
-
-    QTableWidgetItem *item = current->item(y,x);
-    if (item==nullptr) {
-        return ret;
-    }
-    ret = item->text();
-
-    return ret;
-}
