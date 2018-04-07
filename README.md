@@ -24,11 +24,7 @@ Guide on how to use command line:
 #### Formulas:
 There are two ways to apply formulas: individual cells, and the bulk method. Please note that all formulas must start with an equals ("=") sign. Also note that formulas must be entered in the command line (make sure you are typing in the command line, not in the cell. If you are in the cell, it will be treated as text). 
 
-Individual cells can simply be added, subtracted, multiplied, or divided by using one of the following operators: "+", "-", "x", "/". To specify your cells, put the coordinates in parentheses with the row followed by the column (separated with a comma). Below is an example:
-=(4,2)+(4,3)+(4,4)+(4,5)+(4,6)
-
-Sometimes, you may want to use a hardcoded number in your formula (eg, converting a decimal to a percent). To do so, enclose the number in brackets. Below is an example:
-=(4,7)/(5,7)x[100]
+Individual cells can be added, subtracted, multiplied, or divided by other cells and/or with constants. Any combination of numbers and signs can be used in a formula. Individual cell formulas now follow the Microsoft Excel syntax. Because of this, these are the only formulas (at this point) that can be applied from an xlsx file.
 
 Bulk formulas allow you to apply a mathematical operating to all cells within a certain range. To use these, first begin with one of the operational keywords: 'add' (addition), 'sub' (subtraction), 'mp' (multiplication), and 'div' (division). After the keyword, insert the following symbol: '>'. This does nothing but to let the parser know that we have specified the keyword (its basically a stop command for the parser). After that, specify the starting coordinates, followed by a colon (':'), and ending with the stop coordinates. Below is an example for addition:
 =add>(1,2):(1,6)
