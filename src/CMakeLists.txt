@@ -16,8 +16,8 @@ set(SRC
 )
 
 set(FORMULA_SRC
-	formula/math.cxx
-	formula/formula_utils.cxx
+    formula/math.cxx
+    formula/formula_utils.cxx
 )
 
 set(MENUBAR_SRC
@@ -32,10 +32,10 @@ set(PARSER_SRC
 )
 
 add_executable(CppSheets 
-	${SRC}
-	${FORMULA_SRC}
-	${MENUBAR_SRC}
-	${PARSER_SRC}
+    ${SRC}
+    ${FORMULA_SRC}
+    ${MENUBAR_SRC}
+    ${PARSER_SRC}
 )
 
 target_link_libraries(CppSheets
