@@ -15,6 +15,10 @@ set(SRC
     statusbar.cxx
 )
 
+set(ACTIONS_SRC
+	actions/file_actions.cxx
+)
+
 set(FORMULA_SRC
     formula/math.cxx
     formula/formula_utils.cxx
@@ -35,6 +39,7 @@ set(PARSER_SRC
 
 add_executable(CppSheets 
     ${SRC}
+    ${ACTIONS_SRC}
     ${FORMULA_SRC}
     ${MENUBAR_SRC}
     ${PARSER_SRC}

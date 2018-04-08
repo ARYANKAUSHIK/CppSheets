@@ -27,6 +27,7 @@
 #include <QPixmap>
 
 #include "maintoolbar.hh"
+#include "actions/file_actions.hh"
 #include "actions.hh"
 
 MainToolbar::MainToolbar()
@@ -82,19 +83,19 @@ MainToolbar::~MainToolbar() {
 }
 
 void MainToolbar::onNewFileClicked() {
-    Actions::newFile();
+    FileActions::newFile();
 }
 
 void MainToolbar::onOpenClicked() {
-    Actions::openFile();
+    FileActions::openFile();
 }
 
 void MainToolbar::onSaveClicked() {
-    Actions::saveFile();
+    FileActions::saveFile();
 }
 
 void MainToolbar::onSaveAsClicked() {
-    Actions::saveFileAs();
+    FileActions::saveFileAs();
 }
 
 void MainToolbar::onBoldClicked() {

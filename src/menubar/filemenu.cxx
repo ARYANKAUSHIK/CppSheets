@@ -29,7 +29,7 @@
 #include <QApplication>
 
 #include "filemenu.hh"
-#include "../actions.hh"
+#include "../actions/file_actions.hh"
 #include "../window.hh"
 
 FileMenu::FileMenu() {
@@ -75,19 +75,19 @@ FileMenu::~FileMenu() {
 }
 
 void FileMenu::onNewFileClicked() {
-    Actions::newFile();
+    FileActions::newFile();
 }
 
 void FileMenu::onOpenClicked() {
-    Actions::openFile();
+    FileActions::openFile();
 }
 
 void FileMenu::onSaveClicked() {
-    Actions::saveFile();
+    FileActions::saveFile();
 }
 
 void FileMenu::onSaveAsClicked() {
-    Actions::saveFileAs();
+    FileActions::saveFileAs();
 }
 
 void FileMenu::onQuitClicked() {

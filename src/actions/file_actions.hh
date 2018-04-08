@@ -26,9 +26,10 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-class Actions {
+class FileActions {
 public:
-    static void bold();
-    static void italic();
-    static void underline();
+    static void newFile();
+    static void openFile();
+    static void saveFile();
+    static void saveFileAs();
 };
