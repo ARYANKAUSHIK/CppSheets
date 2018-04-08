@@ -82,25 +82,34 @@ QVector<SheetItem> XlsxParser::allItems(QString file, QString page) {
     auto sheet = wb.sheet_by_title(page.toStdString());
     int c = 0;
     int r = 0;
-    for (auto row : sheet.rows()) {
+    for (auto row : sheet.rows(false)) {
         c = 0;
         for (auto cell : row) {
             SheetItem item;
-            item.data = QString::fromStdString(cell.to_string());
             item.x = r;
             item.y = c;
             item.bgColor = Qt::white;
             item.fgColor = Qt::black;
             item.spanx = 1;
             item.spany = 1;
-            item.colWidth = cell.width();
-            item.rowWidth = cell.height();
 
-            QFont font;
-            font.setBold(cell.font().bold());
-            font.setItalic(cell.font().italic());
-            font.setUnderline(cell.font().underlined());
-            item.font = font;
+            try {
+                item.data = QString::fromStdString(cell.to_string());
+                item.colWidth = cell.width();
+                item.rowWidth = cell.height();
+            } catch (xlnt::exception &e) {
+                std::cout << e.what() << std::endl;
+            }
+
+            try {
+                QFont font;
+                font.setBold(cell.font().bold());
+                font.setItalic(cell.font().italic());
+                font.setUnderline(cell.font().underlined());
+                item.font = font;
+            } catch (xlnt::exception &e) {
+                std::cout << e.what() << std::endl;
+            }
 
             try {
                 std::string bgColor = "#"+cell.format().fill().pattern_fill()
