@@ -25,6 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QFileInfo>
+#include <QMessageBox>
 
 #include "tabwidget.hh"
 #include "window.hh"
@@ -45,6 +46,7 @@ TabWidget::TabWidget()
     tabs->addTab(new SheetWidget("untitled"),"untitled");
     layout->addWidget(tabs);
 
+    connect(tabs,SIGNAL(tabCloseRequested(int)),this,SLOT(onTabCloseRequested(int)));
     connect(tabs,&QTabWidget::currentChanged,this,&TabWidget::onCurrentChanged);
 }
 
@@ -84,6 +86,26 @@ SheetWidget *TabWidget::widgetAt(int index) {
 
 void TabWidget::setCurrentTitle(QString title) {
     tabs->setTabText(tabs->currentIndex(),title);
+}
+
+void TabWidget::onTabCloseRequested(int index) {
+    if (tabs->count()==1) {
+        addNewTab();
+    }
+    auto widget = widgetAt(index);
+    if (widget->isSaved()) {
+        delete widget;
+    } else {
+        QMessageBox msg;
+        msg.setIcon(QMessageBox::Warning);
+        msg.setText("This file has not been saved.\n"
+                    "Do you wish to close it?");
+        msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        int ret = msg.exec();
+        if (ret==QMessageBox::Yes) {
+            delete widget;
+        }
+    }
 }
 
 void TabWidget::onCurrentChanged() {

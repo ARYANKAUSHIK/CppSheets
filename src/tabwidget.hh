@@ -46,5 +46,6 @@ public:
 private:
     QVBoxLayout *layout;
 private slots:
+    void onTabCloseRequested(int index);
     void onCurrentChanged();
 };
