@@ -54,9 +54,11 @@ Window::Window() {
 
     filemenu = new FileMenu;
     formatMenu = new FormatMenu;
+    helpMenu = new HelpMenu;
 
     this->menuBar()->addMenu(filemenu);
     this->menuBar()->addMenu(formatMenu);
+    this->menuBar()->addMenu(helpMenu);
 
     statusbar = new StatusBar;
     this->setStatusBar(statusbar);
@@ -65,6 +67,7 @@ Window::Window() {
 Window::~Window() {
     delete filemenu;
     delete formatMenu;
+    delete helpMenu;
 }
 
 void Window::setCurrentPath(QString path) {

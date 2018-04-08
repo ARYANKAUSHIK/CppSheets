@@ -31,6 +31,7 @@
 
 #include "menubar/filemenu.hh"
 #include "menubar/format_menu.hh"
+#include "menubar/helpmenu.hh"
 #include "statusbar.hh"
 
 class Window : public QMainWindow {
@@ -46,5 +47,6 @@ protected:
 private:
     FileMenu *filemenu;
     FormatMenu *formatMenu;
+    HelpMenu *helpMenu;
     static StatusBar *statusbar;
 };
