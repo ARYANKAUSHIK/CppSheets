@@ -22,6 +22,7 @@ set(FORMULA_SRC
 
 set(MENUBAR_SRC
     menubar/filemenu.cxx
+    menubar/format_menu.cxx
 )
 
 set(PARSER_SRC

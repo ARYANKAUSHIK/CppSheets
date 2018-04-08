@@ -53,7 +53,10 @@ Window::Window() {
     centerLayout->addWidget(tabs);
 
     filemenu = new FileMenu;
+    formatMenu = new FormatMenu;
+
     this->menuBar()->addMenu(filemenu);
+    this->menuBar()->addMenu(formatMenu);
 
     statusbar = new StatusBar;
     this->setStatusBar(statusbar);
@@ -61,6 +64,7 @@ Window::Window() {
 
 Window::~Window() {
     delete filemenu;
+    delete formatMenu;
 }
 
 void Window::setCurrentPath(QString path) {
