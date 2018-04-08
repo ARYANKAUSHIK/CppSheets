@@ -25,6 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QPixmap>
+#include <QKeySequence>
 
 #include "format_menu.hh"
 #include "../actions.hh"
@@ -39,6 +40,10 @@ FormatMenu::FormatMenu() {
     bold->setIcon(QPixmap(":/icons/format-text-bold.png"));
     italic->setIcon(QPixmap(":/icons/format-text-italic.png"));
     underline->setIcon(QPixmap(":/icons/format-text-underline.png"));
+
+    bold->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_B));
+    italic->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_I));
+    underline->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_U));
 
     connect(bold,&QAction::triggered,this,&FormatMenu::onBoldClicked);
     connect(italic,&QAction::triggered,this,&FormatMenu::onItalicClicked);
