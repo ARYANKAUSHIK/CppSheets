@@ -30,6 +30,7 @@
 
 #include "filemenu.hh"
 #include "../actions.hh"
+#include "../window.hh"
 
 FileMenu::FileMenu() {
     this->setTitle("File");
@@ -90,5 +91,7 @@ void FileMenu::onSaveAsClicked() {
 }
 
 void FileMenu::onQuitClicked() {
-    qApp->exit();
+    if (Window::checkSave()) {
+        qApp->exit(0);
+    }
 }
