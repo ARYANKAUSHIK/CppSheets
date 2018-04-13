@@ -9,14 +9,14 @@ set(SRC
     window.cxx
     maintoolbar.cxx
     tabwidget.cxx
-    actions.cxx
     ribbon.cxx
     cellbar.cxx
     statusbar.cxx
 )
 
 set(ACTIONS_SRC
-	actions/file_actions.cxx
+    actions/file_actions.cxx
+    actions/format_actions.cxx
 )
 
 set(FORMULA_SRC

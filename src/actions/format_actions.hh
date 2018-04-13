@@ -24,50 +24,11 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <QPixmap>
-#include <QKeySequence>
+#pragma once
 
-#include "format_menu.hh"
-#include "../actions/format_actions.hh"
-
-FormatMenu::FormatMenu() {
-    this->setTitle("Format");
-
-    bold = new QAction("Bold",this);
-    italic = new QAction("Italic",this);
-    underline = new QAction("Underline",this);
-
-    bold->setIcon(QPixmap(":/icons/format-text-bold.png"));
-    italic->setIcon(QPixmap(":/icons/format-text-italic.png"));
-    underline->setIcon(QPixmap(":/icons/format-text-underline.png"));
-
-    bold->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_B));
-    italic->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_I));
-    underline->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_U));
-
-    connect(bold,&QAction::triggered,this,&FormatMenu::onBoldClicked);
-    connect(italic,&QAction::triggered,this,&FormatMenu::onItalicClicked);
-    connect(underline,&QAction::triggered,this,&FormatMenu::onUnderlineClicked);
-
-    this->addAction(bold);
-    this->addAction(italic);
-    this->addAction(underline);
-}
-
-FormatMenu::~FormatMenu() {
-    delete bold;
-    delete italic;
-    delete underline;
-}
-
-void FormatMenu::onBoldClicked() {
-    FormatActions::bold();
-}
-
-void FormatMenu::onItalicClicked() {
-    FormatActions::italic();
-}
-
-void FormatMenu::onUnderlineClicked() {
-    FormatActions::underline();
-}
+class FormatActions {
+public:
+    static void bold();
+    static void italic();
+    static void underline();
+};

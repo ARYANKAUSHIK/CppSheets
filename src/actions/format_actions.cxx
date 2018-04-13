@@ -24,50 +24,43 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <QPixmap>
-#include <QKeySequence>
+#include "format_actions.hh"
+#include "../tabwidget.hh"
+#include "../parser/parser.hh"
+#include "../sheetwidget.hh"
 
-#include "format_menu.hh"
-#include "../actions/format_actions.hh"
-
-FormatMenu::FormatMenu() {
-    this->setTitle("Format");
-
-    bold = new QAction("Bold",this);
-    italic = new QAction("Italic",this);
-    underline = new QAction("Underline",this);
-
-    bold->setIcon(QPixmap(":/icons/format-text-bold.png"));
-    italic->setIcon(QPixmap(":/icons/format-text-italic.png"));
-    underline->setIcon(QPixmap(":/icons/format-text-underline.png"));
-
-    bold->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_B));
-    italic->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_I));
-    underline->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_U));
-
-    connect(bold,&QAction::triggered,this,&FormatMenu::onBoldClicked);
-    connect(italic,&QAction::triggered,this,&FormatMenu::onItalicClicked);
-    connect(underline,&QAction::triggered,this,&FormatMenu::onUnderlineClicked);
-
-    this->addAction(bold);
-    this->addAction(italic);
-    this->addAction(underline);
+void FormatActions::bold() {
+    SheetWidget *sheet = TabWidget::currentWidget();
+    QTableWidgetItem *item = sheet->currentCell();
+    QFont font = item->font();
+    if (font.bold()) {
+        font.setBold(false);
+    } else {
+        font.setBold(true);
+    }
+    item->setFont(font);
 }
 
-FormatMenu::~FormatMenu() {
-    delete bold;
-    delete italic;
-    delete underline;
+void FormatActions::italic() {
+    SheetWidget *sheet = TabWidget::currentWidget();
+    QTableWidgetItem *item = sheet->currentCell();
+    QFont font = item->font();
+    if (font.italic()) {
+        font.setItalic(false);
+    } else {
+        font.setItalic(true);
+    }
+    item->setFont(font);
 }
 
-void FormatMenu::onBoldClicked() {
-    FormatActions::bold();
-}
-
-void FormatMenu::onItalicClicked() {
-    FormatActions::italic();
-}
-
-void FormatMenu::onUnderlineClicked() {
-    FormatActions::underline();
+void FormatActions::underline() {
+    SheetWidget *sheet = TabWidget::currentWidget();
+    QTableWidgetItem *item = sheet->currentCell();
+    QFont font = item->font();
+    if (font.underline()) {
+        font.setUnderline(false);
+    } else {
+        font.setUnderline(true);
+    }
+    item->setFont(font);
 }

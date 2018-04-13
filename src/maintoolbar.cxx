@@ -28,7 +28,7 @@
 
 #include "maintoolbar.hh"
 #include "actions/file_actions.hh"
-#include "actions.hh"
+#include "actions/format_actions.hh".hh"
 
 MainToolbar::MainToolbar()
     : newFile(new QToolButton),
@@ -99,13 +99,13 @@ void MainToolbar::onSaveAsClicked() {
 }
 
 void MainToolbar::onBoldClicked() {
-    Actions::bold();
+    FormatActions::bold();
 }
 
 void MainToolbar::onItalicClicked() {
-    Actions::italic();
+    FormatActions::italic();
 }
 
 void MainToolbar::onUnderlineClicked() {
-    Actions::underline();
+    FormatActions::underline();
 }
