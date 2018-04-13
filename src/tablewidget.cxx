@@ -36,14 +36,16 @@ TableWidgetDelegate::TableWidgetDelegate(QObject *parent) : QItemDelegate(parent
 }
 
 void TableWidgetDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
-    if (index.data(Qt::ForegroundRole).toString()=="please_test") {
+    if (index.data(Qt::UserRole).toString()=="please_test") {
         painter->save();
-        QPen pen(Qt::green, 2, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
+        QPen pen(Qt::green, 2, Qt::DashLine, Qt::SquareCap, Qt::MiterJoin);
         int w = pen.width()/2;
         painter->setPen(pen);
         painter->setBrush(Qt::white);
         painter->drawRect(option.rect.adjusted(w,w,-w,-w));
         painter->restore();
+
+        QItemDelegate::paint(painter,option,index);
     } else if (option.state & QStyle::State_Selected) {
         painter->save();
         QPen pen(Qt::black, 2, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
@@ -51,6 +53,13 @@ void TableWidgetDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         painter->setPen(pen);
         painter->setBrush(Qt::white);
         painter->drawRect(option.rect.adjusted(w,w,-w,-w));
+        painter->restore();
+
+        painter->save();
+        QPen pen2(Qt::black);
+        painter->setPen(pen2);
+        painter->setFont(option.font);
+        painter->drawText(option.rect,Qt::AlignCenter,index.data().toString());
         painter->restore();
     } else {
         QItemDelegate::paint(painter,option,index);
