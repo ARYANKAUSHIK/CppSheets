@@ -29,11 +29,13 @@
 
 #include "cellbar.hh"
 #include "actions/format_actions.hh"
+#include "tabwidget.hh"
 
 CellBar::CellBar()
     : cellColor(new QToolButton),
       merge(new QToolButton),
-      unmerge(new QToolButton)
+      unmerge(new QToolButton),
+      borderTest(new QToolButton)
 {
     QMenu *colorMenu = new QMenu;
     QAction *bg = new QAction("Background",colorMenu);
@@ -47,20 +49,24 @@ CellBar::CellBar()
     cellColor->setText("Color");
     merge->setText("Merge Cells");
     unmerge->setText("Unmerge Cells");
+    borderTest->setText("Border Test");
 
     this->addWidget(cellColor);
     this->addWidget(merge);
     this->addWidget(unmerge);
+    this->addWidget(borderTest);
 
     connect(bg,&QAction::triggered,this,&CellBar::onBgColorClicked);
     connect(fg,&QAction::triggered,this,&CellBar::onFgColorClicked);
     connect(merge,&QToolButton::clicked,this,&CellBar::onMergeClicked);
     connect(unmerge,&QToolButton::clicked,this,&CellBar::onUnMergeClicked);
+    connect(borderTest,&QToolButton::clicked,this,&CellBar::onBorderTestClicked);
 }
 
 CellBar::~CellBar() {
     delete cellColor;
     delete merge;
+    delete borderTest;
 }
 
 void CellBar::onBgColorClicked() {
@@ -77,4 +83,8 @@ void CellBar::onMergeClicked() {
 
 void CellBar::onUnMergeClicked() {
     FormatActions::unMerge();
+}
+
+void CellBar::onBorderTestClicked() {
+    TabWidget::currentWidget()->currentCell()->setData(Qt::EditRole,QVariant("please_test"));
 }

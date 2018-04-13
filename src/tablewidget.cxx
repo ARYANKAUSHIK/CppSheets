@@ -32,13 +32,36 @@
 #include "tablewidget.hh"
 #include "formula/math.hh"
 
+TableWidgetDelegate::TableWidgetDelegate(QObject *parent) : QItemDelegate(parent) {
+}
+
+void TableWidgetDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
+    if (index.data().toString()=="please_test") {
+        painter->setPen(Qt::green);
+        painter->drawRect(option.rect);
+    } else if (option.state & QStyle::State_Selected) {
+        painter->save();
+        QPen pen(Qt::black, 2, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
+        int w = pen.width()/2;
+        painter->setPen(pen);
+        painter->setBrush(Qt::white);
+        painter->drawRect(option.rect.adjusted(w,w,-w,-w));
+        painter->restore();
+    } else {
+        QItemDelegate::paint(painter,option,index);
+    }
+}
+
 TableWidget::TableWidget() {
     this->setColumnCount(1000);
     this->setRowCount(1000);
     this->loadHeaders();
 
+    this->setItemDelegate(new TableWidgetDelegate(this));
+
     connect(this,&TableWidget::cellChanged,this,&TableWidget::onCellChanged);
     connect(this,SIGNAL(itemChanged(QTableWidgetItem*)),this,SLOT(onItemChanged(QTableWidgetItem*)));
+    connect(this,SIGNAL(cellClicked(int,int)),this,SLOT(onCellClicked(int,int)));
 }
 
 void TableWidget::loadHeaders() {
@@ -152,6 +175,9 @@ void TableWidget::keyPressEvent(QKeyEvent *event) {
 
 void TableWidget::onCellChanged() {
     emit cellModified();
+}
+
+void TableWidget::onCellClicked(int row, int col) {
 }
 
 void TableWidget::onItemChanged(QTableWidgetItem *item) {

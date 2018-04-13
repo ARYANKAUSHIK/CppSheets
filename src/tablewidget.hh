@@ -27,12 +27,21 @@
 #pragma once
 
 #include <QTableWidget>
+#include <QItemDelegate>
+#include <QPainter>
 #include <QVector>
 #include <QTableWidgetItem>
 #include <QModelIndexList>
 #include <QKeyEvent>
 
 #include "parser/xml_parser.hh"
+
+class TableWidgetDelegate : public QItemDelegate {
+    Q_OBJECT
+public:
+    explicit TableWidgetDelegate(QObject *parent);
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+};
 
 class TableWidget : public QTableWidget {
     Q_OBJECT
@@ -53,6 +62,7 @@ private:
 private slots:
     void onCellChanged();
     void onItemChanged(QTableWidgetItem *item);
+    void onCellClicked(int row, int col);
 signals:
     void cellModified();
 };
