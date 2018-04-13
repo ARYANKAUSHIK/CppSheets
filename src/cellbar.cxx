@@ -26,11 +26,9 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QMenu>
 #include <QAction>
-#include <QColorDialog>
-#include <iostream>
 
 #include "cellbar.hh"
-#include "tabwidget.hh"
+#include "actions/format_actions.hh"
 
 CellBar::CellBar()
     : cellColor(new QToolButton),
@@ -66,53 +64,17 @@ CellBar::~CellBar() {
 }
 
 void CellBar::onBgColorClicked() {
-    QColor color = QColorDialog::getColor();
-    SheetWidget *current = TabWidget::currentWidget();
-    if (current->currentTable()->currentSelectedItems().size()==1) {
-        TabWidget::currentWidget()->currentCell()->setBackgroundColor(color);
-    } else {
-        auto list = current->currentTable()->currentSelectedItems();
-        for (int i = 0; i<list.size(); i++) {
-            auto item = list.at(i);
-            int col = item.column();
-            int row = item.row();
-
-            QTableWidgetItem *tItem = current->currentTable()->item(row,col);
-            if (tItem==nullptr) {
-                tItem = new QTableWidgetItem();
-                current->currentTable()->setItem(row,col,tItem);
-            }
-            tItem->setBackgroundColor(color);
-        }
-    }
+    FormatActions::bgColor();
 }
 
 void CellBar::onFgColorClicked() {
-    QColor color = QColorDialog::getColor(Qt::black);
-    SheetWidget *current = TabWidget::currentWidget();
-    if (current->currentTable()->currentSelectedItems().size()==1) {
-        TabWidget::currentWidget()->currentCell()->setTextColor(color);
-    } else {
-        auto list = current->currentTable()->currentSelectedItems();
-        for (int i = 0; i<list.size(); i++) {
-            auto item = list.at(i);
-            int col = item.column();
-            int row = item.row();
-
-            QTableWidgetItem *tItem = current->currentTable()->item(row,col);
-            if (tItem==nullptr) {
-                tItem = new QTableWidgetItem();
-                current->currentTable()->setItem(row,col,tItem);
-            }
-            tItem->setTextColor(color);
-        }
-    }
+    FormatActions::fgColor();
 }
 
 void CellBar::onMergeClicked() {
-    TabWidget::currentWidget()->mergeSelected();
+    FormatActions::merge();
 }
 
 void CellBar::onUnMergeClicked() {
-    TabWidget::currentWidget()->unMergeSelected();
+    FormatActions::unMerge();
 }

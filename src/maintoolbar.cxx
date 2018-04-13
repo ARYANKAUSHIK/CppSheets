@@ -28,7 +28,7 @@
 
 #include "maintoolbar.hh"
 #include "actions/file_actions.hh"
-#include "actions/format_actions.hh".hh"
+#include "actions/format_actions.hh"
 
 MainToolbar::MainToolbar()
     : newFile(new QToolButton),

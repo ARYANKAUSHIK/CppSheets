@@ -24,6 +24,8 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <QColorDialog>
+
 #include "format_actions.hh"
 #include "../tabwidget.hh"
 #include "../parser/parser.hh"
@@ -63,4 +65,54 @@ void FormatActions::underline() {
         font.setUnderline(true);
     }
     item->setFont(font);
+}
+
+void FormatActions::bgColor() {
+    QColor color = QColorDialog::getColor();
+    SheetWidget *current = TabWidget::currentWidget();
+    if (current->currentTable()->currentSelectedItems().size()==1) {
+        TabWidget::currentWidget()->currentCell()->setBackgroundColor(color);
+    } else {
+        auto list = current->currentTable()->currentSelectedItems();
+        for (auto item : list) {
+            int col = item.column();
+            int row = item.row();
+
+            QTableWidgetItem *tItem = current->currentTable()->item(row,col);
+            if (tItem==nullptr) {
+                tItem = new QTableWidgetItem();
+                current->currentTable()->setItem(row,col,tItem);
+            }
+            tItem->setBackgroundColor(color);
+        }
+    }
+}
+
+void FormatActions::fgColor() {
+    QColor color = QColorDialog::getColor(Qt::black);
+    SheetWidget *current = TabWidget::currentWidget();
+    if (current->currentTable()->currentSelectedItems().size()==1) {
+        TabWidget::currentWidget()->currentCell()->setTextColor(color);
+    } else {
+        auto list = current->currentTable()->currentSelectedItems();
+        for (auto item : list) {
+            int col = item.column();
+            int row = item.row();
+
+            QTableWidgetItem *tItem = current->currentTable()->item(row,col);
+            if (tItem==nullptr) {
+                tItem = new QTableWidgetItem();
+                current->currentTable()->setItem(row,col,tItem);
+            }
+            tItem->setTextColor(color);
+        }
+    }
+}
+
+void FormatActions::merge() {
+    TabWidget::currentWidget()->mergeSelected();
+}
+
+void FormatActions::unMerge() {
+    TabWidget::currentWidget()->unMergeSelected();
 }

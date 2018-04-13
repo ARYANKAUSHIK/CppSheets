@@ -31,4 +31,8 @@ public:
     static void bold();
     static void italic();
     static void underline();
+    static void bgColor();
+    static void fgColor();
+    static void merge();
+    static void unMerge();
 };
