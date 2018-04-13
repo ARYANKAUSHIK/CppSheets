@@ -86,5 +86,5 @@ void CellBar::onUnMergeClicked() {
 }
 
 void CellBar::onBorderTestClicked() {
-    TabWidget::currentWidget()->currentCell()->setData(Qt::EditRole,QVariant("please_test"));
+    TabWidget::currentWidget()->currentCell()->setData(Qt::ForegroundRole,QVariant("please_test"));
 }

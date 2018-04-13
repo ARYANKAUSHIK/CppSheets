@@ -36,9 +36,14 @@ TableWidgetDelegate::TableWidgetDelegate(QObject *parent) : QItemDelegate(parent
 }
 
 void TableWidgetDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
-    if (index.data().toString()=="please_test") {
-        painter->setPen(Qt::green);
-        painter->drawRect(option.rect);
+    if (index.data(Qt::ForegroundRole).toString()=="please_test") {
+        painter->save();
+        QPen pen(Qt::green, 2, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
+        int w = pen.width()/2;
+        painter->setPen(pen);
+        painter->setBrush(Qt::white);
+        painter->drawRect(option.rect.adjusted(w,w,-w,-w));
+        painter->restore();
     } else if (option.state & QStyle::State_Selected) {
         painter->save();
         QPen pen(Qt::black, 2, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
