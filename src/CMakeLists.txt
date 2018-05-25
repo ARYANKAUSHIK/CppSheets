@@ -56,6 +56,7 @@ ExternalProject_Add(
     BINARY_DIR "${CMAKE_SOURCE_DIR}/math"
     INSTALL_COMMAND ""
     LOG_BUILD OFF
+    ALWAYS 1
 )
 
 add_dependencies(CppSheets libmath)

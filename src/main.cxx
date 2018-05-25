@@ -32,9 +32,9 @@
 #include "libmath.hh"
 
 int main(int argc, char **argv) {
-    test_rs();
-
     QApplication app(argc,argv);
+
+    test_rs();
 
     QFile css(":/style.css");
     QString style = "";
