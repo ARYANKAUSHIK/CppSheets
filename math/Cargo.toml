@@ -1,0 +1,7 @@
+[package]
+name = "libmath"
+version = "1.0.0"
+
+[lib]
+name = "math"
+crate-type = ["staticlib"]

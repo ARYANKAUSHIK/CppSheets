@@ -45,8 +45,28 @@ add_executable(CppSheets
     ${PARSER_SRC}
 )
 
+include(ExternalProject)
+set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/Rust)
+
+ExternalProject_Add(
+    libmath
+    DOWNLOAD_COMMAND ""
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND cargo build COMMAND cargo build --release
+    BINARY_DIR "${CMAKE_SOURCE_DIR}/math"
+    INSTALL_COMMAND ""
+    LOG_BUILD OFF
+)
+
+add_dependencies(CppSheets libmath)
+
 target_link_libraries(CppSheets
+    optimized "${CMAKE_SOURCE_DIR}/math/target/release/libmath.a"
+    pthread
+    dl
     Qt5::Core
     Qt5::Widgets
     xlnt
 )
+
+set_target_properties(CppSheets PROPERTIES CXX_STANDARD 11 CXX_STANDARD_REQUIRED ON)
