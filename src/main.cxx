@@ -29,12 +29,9 @@
 #include <QTextStream>
 
 #include "window.hh"
-#include "libmath.hh"
 
 int main(int argc, char **argv) {
     QApplication app(argc,argv);
-
-    test_rs();
 
     QFile css(":/style.css");
     QString style = "";
