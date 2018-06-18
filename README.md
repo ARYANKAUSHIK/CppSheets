@@ -24,12 +24,11 @@ Guide on how to use command line:
 #### Formulas:
 There are two ways to apply formulas: individual cells, and the bulk method. Please note that all formulas must start with an equals ("=") sign. Also note that formulas must be entered in the command line (make sure you are typing in the command line, not in the cell. If you are in the cell, it will be treated as text). 
 
-Individual cells can be added, subtracted, multiplied, or divided by other cells and/or with constants. Any combination of numbers and signs can be used in a formula. Individual cell formulas now follow the Microsoft Excel syntax. Because of this, these are the only formulas (at this point) that can be applied from an xlsx file.
+Individual cells can be added, subtracted, multiplied, or divided by other cells and/or with constants. Any combination of numbers and signs can be used in a formula. Individual cell formulas now follow the Microsoft Excel syntax.
 
-Bulk formulas allow you to apply a mathematical operating to all cells within a certain range. To use these, first begin with one of the operational keywords: 'add' (addition), 'sub' (subtraction), 'mp' (multiplication), and 'div' (division). After the keyword, insert the following symbol: '>'. This does nothing but to let the parser know that we have specified the keyword (its basically a stop command for the parser). After that, specify the starting coordinates, followed by a colon (':'), and ending with the stop coordinates. Below is an example for addition:
-=add>(1,2):(1,6)
+Bulk formulas allow you to apply a mathematical operating to all cells within a certain range. I am now starting to add better bulk formula support. Right now, the only bulk formula that is supported is the SUM formula. These follow the Microsoft Excel syntax, so they are supported from xlsx files.
 
-A long-time MS Excel user would probably find these formulas inferior and cumbersome. This is understandable. But again, this program is meant to be experimental and proof-of-concept, not the next alternative to Excel. 
+Better formula support will be slowly added. It is unlikely that complete support will ever be attained. Remember, though, that this is a proof-of-concept program, not a drop-in replacement from MS Excel.
 
 #### The file format:
 Our custom file format is actually quite simple. It is fully XML based. 
