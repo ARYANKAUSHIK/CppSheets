@@ -39,6 +39,7 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
         QString name = FormulaUtils::formulaName(current.equation);
         QString equ = FormulaUtils::formulaEqu(current.equation);
 
+        //The SUM function
         if (name=="SUM") {
             QStringList range = FormulaUtils::rangeContents(equ,table);
 
@@ -51,6 +52,7 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
 
             FormulaUtils::printResult(answer,current,table);
         } else {
+            //Used for column functions
             if (equ.length()==0) {
                 QStringList objects;
 
@@ -85,13 +87,7 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
                 FormulaUtils::printResult(answer,current,table);
             } else {
                 //Unknown formula name
-                //std::cout << "Unknown formula" << std::endl;
-                /*QMessageBox msg;
-                msg.setText("Error: Unknown formula.");
-                msg.setDetailedText(current.equation);
-                msg.setWindowTitle("Error");
-                msg.setIcon(QMessageBox::Critical);
-                msg.exec();*/
+                std::cout << "Unknown formula" << std::endl;
             }
         }
     }
