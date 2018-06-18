@@ -26,6 +26,8 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
+#include <QString>
+
 enum OPERATION {
     ADD,
     SUB,
@@ -36,4 +38,5 @@ enum OPERATION {
 struct Cell {
     int x;
     int y;
+    QString content;
 };

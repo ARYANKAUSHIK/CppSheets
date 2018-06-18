@@ -35,6 +35,9 @@
 class Math {
 public:
     static void updateMath(QVector<MathItem> mathItems, TableWidget *table);
-    static void applyBulkFormula(MathItem mathItem, TableWidget *table);
-    static void applyColumnFormula(MathItem mathItem, TableWidget *table);
+private:
+    static QString formulaName(QString equation);
+    static QString formulaEqu(QString equation);
+    static QStringList rangeContents(QString range, TableWidget *table);
+    static Cell cellFromName(QString name, TableWidget *table);
 };

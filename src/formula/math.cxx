@@ -25,6 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QHeaderView>
+#include <QMessageBox>
 #include <iostream>
 
 #include "math.hh"
@@ -34,189 +35,166 @@
 
 void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
     for (int i = 0; i<mathItems.size(); i++) {
-        QString equ = mathItems.at(i).equation;
-        QString newEqu = equ.remove(0,1);
+        MathItem current = mathItems.at(i);
+        QString name = formulaName(current.equation);
+        QString equ = formulaEqu(current.equation);
 
-        if ((newEqu.startsWith("add"))||(newEqu.startsWith("sub"))
-                ||(newEqu.startsWith("mp"))||(newEqu.startsWith("div"))) {
-            applyBulkFormula(mathItems.at(i),table);
-        } else {
-            applyColumnFormula(mathItems.at(i),table);
-        }
-    }
-}
-
-void Math::applyBulkFormula(MathItem mathItem, TableWidget *table) {
-    int x = mathItem.x;
-    int y = mathItem.y;
-    QString equ = mathItem.equation;
-    QString newEqu = equ.remove(0,1);
-
-    bool parseOp = true;
-    QString opStr = "";
-    OPERATION op = OPERATION::ADD;
-    bool isSecond = false;
-    bool parse = false;
-    bool foundComma = false;
-    QString strCx = "";
-    QString strCy = "";
-    int cx = 0;
-    int cy = 0;
-    Cell startCell, endCell;
-    double result = 0;
-
-    for (int i = 0; i<newEqu.size(); i++) {
-        QChar c = newEqu.at(i);
-        if (c=='>') {
-            parseOp = false;
-            if (opStr=="add") {
-                op = OPERATION::ADD;
-            } else if (opStr=="sub") {
-                op = OPERATION::SUB;
-            } else if (opStr=="mp") {
-                op = OPERATION::MP;
-            } else if (opStr=="div") {
-                op = OPERATION::DIV;
+        if (name=="SUM") {
+            QStringList range = rangeContents(equ,table);
+            for (int i = 0; i<range.size(); i++) {
+                std::cout << "DEBUG: " << QString(range.at(i)).toStdString() << std::endl;
             }
-        } else if (c=='(') {
-            parse = true;
-        } else if (c==')') {
-            cx = QVariant(strCx).toInt();
-            cy = QVariant(strCy).toInt();
-            cx--;
-            cy--;
-
-            if (isSecond) {
-                endCell.x = cx;
-                endCell.y = cy;
+        } else {
+            if (equ.length()==0) {
+                //std::cout << "Column" << std::endl;
             } else {
-                startCell.x = cx;
-                startCell.y = cy;
+                //Unknown formula name
+                //std::cout << "Unknown formula" << std::endl;
+                /*QMessageBox msg;
+                msg.setText("Error: Unknown formula.");
+                msg.setDetailedText(current.equation);
+                msg.setWindowTitle("Error");
+                msg.setIcon(QMessageBox::Critical);
+                msg.exec();*/
             }
+        }
+    }
+}
 
-            parse = false;
-            foundComma = false;
-            strCx = strCy = "";
-        } else if (c==':') {
-            isSecond = true;
-        } else if (c==',') {
-            foundComma = true;
+//This returns the formula's name.
+QString Math::formulaName(QString equation) {
+    QString name = "";
+
+    for (int i = 1; i<equation.length(); i++) {
+        if (equation.at(i)=='(') {
+            break;
+        }
+        name+=equation.at(i);
+    }
+
+    return name;
+}
+
+//This returns the formula's content
+QString Math::formulaEqu(QString equation) {
+    QString ret = "";
+    bool in = false;
+
+    for (int i = 1; i<equation.length(); i++) {
+        if (equation.at(i)=='(') {
+            in = true;
+        } else if (equation.at(i)==')') {
+            break;
         } else {
-            if (parseOp) {
-                opStr+=c;
+            if (in) {
+                ret+=equation.at(i);
+            }
+        }
+    }
+
+    return ret;
+}
+
+//All the items within a particular rnage
+QStringList Math::rangeContents(QString range, TableWidget *table) {
+    std::cout << "RANGE: " << range.toStdString() << std::endl;
+    QStringList ret;
+
+    //First, break up the range
+    QString start = "";
+    QString end = "";
+    bool found = false;
+
+    for (int i = 0; i<range.length(); i++) {
+        if (range.at(i)==':') {
+            found = true;
+        } else {
+            if (found) {
+                end+=range.at(i);
             } else {
-                if (parse) {
-                    if (foundComma) {
-                        strCx+=c;
-                    } else {
-                        strCy+=c;
-                    }
-                }
+                start+=range.at(i);
             }
         }
     }
 
-    bool getRows = true;
-    int start = startCell.y;
-    int end = endCell.y;
-    if ((startCell.y)==(endCell.y)) {
-        getRows = false;
-        start = startCell.x;
-        end = endCell.x;
-    }
+    //Get cell locations and contents
+    Cell startC = cellFromName(start,table);
+    Cell endC = cellFromName(end,table);
 
-    QStringList noStrList;
+    //Now, we must see which direction we are going (horizontal or vertical)
+    ret.push_back(startC.content);
 
-    for (int i = start; i<(end+1); i++) {
-        QTableWidgetItem *item;
-        if (getRows) {
-            item = table->item(i,startCell.x);
-        } else {
-            item = table->item(startCell.y,i);
+    if (startC.x!=endC.x) {
+        //We are going across
+        for (int i = startC.x; i<=endC.x; i++) {
+            QTableWidgetItem *item = table->item(startC.y,i);
+            if (item!=nullptr) {
+                ret.push_back(item->text());
+            }
         }
-        if (item==nullptr) {
-            continue;
-        }
-        noStrList.push_back(item->text());
-    }
-
-    if (noStrList.size()==0) {
-        return;
-    }
-
-    int s = 0;
-    if ((op==OPERATION::MP)||(op==OPERATION::DIV)) {
-        result = QVariant(noStrList.at(0)).toDouble();
-        s = 1;
-    }
-    for (int i = s; i<noStrList.size(); i++) {
-        double current = QVariant(noStrList.at(i)).toDouble();
-
-        if (op==OPERATION::ADD) {
-            result+=current;
-        } else if (op==OPERATION::SUB) {
-            result-=current;
-        } else if (op==OPERATION::MP) {
-            result*=current;
-        } else if (op==OPERATION::DIV) {
-            result/=current;
+    } else {
+        //We are going vertically
+        for (int i = startC.y; i<endC.y; i++) {
+            QTableWidgetItem *item = table->item(i,startC.x);
+            if (item!=nullptr) {
+                ret.push_back(item->text());
+            }
         }
     }
 
-    QString strResult = QVariant(result).toString();
-    QTableWidgetItem *item = table->item(x,y);
-    if (item==nullptr) {
-        item = new QTableWidgetItem;
+    ret.push_back(endC.content);
+
+    //Go through the list and remove and blank entries
+    QStringList list2;
+
+    for (int i = 0; i<ret.size(); i++) {
+        QString current = ret.at(i);
+        if (current.length()>0) {
+            list2.push_back(current);
+        }
     }
-    item->setText(strResult);
-    table->setItem(x,y,item);
+
+    ret = list2;
+
+    return ret;
 }
 
-void Math::applyColumnFormula(MathItem mathItem, TableWidget *table) {
-    int x = mathItem.x;
-    int y = mathItem.y;
-    QString equ = mathItem.equation;
-    equ = equ.remove(0,1);
+Cell Math::cellFromName(QString name, TableWidget *table) {
+    Cell c;
 
-    QString no;
-    QStringList objects;
+    //Separate the string into parts
+    QString part1 = "";
+    QString part2 = "";
 
-    for (int i = 0; i<equ.length(); i++) {
-        if (equ.at(i)=='+') {
-            no = FormulaUtils::transAndGetContent(no);
-            objects.push_back(no);
-            objects.push_back("+");
-            no = "";
-        } else if (equ.at(i)=='-') {
-            no = FormulaUtils::transAndGetContent(no);
-            objects.push_back(no);
-            objects.push_back("-");
-            no = "";
-        } else if (equ.at(i)=='*') {
-            no = FormulaUtils::transAndGetContent(no);
-            objects.push_back(no);
-            objects.push_back("*");
-            no = "";
-        } else if (equ.at(i)=='/') {
-            no = FormulaUtils::transAndGetContent(no);
-            objects.push_back(no);
-            objects.push_back("/");
-            no = "";
+    for (int i = 0; i<name.length(); i++) {
+        if (name.at(i).isNumber()) {
+            part2+=name.at(i);
         } else {
-            no+=equ.at(i);
+            part1+=name.at(i);
         }
     }
-    no = FormulaUtils::transAndGetContent(no);
-    objects.push_back(no);
 
-    double result = FormulaUtils::solve(objects);
-
-    QTableWidgetItem *item = table->item(x,y);
-    if (item==nullptr) {
-        item = new QTableWidgetItem;
+    //Part 1 corresponds to the X var, so get the header that
+    //matches the part1 var
+    int h_count = table->horizontalHeader()->count();
+    for (int i = 0; i<h_count; i++) {
+        if (table->horizontalHeaderItem(i)->text()==part1) {
+            c.x = i;
+            break;
+        }
     }
-    QString resultStr = QString::number(result);
-    item->setText(resultStr);
-    table->setItem(x,y,item);
-}
 
+    //Part 2 corresponds to the Y var, so go ahead and convert
+    c.y = QVariant(part2).toInt();
+    c.y = c.y-1;
+
+    //We now have a valid location. Get the content.
+    QTableWidgetItem *item = table->item(c.y,c.x);
+    if (item==nullptr) {
+        c.content = "";
+    } else {
+        c.content = item->text();
+    }
+
+    return c;
+}
