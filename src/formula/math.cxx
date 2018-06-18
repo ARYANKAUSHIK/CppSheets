@@ -41,9 +41,15 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
 
         if (name=="SUM") {
             QStringList range = rangeContents(equ,table);
+
+            double answer = 0;
+
             for (int i = 0; i<range.size(); i++) {
-                std::cout << "DEBUG: " << QString(range.at(i)).toStdString() << std::endl;
+                double c = QVariant(range.at(i)).toDouble();
+                answer+=c;
             }
+
+            printResult(answer,current,table);
         } else {
             if (equ.length()==0) {
                 //std::cout << "Column" << std::endl;
@@ -97,7 +103,6 @@ QString Math::formulaEqu(QString equation) {
 
 //All the items within a particular rnage
 QStringList Math::rangeContents(QString range, TableWidget *table) {
-    std::cout << "RANGE: " << range.toStdString() << std::endl;
     QStringList ret;
 
     //First, break up the range
@@ -126,7 +131,7 @@ QStringList Math::rangeContents(QString range, TableWidget *table) {
 
     if (startC.x!=endC.x) {
         //We are going across
-        for (int i = startC.x; i<=endC.x; i++) {
+        for (int i = startC.x+1; i<=endC.x; i++) {
             QTableWidgetItem *item = table->item(startC.y,i);
             if (item!=nullptr) {
                 ret.push_back(item->text());
@@ -134,7 +139,7 @@ QStringList Math::rangeContents(QString range, TableWidget *table) {
         }
     } else {
         //We are going vertically
-        for (int i = startC.y; i<endC.y; i++) {
+        for (int i = startC.y+1; i<endC.y; i++) {
             QTableWidgetItem *item = table->item(i,startC.x);
             if (item!=nullptr) {
                 ret.push_back(item->text());
@@ -197,4 +202,38 @@ Cell Math::cellFromName(QString name, TableWidget *table) {
     }
 
     return c;
+}
+
+//Solves a column of objects
+double Math::solve(QStringList objects) {
+    double result = QVariant(objects.at(0)).toDouble();
+
+    int len = objects.length();
+    for (int i = 1; i<len; i+=2) {
+        double no = QVariant(objects.at(i+1)).toDouble();
+        QString op = objects.at(i);
+        if (op=="+") {
+            result+=no;
+        } else if (op=="-") {
+            result-=no;
+        } else if (op=="*") {
+            result*=no;
+        } else if (op=="/") {
+            result/=no;
+        }
+    }
+
+    return result;
+}
+
+//This prints the results of our calculations to the table
+void Math::printResult(double answer, MathItem current, TableWidget *table) {
+    QString answerStr = QVariant(answer).toString();
+
+    QTableWidgetItem *item = table->item(current.x,current.y);
+    if (item==nullptr) {
+        item = new QTableWidgetItem;
+    }
+    item->setText(answerStr);
+    table->setItem(current.x,current.y,item);
 }
