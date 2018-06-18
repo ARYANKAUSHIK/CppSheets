@@ -52,7 +52,37 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
             printResult(answer,current,table);
         } else {
             if (equ.length()==0) {
-                //std::cout << "Column" << std::endl;
+                QStringList objects;
+
+                QString currentS = "";
+                for (int i = 1; i<current.equation.length(); i++) {
+                    QChar c = current.equation.at(i);
+                    if (c=='+' || c=='-' || c=='*' || c=='/') {
+                        QChar c1 = currentS.at(0);
+                        if (c1.isLetter()) {
+                            Cell cell = cellFromName(currentS,table);
+                            currentS = cell.content;
+                        }
+                        objects.push_back(currentS);
+                        currentS = "";
+
+                        QString sym = "";
+                        sym+=c;
+                        objects.push_back(c);
+                    } else {
+                        currentS+=c;
+                    }
+                }
+
+                QChar c1 = currentS.at(0);
+                if (c1.isLetter()) {
+                    Cell cell = cellFromName(currentS,table);
+                    currentS = cell.content;
+                }
+                objects.push_back(currentS);
+
+                double answer = solve(objects);
+                printResult(answer,current,table);
             } else {
                 //Unknown formula name
                 //std::cout << "Unknown formula" << std::endl;
