@@ -28,49 +28,146 @@
 #include <QTableWidgetItem>
 
 #include "formula_utils.hh"
-#include "../tabwidget.hh"
+#include "../tablewidget.hh"
 
-QString FormulaUtils::transAndGetContent(QString loco) {
-    QString ret = "";
+//This returns the formula's name.
+QString FormulaUtils::formulaName(QString equation) {
+    QString name = "";
 
-    if (loco.at(0).isNumber() || loco.at(0)=='(' || loco.at(0)==')') {
-        ret = loco;
-        return ret;
-    }
-
-    QString letter = "";
-    QString no = "";
-    for (int i = 0; i<loco.length(); i++) {
-        if (loco.at(i).isLetter()) {
-            letter+=loco.at(i);
-        } else if (loco.at(i).isNumber()) {
-            no+=loco.at(i);
-        }
-    }
-
-    int x = 0;
-    int y = QVariant(no).toInt();
-
-    QTableWidget *current = TabWidget::currentWidget()->currentTable();
-    int count = current->horizontalHeader()->count();
-    for (int i = 0; i<count; i++) {
-        if (current->horizontalHeaderItem(i)->text()==letter) {
-            x = i;
+    for (int i = 1; i<equation.length(); i++) {
+        if (equation.at(i)=='(') {
             break;
         }
+        name+=equation.at(i);
     }
 
-    y--;
+    return name;
+}
 
-    QTableWidgetItem *item = current->item(y,x);
-    if (item==nullptr) {
-        return ret;
+//This returns the formula's content
+QString FormulaUtils::formulaEqu(QString equation) {
+    QString ret = "";
+    bool in = false;
+
+    for (int i = 1; i<equation.length(); i++) {
+        if (equation.at(i)=='(') {
+            in = true;
+        } else if (equation.at(i)==')') {
+            break;
+        } else {
+            if (in) {
+                ret+=equation.at(i);
+            }
+        }
     }
-    ret = item->text();
 
     return ret;
 }
 
+//All the items within a particular rnage
+QStringList FormulaUtils::rangeContents(QString range, TableWidget *table) {
+    QStringList ret;
+
+    //First, break up the range
+    QString start = "";
+    QString end = "";
+    bool found = false;
+
+    for (int i = 0; i<range.length(); i++) {
+        if (range.at(i)==':') {
+            found = true;
+        } else {
+            if (found) {
+                end+=range.at(i);
+            } else {
+                start+=range.at(i);
+            }
+        }
+    }
+
+    //Get cell locations and contents
+    Cell startC = cellFromName(start,table);
+    Cell endC = cellFromName(end,table);
+
+    //Now, we must see which direction we are going (horizontal or vertical)
+    ret.push_back(startC.content);
+
+    if (startC.x!=endC.x) {
+        //We are going across
+        for (int i = startC.x+1; i<=endC.x; i++) {
+            QTableWidgetItem *item = table->item(startC.y,i);
+            if (item!=nullptr) {
+                ret.push_back(item->text());
+            }
+        }
+    } else {
+        //We are going vertically
+        for (int i = startC.y+1; i<endC.y; i++) {
+            QTableWidgetItem *item = table->item(i,startC.x);
+            if (item!=nullptr) {
+                ret.push_back(item->text());
+            }
+        }
+    }
+
+    ret.push_back(endC.content);
+
+    //Go through the list and remove and blank entries
+    QStringList list2;
+
+    for (int i = 0; i<ret.size(); i++) {
+        QString current = ret.at(i);
+        if (current.length()>0) {
+            list2.push_back(current);
+        }
+    }
+
+    ret = list2;
+
+    return ret;
+}
+
+Cell FormulaUtils::cellFromName(QString name, TableWidget *table) {
+    Cell c;
+
+    //Separate the string into parts
+    QString part1 = "";
+    QString part2 = "";
+
+    for (int i = 0; i<name.length(); i++) {
+        if (name.at(i).isNumber()) {
+            part2+=name.at(i);
+        } else {
+            part1+=name.at(i);
+        }
+    }
+
+    //Part 1 corresponds to the X var, so get the header that
+    //matches the part1 var
+    int h_count = table->horizontalHeader()->count();
+    for (int i = 0; i<h_count; i++) {
+        if (table->horizontalHeaderItem(i)->text()==part1) {
+            c.x = i;
+            break;
+        }
+    }
+
+    //Part 2 corresponds to the Y var, so go ahead and convert
+    c.y = QVariant(part2).toInt();
+    c.y = c.y-1;
+
+    //We now have a valid location. Get the content.
+    QTableWidgetItem *item = table->item(c.y,c.x);
+    if (item==nullptr) {
+        c.content = "";
+    } else {
+        c.content = item->text();
+    }
+
+    return c;
+}
+
+//Solves a column of objects
 double FormulaUtils::solve(QStringList objects) {
     double result = QVariant(objects.at(0)).toDouble();
 
@@ -90,5 +187,17 @@ double FormulaUtils::solve(QStringList objects) {
     }
 
     return result;
+}
+
+//This prints the results of our calculations to the table
+void FormulaUtils::printResult(double answer, MathItem current, TableWidget *table) {
+    QString answerStr = QVariant(answer).toString();
+
+    QTableWidgetItem *item = table->item(current.x,current.y);
+    if (item==nullptr) {
+        item = new QTableWidgetItem;
+    }
+    item->setText(answerStr);
+    table->setItem(current.x,current.y,item);
 }
 

@@ -29,9 +29,14 @@
 #include <QString>
 
 #include "math_types.hh"
+#include "../tablewidget.hh"
 
 class FormulaUtils {
 public:
-	static QString transAndGetContent(QString loco);
-	static double solve(QStringList objects);
+    static QString formulaName(QString equation);
+    static QString formulaEqu(QString equation);
+    static QStringList rangeContents(QString range, TableWidget *table);
+    static Cell cellFromName(QString name, TableWidget *table);
+    static double solve(QStringList objects);
+    static void printResult(double answer, MathItem current, TableWidget *table);
 };
