@@ -32,13 +32,14 @@ CppSheets is slowly supporting Excel formulas. Overall, the syntax is the same. 
 3. ABS   
 4. LEN   
 5. LOWER   
+6. UPPER   
 
 More will be on the way as time goes on.
 
 #### The file format:
 Our custom file format is actually quite simple. It is fully XML based. 
 
-The root element must always be title "sheet". Nothing more is needed.
+The root element must always be titled "sheet". Nothing more is needed.
 
 Each page must be in an element titled "page". This element must contain an attribute entitled "title". The value of this attribute will be displayed as the page title in the program.
 
