@@ -67,6 +67,12 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
             QString answer = QVariant(result).toString();
             FormulaUtils::printResult(answer,current,table);
 
+        //Converts the contents of a cell to lowercase
+        } else if (name=="LOWER") {
+            Cell c = FormulaUtils::cellFromName(equ,table);
+            QString answer = c.content.toLower();
+            FormulaUtils::printResult(answer,current,table);
+
         //Other functions and utilities
         //Note: Most formulas past this point are handeled by separate functions
         } else if (name=="IF") {

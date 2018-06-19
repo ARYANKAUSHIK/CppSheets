@@ -31,6 +31,7 @@ CppSheets is slowly supporting Excel formulas. Overall, the syntax is the same. 
 2. IF   
 3. ABS   
 4. LEN   
+5. LOWER   
 
 More will be on the way as time goes on.
 
