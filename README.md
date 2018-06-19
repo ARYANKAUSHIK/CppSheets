@@ -26,9 +26,13 @@ There are two ways to apply formulas: individual cells, and the bulk method. Ple
 
 Individual cells can be added, subtracted, multiplied, or divided by other cells and/or with constants. Any combination of numbers and signs can be used in a formula. Individual cell formulas now follow the Microsoft Excel syntax.
 
-Bulk formulas allow you to apply a mathematical operating to all cells within a certain range. I am now starting to add better bulk formula support. Right now, the only bulk formula that is supported is the SUM formula. These follow the Microsoft Excel syntax, so they are supported from xlsx files.
+CppSheets is slowly supporting Excel formulas. Overall, the syntax is the same. If you have weird behavior when constructing a formula, it is most likely because you are trying to do something not current supported. Below is a list of the supported formulas:   
+1. SUM   
+2. IF   
+3. ABS   
+4. LEN   
 
-Better formula support will be slowly added. It is unlikely that complete support will ever be attained. Remember, though, that this is a proof-of-concept program, not a drop-in replacement from MS Excel.
+More will be on the way as time goes on.
 
 #### The file format:
 Our custom file format is actually quite simple. It is fully XML based. 
