@@ -52,11 +52,23 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
             }
 
             FormulaUtils::printResult(answer,current,table);
+
+        //The ABS function
         } else if (name=="ABS") {
             Cell c = FormulaUtils::cellFromName(equ,table);
             double result = QVariant(c.content).toDouble();
             double answer = std::abs(result);
             FormulaUtils::printResult(answer,current,table);
+
+        //The LEN function (string length)
+        } else if (name=="LEN") {
+            Cell c = FormulaUtils::cellFromName(equ,table);
+            int result = c.content.length();
+            QString answer = QVariant(result).toString();
+            FormulaUtils::printResult(answer,current,table);
+
+        //Other functions and utilities
+        //Note: Most formulas past this point are handeled by separate functions
         } else if (name=="IF") {
             solveIF(equ,current,table);
         } else {
