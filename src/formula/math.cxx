@@ -103,8 +103,10 @@ void Math::solveIF(QString statement, MathItem current, TableWidget *table) {
     QString data = "";
 
     bool fe = false;
+    QChar middle = ' ';
     for (int i = 0; i<toCheck.length(); i++) {
-        if (toCheck.at(i)=='=') {
+        if (toCheck.at(i)=='=' || toCheck.at(i)=='>' || toCheck.at(i)=='<') {
+            middle = toCheck.at(i);
             fe = true;
         } else {
             if (fe) {
@@ -136,10 +138,28 @@ void Math::solveIF(QString statement, MathItem current, TableWidget *table) {
     QString cell_data = c.content;
     QString result = "";
 
-    if (data==cell_data) {
-        result = trueStr;
+    if (middle=='=') {
+        if (data==cell_data) {
+            result = trueStr;
+        } else {
+            result = falseStr;
+        }
+
     } else {
+        double no1 = QVariant(cell_data).toDouble();
+        double no2 = QVariant(data).toDouble();
+
         result = falseStr;
+
+        if (middle=='>') {
+            if (no1>no2) {
+                result = trueStr;
+            }
+        } else {
+            if (no1<no2) {
+                result = trueStr;
+            }
+        }
     }
 
     //Set the data
