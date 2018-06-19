@@ -57,6 +57,8 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
             double result = QVariant(c.content).toDouble();
             double answer = std::abs(result);
             FormulaUtils::printResult(answer,current,table);
+        } else if (name=="IF") {
+            solveIF(equ,current,table);
         } else {
             //Used for column functions
             if (equ.length()==0) {
@@ -69,6 +71,82 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
     }
 }
 
+//Solves and IF function
+void Math::solveIF(QString statement, MathItem current, TableWidget *table) {
+    //First, break up the string
+    QString toCheck = "";
+    QString trueStr = "";
+    QString falseStr = "";
+
+    bool fc1 = false;
+    bool fc2 = false;
+    for (int i = 0; i<statement.length(); i++) {
+        if (statement.at(i)==',') {
+            if (!fc1) {
+                fc1 = true;
+            } else {
+                fc2 = true;
+            }
+        } else {
+            if (fc1 && fc2) {
+                falseStr+=statement.at(i);
+            } else if (fc1) {
+                trueStr+=statement.at(i);
+            } else {
+                toCheck+=statement.at(i);
+            }
+        }
+    }
+
+    //Now, parse the conditional statement
+    QString cell = "";
+    QString data = "";
+
+    bool fe = false;
+    for (int i = 0; i<toCheck.length(); i++) {
+        if (toCheck.at(i)=='=') {
+            fe = true;
+        } else {
+            if (fe) {
+                data+=toCheck.at(i);
+            } else {
+                cell+=toCheck.at(i);
+            }
+        }
+    }
+
+    //Remove quotation marks
+    if (data.at(0)=='\"' || data.at(data.length()-1)=='\"') {
+        data.remove(0,1);
+        data.remove(data.length()-1,data.length()-1);
+    }
+
+    if (trueStr.at(0)=='\"' || trueStr.at(trueStr.length()-1)=='\"') {
+        trueStr.remove(0,1);
+        trueStr.remove(trueStr.length()-1,trueStr.length()-1);
+    }
+
+    if (falseStr.at(0)=='\"' || falseStr.at(falseStr.length()-1)=='\"') {
+        falseStr.remove(0,1);
+        falseStr.remove(falseStr.length()-1,falseStr.length()-1);
+    }
+
+    //Get the target cell content and compare
+    Cell c = FormulaUtils::cellFromName(cell,table);
+    QString cell_data = c.content;
+    QString result = "";
+
+    if (data==cell_data) {
+        result = trueStr;
+    } else {
+        result = falseStr;
+    }
+
+    //Set the data
+    FormulaUtils::printResult(result,current,table);
+}
+
+//Solves a column
 void Math::solveColumn(MathItem current, TableWidget *table) {
     QStringList objects;
 
