@@ -27,6 +27,7 @@
 #include <QHeaderView>
 #include <QMessageBox>
 #include <iostream>
+#include <cmath>
 
 #include "math.hh"
 #include "formula_utils.hh"
@@ -50,6 +51,11 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
                 answer+=c;
             }
 
+            FormulaUtils::printResult(answer,current,table);
+        } else if (name=="ABS") {
+            Cell c = FormulaUtils::cellFromName(equ,table);
+            double result = QVariant(c.content).toDouble();
+            double answer = std::abs(result);
             FormulaUtils::printResult(answer,current,table);
         } else {
             //Used for column functions
