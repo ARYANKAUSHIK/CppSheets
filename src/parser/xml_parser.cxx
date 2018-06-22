@@ -348,6 +348,8 @@ void XmlParser::setData(QString file, QString page, QVector<SheetItem> items) {
         } else {
             td->SetAttribute("underline","false");
         }
+
+        td->SetAttribute("border",current.border.toStdString().c_str());
     }
 
     doc->SaveFile(file.toStdString().c_str());

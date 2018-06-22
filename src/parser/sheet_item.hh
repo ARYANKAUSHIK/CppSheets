@@ -42,6 +42,7 @@ struct SheetItem {
     int spanx;
     int spany;
     QFont font;
+    QString border;
 };
 
 struct MathItem {

@@ -163,6 +163,8 @@ QVector<SheetItem> SheetWidget::data(QString page) {
                 sitem.tooltip = item->toolTip();
             }
 
+            sitem.border = QVariant(item->data(Qt::UserRole)).toString();
+
             items.push_back(sitem);
         }
     }
