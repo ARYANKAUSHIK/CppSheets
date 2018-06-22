@@ -35,11 +35,11 @@ public:
     CellBar();
     ~CellBar();
 private:
-    QToolButton *cellColor, *merge, *unmerge, *borderTest;
+    QToolButton *cellColor, *merge, *unmerge, *border;
 private slots:
     void onBgColorClicked();
     void onFgColorClicked();
     void onMergeClicked();
     void onUnMergeClicked();
-    void onBorderTestClicked();
+    void onBorderClicked();
 };
