@@ -175,6 +175,8 @@ QVector<SheetItem> XmlParser::allItems(QString file, QString page) {
         font.setUnderline(QVariant(sUnderline).toBool());
         item.font = font;
 
+        item.border = QString(td->Attribute("border"));
+
         if ((!sx.isNull())||(!sy.isNull())||(!text.isNull())) {
             item.x = QVariant(sx).toInt();
             item.y = QVariant(sy).toInt();

@@ -110,6 +110,8 @@ void SheetWidget::loadFile() {
             table->setRowHeight(x,height);
 
             table->setSpan(x,y,itemList.at(j).spanx,itemList.at(j).spany);
+
+            item->setData(Qt::UserRole,QVariant(itemList.at(j).border));
         }
     }
 }
