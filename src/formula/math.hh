@@ -35,4 +35,6 @@
 class Math {
 public:
     static void updateMath(QVector<MathItem> mathItems, TableWidget *table);
+    static void solveIF(QString statement, MathItem current, TableWidget *table);
+    static void solveColumn(MathItem current, TableWidget *table);
 };

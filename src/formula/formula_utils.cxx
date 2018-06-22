@@ -190,14 +190,17 @@ double FormulaUtils::solve(QStringList objects) {
 }
 
 //This prints the results of our calculations to the table
-void FormulaUtils::printResult(double answer, MathItem current, TableWidget *table) {
-    QString answerStr = QVariant(answer).toString();
-
+void FormulaUtils::printResult(QString answer, MathItem current, TableWidget *table) {
     QTableWidgetItem *item = table->item(current.x,current.y);
     if (item==nullptr) {
         item = new QTableWidgetItem;
     }
-    item->setText(answerStr);
+    item->setText(answer);
     table->setItem(current.x,current.y,item);
+}
+
+void FormulaUtils::printResult(double answer, MathItem current, TableWidget *table) {
+    QString answerStr = QVariant(answer).toString();
+    printResult(answerStr,current,table);
 }
 
