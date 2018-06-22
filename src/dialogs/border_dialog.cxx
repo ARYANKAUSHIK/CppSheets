@@ -123,7 +123,24 @@ void BorderDialog::onClose() {
     border+=color+",";
     border+=width+",";
     border+=type;
-    TabWidget::currentWidget()->currentCell()->setData(Qt::UserRole,QVariant(border));
+
+    SheetWidget *current = TabWidget::currentWidget();
+    if (current->currentTable()->currentSelectedItems().size()==1) {
+        TabWidget::currentWidget()->currentCell()->setData(Qt::UserRole,QVariant(border));
+    } else {
+        auto list = current->currentTable()->currentSelectedItems();
+        for (auto item : list) {
+            int col = item.column();
+            int row = item.row();
+
+            QTableWidgetItem *tItem = current->currentTable()->item(row,col);
+            if (tItem==nullptr) {
+                tItem = new QTableWidgetItem();
+                current->currentTable()->setItem(row,col,tItem);
+            }
+            tItem->setData(Qt::UserRole,QVariant(border));
+        }
+    }
 
     this->close();
 }
