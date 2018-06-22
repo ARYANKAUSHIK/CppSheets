@@ -86,5 +86,5 @@ void CellBar::onUnMergeClicked() {
 }
 
 void CellBar::onBorderTestClicked() {
-    TabWidget::currentWidget()->currentCell()->setData(Qt::UserRole,QVariant("border:#cc33ff,5,solid"));
+    FormatActions::dspBorderDialog();
 }

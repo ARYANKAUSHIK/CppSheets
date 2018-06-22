@@ -26,6 +26,18 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
+#include <QDialog>
+#include <QFrame>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QComboBox>
+#include <QDialogButtonBox>
+
+class BorderDialog;
+
 class FormatActions {
 public:
     static void bold();
@@ -35,4 +47,28 @@ public:
     static void fgColor();
     static void merge();
     static void unMerge();
+    static void dspBorderDialog();
+};
+
+class BorderDialog : public QDialog {
+    Q_OBJECT
+public:
+    BorderDialog();
+    ~BorderDialog();
+private:
+    QString color = "";
+    QString width = "1";
+    QString type = "solid";
+    QFrame *mainWidget, *colorWidget, *widthWidget, *typeWidget;
+    QVBoxLayout *mainLayout;
+    QHBoxLayout *colorLayout, *widthLayout, *typeLayout;
+    QPushButton *chooseColor;
+    QSpinBox *widthSpinner;
+    QComboBox *borderTypes;
+    QDialogButtonBox *dialogButtons;
+private slots:
+    void onColorChanged();
+    void onWidthChanged();
+    void onTypeChanged();
+    void onClose();
 };
