@@ -19,6 +19,10 @@ set(ACTIONS_SRC
     actions/format_actions.cxx
 )
 
+set(DIALOGS_SRC
+    dialogs/border_dialog.cxx
+)
+
 set(FORMULA_SRC
     formula/math.cxx
     formula/formula_utils.cxx
@@ -40,6 +44,7 @@ set(PARSER_SRC
 add_executable(CppSheets 
     ${SRC}
     ${ACTIONS_SRC}
+    ${DIALOGS_SRC}
     ${FORMULA_SRC}
     ${MENUBAR_SRC}
     ${PARSER_SRC}
