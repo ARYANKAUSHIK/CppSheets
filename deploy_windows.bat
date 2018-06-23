@@ -7,6 +7,6 @@ copy src\CppSheets.exe .\winbin
 copy src\libxlnt.dll .\winbin
 
 cd winbin
-windeployqt CppSheets.exe
+windeployqt --release CppSheets.exe
 
 cd ..
