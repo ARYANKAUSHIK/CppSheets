@@ -41,7 +41,7 @@ set(PARSER_SRC
     parser/tinyxml2.cpp
 )
 
-add_executable(CppSheets 
+set(SRC_ALL
     ${SRC}
     ${ACTIONS_SRC}
     ${DIALOGS_SRC}
@@ -49,6 +49,12 @@ add_executable(CppSheets
     ${MENUBAR_SRC}
     ${PARSER_SRC}
 )
+
+if (WIN32)
+    add_executable(CppSheets WIN32 ${SRC_ALL})
+else()
+    add_executable(CppSheets ${SRC_ALL})
+endif()
 
 target_link_libraries(CppSheets
     Qt5::Core
