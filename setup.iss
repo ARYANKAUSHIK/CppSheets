@@ -49,11 +49,11 @@ Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\Qt5Widgets.dll"
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\iconengines\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\imageformats\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\platforms\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\styles\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\translations\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\styles\*"; DestDir: "{app}\styles"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\translations\*"; DestDir: "{app}\translations"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
