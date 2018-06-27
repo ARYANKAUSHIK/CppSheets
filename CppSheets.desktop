@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=CppSheets
+Type=Application
+Exec=CppSheets
+Terminal=false
+Icon=/usr/share/icons/hicolor/48x48/CppSheets.png
+Categories=Office
