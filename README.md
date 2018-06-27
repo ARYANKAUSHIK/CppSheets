@@ -1,59 +1,30 @@
 ## CppSheets
 
 #### Introduction
-CppSheets is a simple spreadsheet application. This program has its own XML-based file format (see "file.xml" for more information); it contains an example of all possible values. Basic formulas, cell formatting, and a few other features are supported.
+CppSheets is a simple spreadsheet application that I work on as a hobby project. For more information about the project and the program itself, see the wiki.
 
-Why did I make this? The answer is because I was looking for something challenging to do. I was getting bored with some of my other programs, so after playing around with the QTableWidget, I got to thinking that I could probably make some sort of spreadsheet application with it. After a few experimental programs, I began this project. I do not intend on making the next alternative to Microsoft Excel. My goal is simply to make a working spreadsheet application with as many features found in other programs as possible. The ultimate purpose is to have fun! I have thoroughly enjoyed working on this project, and I continue to enjoy working on it.
+#### Features
+Basic formatting (bold, italic, underline text; cell background color; text color; cell borders)   
+Cell merge   
+Custom XML-based file format   
+Basic xlsx (MS Excel) support   
+Formula support   
 
-#### CppSheets files
-CppSheets files are nothing special; they are simply XML files. However, the XML has to follow specific rules in order for it to be loaded. More information on the file format can be found below. These files are specific to this program. Because this program is mainly a hobby project, it may not be wise to use this for any production purposes- at least for now. If you want to, then go for it! While the file format is unlikely to change, you can expect constant GUI changes.
+For more information, see the wiki.
 
-#### Excel files
-CppSheets has experimental xlsx (Microsoft Excel) file compatibility. This is made possible through the xlnt (https://github.com/tfussell/xlnt) library. To make things easier, the code is included (unmodified) directly in this project. All credit to the original author.
+#### Building
+Building is very easy; the only external dependency required is Qt5 (Core, Widgets, Gui). To build, simply run CMake and Make. Note: you should probably use G++ to build this program; I tried using Clang, and it failed while building the xlnt library.
 
-Xlsx compatibility at this point is very, very limited. CppSheets is able to load text data from xlsx files and cell height/width attributes. All sheets contained in an Excel workbook are also able to be loaded. As far as saving goes, xlsx files can be saved to a limited extent. Only text data and new sheets are saved; formatting is not. Both mechanisms, especially the saving mechanism, are buggy.
+#### Platform Support
+CppSheets is fully supported on Linux and Windows. It should work on other systems as well. I will list them here as I test them.
 
-CppSheets is currently not an alternative for Microsoft Excel, or any other office suite such as LibreOffice or WPS Office. Save workbooks using this program at your own risk; I am not responsible for mangled spreadsheets. Opening workbooks should not damage them.
+#### Licensing
+CppSheets is licensed under BSD-3.   
+The built-in TinyXML2 library is licensed under the zlib license.   
+The included xlnt library is licensed under MIT.   
+Qt5 is licensed under LGPL.   
+The included Oxygen icons are licensed under LGPL.   
 
-#### Command Line
-Guide on how to use command line:
-=\				Kill the formula
--{				Create a tooltip
--{\				Clears tooltip
+See the wiki for more information.
 
-#### Formulas:
-There are two ways to apply formulas: individual cells, and the bulk method. Please note that all formulas must start with an equals ("=") sign. Also note that formulas must be entered in the command line (make sure you are typing in the command line, not in the cell. If you are in the cell, it will be treated as text). 
 
-Individual cells can be added, subtracted, multiplied, or divided by other cells and/or with constants. Any combination of numbers and signs can be used in a formula. Individual cell formulas now follow the Microsoft Excel syntax.
-
-CppSheets is slowly supporting Excel formulas. Overall, the syntax is the same. If you have weird behavior when constructing a formula, it is most likely because you are trying to do something not current supported. Below is a list of the supported formulas:   
-1. SUM   
-2. IF   
-3. ABS   
-4. LEN   
-5. LOWER   
-6. UPPER   
-
-More will be on the way as time goes on.
-
-#### The file format:
-Our custom file format is actually quite simple. It is fully XML based. 
-
-The root element must always be titled "sheet". Nothing more is needed.
-
-Each page must be in an element titled "page". This element must contain an attribute entitled "title". The value of this attribute will be displayed as the page title in the program.
-
-All page elements must contain two child elements, one entitled "data" and the other entitled "math". The "data" element just contains generic data that will be displayed in the table, along with information on how to display this data. The "math" element contains the formulas for each sheet.
-
-The "data" element contains a variable number of child elements entitled "td". The value of the td element is the data to be displayed. Each td element should have the following attributes:
-x 			(the table row to display it in)
-y 			(the table column to display it in)
-fgColor		(the cell's text color in hex)
-bgColor		(the cell's background color in hex)
-colwidth	(the column-width of the cell)
-rowwidth	(the row-width of the cell)
-spanx		(the number of rows the cell is to span)
-spany		(the number of columns the cell is to span)
-tooltip		(additional information presented as a tooltip)
-
-The "math" element contains a variable number of child elements entitled "equ".
