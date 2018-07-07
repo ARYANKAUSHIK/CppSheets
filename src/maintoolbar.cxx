@@ -37,7 +37,9 @@ MainToolbar::MainToolbar()
       saveAs(new QToolButton),
       bold(new QToolButton),
       italic(new QToolButton),
-      underline(new QToolButton)
+      underline(new QToolButton),
+      cut(new QToolButton),
+      paste(new QToolButton)
 {
     newFile->setIcon(QPixmap(":/icons/document-new.png"));
     open->setIcon(QPixmap(":/icons/document-open.png"));
@@ -46,6 +48,8 @@ MainToolbar::MainToolbar()
     bold->setIcon(QPixmap(":/icons/format-text-bold.png"));
     italic->setIcon(QPixmap(":/icons/format-text-italic.png"));
     underline->setIcon(QPixmap(":/icons/format-text-underline.png"));
+    cut->setIcon(QPixmap(":/icons/edit-cut.png"));
+    paste->setIcon(QPixmap(":/icons/edit-paste.png"));
 
     newFile->setToolTip("New Speadsheet");
     open->setToolTip("Open Sheet");
@@ -54,6 +58,8 @@ MainToolbar::MainToolbar()
     bold->setToolTip("Bold");
     italic->setToolTip("Italic");
     underline->setToolTip("Underline");
+    cut->setToolTip("Cut Cell Data");
+    paste->setToolTip("Paste Cell Data");
 
     connect(newFile,&QToolButton::clicked,this,&MainToolbar::onNewFileClicked);
     connect(open,&QToolButton::clicked,this,&MainToolbar::onOpenClicked);
@@ -62,6 +68,8 @@ MainToolbar::MainToolbar()
     connect(bold,&QToolButton::clicked,this,&MainToolbar::onBoldClicked);
     connect(italic,&QToolButton::clicked,this,&MainToolbar::onItalicClicked);
     connect(underline,&QToolButton::clicked,this,&MainToolbar::onUnderlineClicked);
+    connect(cut,&QToolButton::clicked,this,&MainToolbar::onCutClicked);
+    connect(paste,&QToolButton::clicked,this,&MainToolbar::onPasteClicked);
 
     this->addWidget(newFile);
     this->addWidget(open);
@@ -71,6 +79,9 @@ MainToolbar::MainToolbar()
     this->addWidget(bold);
     this->addWidget(italic);
     this->addWidget(underline);
+    this->addSeparator();
+    this->addWidget(cut);
+    this->addWidget(paste);
 }
 
 MainToolbar::~MainToolbar() {
@@ -80,6 +91,9 @@ MainToolbar::~MainToolbar() {
     delete saveAs;
     delete bold;
     delete italic;
+    delete underline;
+    delete cut;
+    delete paste;
 }
 
 void MainToolbar::onNewFileClicked() {
@@ -108,4 +122,12 @@ void MainToolbar::onItalicClicked() {
 
 void MainToolbar::onUnderlineClicked() {
     FormatActions::underline();
+}
+
+void MainToolbar::onCutClicked() {
+
+}
+
+void MainToolbar::onPasteClicked() {
+
 }

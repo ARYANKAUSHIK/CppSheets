@@ -7,5 +7,7 @@
         <file>icons/document-save-as.png</file>
         <file>icons/application-exit.png</file>
         <file>icons/help-about.png</file>
+        <file>icons/edit-cut.png</file>
+        <file>icons/edit-paste.png</file>
     </qresource>
 </RCC>
