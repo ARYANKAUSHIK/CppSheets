@@ -17,6 +17,7 @@ set(SRC
 set(ACTIONS_SRC
     actions/file_actions.cxx
     actions/format_actions.cxx
+    actions/data_actions.cxx
 )
 
 set(DIALOGS_SRC

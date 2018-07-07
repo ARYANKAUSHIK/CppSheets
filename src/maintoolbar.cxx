@@ -29,6 +29,7 @@
 #include "maintoolbar.hh"
 #include "actions/file_actions.hh"
 #include "actions/format_actions.hh"
+#include "actions/data_actions.hh"
 
 MainToolbar::MainToolbar()
     : newFile(new QToolButton),
@@ -125,9 +126,9 @@ void MainToolbar::onUnderlineClicked() {
 }
 
 void MainToolbar::onCutClicked() {
-
+    DataActions::cut_data();
 }
 
 void MainToolbar::onPasteClicked() {
-
+    DataActions::paste_data();
 }
