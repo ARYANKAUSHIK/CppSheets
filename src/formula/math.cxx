@@ -39,6 +39,7 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
         MathItem current = mathItems.at(i);
         QString name = FormulaUtils::formulaName(current.equation);
         QString equ = FormulaUtils::formulaEqu(current.equation);
+        Cell c = FormulaUtils::cellFromName(equ,table);
 
         //The SUM function
         if (name=="SUM") {
@@ -55,27 +56,23 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
 
         //The ABS function
         } else if (name=="ABS") {
-            Cell c = FormulaUtils::cellFromName(equ,table);
             double result = QVariant(c.content).toDouble();
             double answer = std::abs(result);
             FormulaUtils::printResult(answer,current,table);
 
         //The LEN function (string length)
         } else if (name=="LEN") {
-            Cell c = FormulaUtils::cellFromName(equ,table);
             int result = c.content.length();
             QString answer = QVariant(result).toString();
             FormulaUtils::printResult(answer,current,table);
 
         //Converts the contents of a cell to lowercase
         } else if (name=="LOWER") {
-            Cell c = FormulaUtils::cellFromName(equ,table);
             QString answer = c.content.toLower();
             FormulaUtils::printResult(answer,current,table);
 
         //Converts the contents of a cell to uppercase
         } else if (name=="UPPER") {
-            Cell c = FormulaUtils::cellFromName(equ,table);
             QString answer = c.content.toUpper();
             FormulaUtils::printResult(answer,current,table);
 

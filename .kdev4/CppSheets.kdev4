@@ -1,0 +1,37 @@
+[CMake]
+Build Directory Count=1
+Current Build Directory Index-Host System=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/home/patrick/Projects_public/CppSheets/build
+Build Type=Release
+CMake Binary=/bin/cmake
+CMake Executable=/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=
+Runtime=Host System
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=CppSheets
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x03\x00\x00\x00\x12\x00C\x00p\x00p\x00S\x00h\x00e\x00e\x00t\x00s\x00\x00\x00\x06\x00s\x00r\x00c\x00\x00\x00\x12\x00C\x00p\x00p\x00S\x00h\x00e\x00e\x00t\x00s)
+Dependency Action=Build
+EnvironmentGroup=
+Executable=file:///home/patrick/Projects_public/CppSheets
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=CppSheets,src,CppSheets
+Use External Terminal=false
+Working Directory=
+isExecutable=false
+
+[Project]
+VersionControlSupport=kdevgit
