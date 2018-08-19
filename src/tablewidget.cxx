@@ -252,5 +252,12 @@ void TableWidget::onCellClicked(int row, int col) {
 }
 
 void TableWidget::onItemChanged(QTableWidgetItem *item) {
+    if (item->text().startsWith("=")) {
+        MathItem mitem;
+        mitem.x = item->row();
+        mitem.y = item->column();
+        mitem.equation = item->text();
+        addMathItem(mitem);
+    }
     updateMath();
 }
