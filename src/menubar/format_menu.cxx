@@ -37,9 +37,9 @@ FormatMenu::FormatMenu() {
     italic = new QAction("Italic",this);
     underline = new QAction("Underline",this);
 
-    bold->setIcon(QPixmap(":/icons/format-text-bold.png"));
-    italic->setIcon(QPixmap(":/icons/format-text-italic.png"));
-    underline->setIcon(QPixmap(":/icons/format-text-underline.png"));
+    bold->setIcon(QPixmap(":/icons/format-text-bold.svg"));
+    italic->setIcon(QPixmap(":/icons/format-text-italic.svg"));
+    underline->setIcon(QPixmap(":/icons/format-text-underline.svg"));
 
     bold->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_B));
     italic->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_I));

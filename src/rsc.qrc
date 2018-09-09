@@ -1,9 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>style.css</file>
-        <file>icons/format-text-bold.png</file>
-        <file>icons/format-text-italic.png</file>
-        <file>icons/format-text-underline.png</file>
+        <file>icons/format-text-bold.svg</file>
+        <file>icons/format-text-italic.svg</file>
+        <file>icons/format-text-underline.svg</file>
         <file>headers.txt</file>
     </qresource>
 </RCC>

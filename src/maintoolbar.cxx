@@ -42,15 +42,15 @@ MainToolbar::MainToolbar()
       cut(new QToolButton),
       paste(new QToolButton)
 {
-    newFile->setIcon(QPixmap(":/icons/document-new.png"));
-    open->setIcon(QPixmap(":/icons/document-open.png"));
-    save->setIcon(QPixmap(":/icons/document-save.png"));
-    saveAs->setIcon(QPixmap(":/icons/document-save-as.png"));
-    bold->setIcon(QPixmap(":/icons/format-text-bold.png"));
-    italic->setIcon(QPixmap(":/icons/format-text-italic.png"));
-    underline->setIcon(QPixmap(":/icons/format-text-underline.png"));
-    cut->setIcon(QPixmap(":/icons/edit-cut.png"));
-    paste->setIcon(QPixmap(":/icons/edit-paste.png"));
+    newFile->setIcon(QPixmap(":/icons/document-new.svg"));
+    open->setIcon(QPixmap(":/icons/document-open.svg"));
+    save->setIcon(QPixmap(":/icons/document-save.svg"));
+    saveAs->setIcon(QPixmap(":/icons/document-save-as.svg"));
+    bold->setIcon(QPixmap(":/icons/format-text-bold.svg"));
+    italic->setIcon(QPixmap(":/icons/format-text-italic.svg"));
+    underline->setIcon(QPixmap(":/icons/format-text-underline.svg"));
+    cut->setIcon(QPixmap(":/icons/edit-cut.svg"));
+    paste->setIcon(QPixmap(":/icons/edit-paste.svg"));
 
     newFile->setToolTip("New Speadsheet");
     open->setToolTip("Open Sheet");

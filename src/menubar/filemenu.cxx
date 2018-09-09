@@ -47,11 +47,11 @@ FileMenu::FileMenu() {
     saveAs->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_S));
     quit->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_Q));
 
-    newFile->setIcon(QPixmap(":/icons/document-new.png"));
-    open->setIcon(QPixmap(":/icons/document-open.png"));
-    save->setIcon(QPixmap(":/icons/document-save.png"));
-    saveAs->setIcon(QPixmap(":/icons/document-save-as.png"));
-    quit->setIcon(QPixmap(":/icons/application-exit.png"));
+    newFile->setIcon(QPixmap(":/icons/document-new.svg"));
+    open->setIcon(QPixmap(":/icons/document-open.svg"));
+    save->setIcon(QPixmap(":/icons/document-save.svg"));
+    saveAs->setIcon(QPixmap(":/icons/document-save-as.svg"));
+    quit->setIcon(QPixmap(":/icons/application-exit.svg"));
 
     connect(newFile,&QAction::triggered,this,&FileMenu::onNewFileClicked);
     connect(open,&QAction::triggered,this,&FileMenu::onOpenClicked);

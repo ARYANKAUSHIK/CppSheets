@@ -36,7 +36,7 @@ HelpMenu::HelpMenu() {
     about = new QAction("About",this);
     aboutQt = new QAction("About Qt",this);
 
-    about->setIcon(QPixmap(":/icons/help-about.png"));
+    about->setIcon(QPixmap(":/icons/help-about.svg"));
 
     connect(about,&QAction::triggered,this,&HelpMenu::onAboutClicked);
     connect(aboutQt,&QAction::triggered,qApp,&QApplication::aboutQt);

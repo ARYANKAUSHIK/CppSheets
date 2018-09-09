@@ -37,7 +37,7 @@ StatusBar *Window::statusbar;
 
 Window::Window() {
     this->setWindowTitle("CppSheets");
-    this->setWindowIcon(QPixmap(":/icons/kspread.png"));
+    this->setWindowIcon(QPixmap(":/icons/sheets.svg"));
     this->resize(800,600);
 
     TabWidget *tabs = new TabWidget;
