@@ -45,7 +45,8 @@ int main(int argc, char **argv) {
 
     Window win;
     win.setStyleSheet(style);
-    win.showMaximized();
+    //win.showMaximized();
+    win.show();
 
     return app.exec();
 }
