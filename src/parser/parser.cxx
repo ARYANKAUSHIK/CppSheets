@@ -25,10 +25,12 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <iostream>
+#include <QFile>
 
 #include "parser.hh"
 #include "xml_parser.hh"
 #include "xlsx_parser.hh"
+#include "csv_parser.hh"
 
 void Parser::createFile(QString filePath) {
 	if (isXlsx(filePath)) {
@@ -41,6 +43,13 @@ void Parser::createFile(QString filePath) {
 QStringList Parser::pages(QString file) {
 	if (isXlsx(file)) {
 		return XlsxParser::pages(file);
+    } else if (file.endsWith(".csv")) {
+        //TODO: Clean this up
+        QFile f(file);
+        QString name = f.fileName();
+        QStringList pages;
+        pages << name;
+        return pages;
 	} else {
 		return XmlParser::pages(file);
 	}
@@ -57,6 +66,8 @@ bool Parser::pageExists(QString file, QString pageName) {
 QVector<SheetItem> Parser::allItems(QString file, QString page) {
 	if (isXlsx(file)) {
 		return XlsxParser::allItems(file,page);
+    } else if (file.endsWith(".csv")) {
+        return CsvParser::allItems(file,page);
 	} else {
 		return XmlParser::allItems(file,page);
 	}
