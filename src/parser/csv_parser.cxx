@@ -88,10 +88,18 @@ QStringList CsvParser::lineParts(QString line) {
     QStringList parts;
     
     QString current = "";
+    bool inQuotes = false;
+    
     for (QChar c : line) {
-        if (c==',' || c==';') {
+        if ((c==',' || c==';') && inQuotes==false) {
             parts << current;
             current = "";
+        } else if (c=='\"') {
+            if (inQuotes) {
+                inQuotes = false;
+            } else {
+                inQuotes = true;
+            }
         } else {
             current += c;
         }
