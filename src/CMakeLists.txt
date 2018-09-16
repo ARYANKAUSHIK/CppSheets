@@ -53,6 +53,8 @@ set(SRC_ALL
 
 if (WIN32)
     add_executable(CppSheets WIN32 ${SRC_ALL})
+elseif(APPLE)
+    add_executable(CppSheets MACOSX_BUNDLE ${SRC_ALL})
 else()
     add_executable(CppSheets ${SRC_ALL})
 endif()
