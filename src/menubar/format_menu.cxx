@@ -36,6 +36,14 @@ FormatMenu::FormatMenu() {
     bold = new QAction("Bold",this);
     italic = new QAction("Italic",this);
     underline = new QAction("Underline",this);
+    border = new QAction("Set Border",this);
+    
+    colorMenu = new QMenu;
+    colorMenu->setTitle("Color");
+    bg = new QAction("Background",colorMenu);
+    fg = new QAction("Text",colorMenu);
+    colorMenu->addAction(bg);
+    colorMenu->addAction(fg);
 
     bold->setIcon(QPixmap(":/icons/format-text-bold.svg"));
     italic->setIcon(QPixmap(":/icons/format-text-italic.svg"));
@@ -48,16 +56,23 @@ FormatMenu::FormatMenu() {
     connect(bold,&QAction::triggered,this,&FormatMenu::onBoldClicked);
     connect(italic,&QAction::triggered,this,&FormatMenu::onItalicClicked);
     connect(underline,&QAction::triggered,this,&FormatMenu::onUnderlineClicked);
+    connect(bg,&QAction::triggered,this,&FormatMenu::onBgColorClicked);
+    connect(fg,&QAction::triggered,this,&FormatMenu::onFgColorClicked);
+    connect(border,&QAction::triggered,this,&FormatMenu::onBorderClicked);
 
     this->addAction(bold);
     this->addAction(italic);
     this->addAction(underline);
+    this->addMenu(colorMenu);
+    this->addAction(border);
 }
 
 FormatMenu::~FormatMenu() {
     delete bold;
     delete italic;
     delete underline;
+    delete colorMenu;
+    delete border;
 }
 
 void FormatMenu::onBoldClicked() {
@@ -71,3 +86,16 @@ void FormatMenu::onItalicClicked() {
 void FormatMenu::onUnderlineClicked() {
     FormatActions::underline();
 }
+
+void FormatMenu::onBgColorClicked() {
+    FormatActions::bgColor();
+}
+
+void FormatMenu::onFgColorClicked() {
+    FormatActions::fgColor();
+}
+
+void FormatMenu::onBorderClicked() {
+    FormatActions::dspBorderDialog();
+}
+

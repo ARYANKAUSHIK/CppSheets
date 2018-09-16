@@ -36,8 +36,13 @@ public:
     ~FormatMenu();
 private:
     QAction *bold, *italic, *underline;
+    QMenu *colorMenu;
+    QAction *bg, *fg, *border;
 private slots:
     void onBoldClicked();
     void onItalicClicked();
     void onUnderlineClicked();
+    void onBgColorClicked();
+    void onFgColorClicked();
+    void onBorderClicked();
 };
