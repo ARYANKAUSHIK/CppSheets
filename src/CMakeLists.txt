@@ -64,3 +64,9 @@ target_link_libraries(CppSheets
     Qt5::Widgets
     xlnt
 )
+
+if (UNIX)
+    if (APPLE)
+        install(TARGETS CppSheets BUNDLE DESTINATION /Applications)
+    endif()
+endif()
