@@ -24,6 +24,8 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <iostream>
+
 #include "data_actions.hh"
 #include "../tabwidget.hh"
 #include "../sheetwidget.hh"
@@ -44,16 +46,73 @@ void DataActions::cut_data() {
         clipboard1.original_col = current->column();
         clipboard1.original_row = current->row();
     } else {
-        //TODO: Implement
+        auto items = sheet->currentTable()->currentSelectedItems();
+        for (int i = 0; i<items.size(); i++) {
+            auto current = items.at(i);
+            DataItem item;
+            item.original_col = current.column();
+            item.original_row = current.row();
+            
+            QTableWidgetItem *tb_item = sheet->currentTable()->item(current.row(),current.column());
+            if (tb_item==nullptr) {
+              item.item.data = "";
+            } else {
+              item.item.data = tb_item->text();  
+            }
+            
+            clipboard.push_back(item);
+        }
     }
 }
 
 void DataActions::paste_data() {
+    QTableWidgetItem *current = TabWidget::currentWidget()->currentCell();
     if (clipboard.isEmpty()) {
-        QTableWidgetItem *current = TabWidget::currentWidget()->currentCell();
         paste_single_item(current->row(),current->column());
     } else {
-        //TODO: Implement
+        int cx = current->column();
+        int cy = current->row();
+        
+        std::cout << "CX: " << cx << std::endl;
+        std::cout << "CY: " << cy << std::endl << std::endl;
+        
+        int diff_x = 0;
+        int diff_y = 0;
+        int last_x = -1;
+        int last_y = -1;
+        
+        for (DataItem item : clipboard) {
+          int ox = item.original_col;
+          int oy = item.original_row;
+          std::cout << "O: " << ox << " " << oy << std::endl;
+          
+          if (last_x != -1 && last_y != -1) {
+              diff_x = ox-last_x;
+              diff_y = oy-last_y;
+          }
+          
+          int dest_x = cx+diff_x;
+          int dest_y = cy+diff_y;
+          
+          last_x = ox;
+          last_y = oy;
+          
+          //Sets the new item
+          QTableWidgetItem *nitem = TabWidget::currentWidget()->currentTable()->item(dest_x,dest_y);
+          if (nitem==nullptr) {
+              nitem = new QTableWidgetItem;
+          }
+          nitem->setText(item.item.data);
+          TabWidget::currentWidget()->currentTable()->setItem(dest_y,dest_x,nitem);
+          
+          //Erases the old item
+          QTableWidgetItem *original = TabWidget::currentWidget()->currentTable()->item(oy,ox);
+          if (original==nullptr) {
+              original = new QTableWidgetItem;
+          }
+          original->setText("");
+          TabWidget::currentWidget()->currentTable()->setItem(oy,ox,original);
+        }
     }
 }
 
