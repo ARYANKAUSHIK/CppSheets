@@ -10,7 +10,7 @@ find_package(Qt5 REQUIRED COMPONENTS
     Gui
 )
 
-add_compile_options(-std=c++11)
+add_compile_options(-std=c++14)
 include_directories(xlnt/include)
 
 add_subdirectory(xlnt)

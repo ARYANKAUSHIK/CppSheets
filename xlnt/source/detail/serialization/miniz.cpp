@@ -35,6 +35,7 @@
 #pragma clang diagnostic ignored "-Wconversion"
 #pragma clang diagnostic ignored "-Wundef"
 #pragma clang diagnostic ignored "-Wunused-parameter"
+#pragma clang diagnostic ignored "-Wcast-qual"
 #pragma clang diagnostic ignored "-W#pragma-messages"
 
 typedef unsigned char mz_validate_uint16[sizeof(mz_uint16) == 2 ? 1 : -1];
