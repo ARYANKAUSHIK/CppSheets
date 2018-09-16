@@ -54,10 +54,12 @@ Window::Window() {
 
     filemenu = new FileMenu;
     formatMenu = new FormatMenu;
+    cellMenu = new CellMenu;
     helpMenu = new HelpMenu;
 
     this->menuBar()->addMenu(filemenu);
     this->menuBar()->addMenu(formatMenu);
+    this->menuBar()->addMenu(cellMenu);
     this->menuBar()->addMenu(helpMenu);
 
     statusbar = new StatusBar;
@@ -67,6 +69,7 @@ Window::Window() {
 Window::~Window() {
     delete filemenu;
     delete formatMenu;
+    delete cellMenu;
     delete helpMenu;
 }
 

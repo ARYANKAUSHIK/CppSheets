@@ -24,31 +24,32 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#pragma once
+#include "cellmenu.hh"
+#include "../actions/format_actions.hh"
 
-#include <QMainWindow>
-#include <QCloseEvent>
+CellMenu::CellMenu() {
+    this->setTitle("Cells");
+    
+    merge = new QAction("Merge Cells",this);
+    unMerge = new QAction("Unmerge Cells",this);
+    
+    connect(merge,&QAction::triggered,this,&CellMenu::onMergeClicked);
+    connect(unMerge,&QAction::triggered,this,&CellMenu::onUnMergeClicked);
+    
+    this->addAction(merge);
+    this->addAction(unMerge);
+}
 
-#include "menubar/filemenu.hh"
-#include "menubar/format_menu.hh"
-#include "menubar/cellmenu.hh"
-#include "menubar/helpmenu.hh"
-#include "statusbar.hh"
+CellMenu::~CellMenu() {
+    delete merge;
+    delete unMerge;
+}
 
-class Window : public QMainWindow {
-    Q_OBJECT
-public:
-    Window();
-    ~Window();
-    static void setCurrentPath(QString path);
-    static void setCurrentSaved(bool saved);
-    static bool checkSave();
-protected:
-    void closeEvent(QCloseEvent *event);
-private:
-    FileMenu *filemenu;
-    FormatMenu *formatMenu;
-    CellMenu *cellMenu;
-    HelpMenu *helpMenu;
-    static StatusBar *statusbar;
-};
+void CellMenu::onMergeClicked() {
+    FormatActions::merge();
+}
+
+void CellMenu::onUnMergeClicked() {
+    FormatActions::unMerge();
+}
+

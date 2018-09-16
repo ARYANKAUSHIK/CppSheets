@@ -32,6 +32,7 @@ set(FORMULA_SRC
 set(MENUBAR_SRC
     menubar/filemenu.cxx
     menubar/format_menu.cxx
+    menubar/cellmenu.cxx
     menubar/helpmenu.cxx
 )
 

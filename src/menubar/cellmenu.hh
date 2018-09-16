@@ -26,29 +26,17 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-#include <QMainWindow>
-#include <QCloseEvent>
+#include <QMenu>
+#include <QAction>
 
-#include "menubar/filemenu.hh"
-#include "menubar/format_menu.hh"
-#include "menubar/cellmenu.hh"
-#include "menubar/helpmenu.hh"
-#include "statusbar.hh"
-
-class Window : public QMainWindow {
+class CellMenu : public QMenu {
     Q_OBJECT
 public:
-    Window();
-    ~Window();
-    static void setCurrentPath(QString path);
-    static void setCurrentSaved(bool saved);
-    static bool checkSave();
-protected:
-    void closeEvent(QCloseEvent *event);
+    CellMenu();
+    ~CellMenu();
 private:
-    FileMenu *filemenu;
-    FormatMenu *formatMenu;
-    CellMenu *cellMenu;
-    HelpMenu *helpMenu;
-    static StatusBar *statusbar;
+    QAction *merge, *unMerge;
+private slots:
+    void onMergeClicked();
+    void onUnMergeClicked();
 };
