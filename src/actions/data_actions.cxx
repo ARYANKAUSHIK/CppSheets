@@ -89,6 +89,14 @@ void DataActions::paste_data() {
           if (last_x != -1 && last_y != -1) {
               diff_x = ox-last_x;
               diff_y = oy-last_y;
+              
+              if (diff_x<0) {
+                diff_x*=-1;
+              }
+              
+              if (diff_y<0) {
+                diff_y*=-1;
+              }
           }
           
           int dest_x = cx+diff_x;
@@ -112,7 +120,12 @@ void DataActions::paste_data() {
           }
           original->setText("");
           TabWidget::currentWidget()->currentTable()->setItem(oy,ox,original);
+          
+          diff_x = 0;
+          diff_y = 0;
         }
+        
+        clipboard.clear();
     }
 }
 
