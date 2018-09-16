@@ -13,10 +13,10 @@ Formula support
 For more information, see the wiki.
 
 #### Building
-Building is very easy; the only external dependency required is Qt5 (Core, Widgets, Gui). To build, simply run CMake and Make. Note: you should probably use G++ to build this program; I tried using Clang, and it failed while building the xlnt library.
+Building is very easy; the only external dependency required is Qt5 (Core, Widgets, Gui). To build, simply run CMake and Make. Note: you should probably use G++ to build this program; I tried using Clang, and it failed while building the xlnt library (Update: Clang seems to be working now after a minor change in the xlnt library; this was only tested on MacOS though).
 
 #### Platform Support
-CppSheets is fully supported on Linux and Windows. It should work on other systems as well. I will list them here as I test them.
+CppSheets is fully supported on Linux, Windows, and MacOS. It should work on other systems as well. I will list them here as I test them.
 
 #### Licensing
 CppSheets is licensed under BSD-3.   
