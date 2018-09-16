@@ -34,6 +34,7 @@
 class CsvParser {
 public:
     static QVector<SheetItem> allItems(QString file, QString page);
+    static void setData(QString file, QString page, QVector<SheetItem> items);
 private:
     static QStringList fileLines(QString file);
     static QStringList lineParts(QString line);

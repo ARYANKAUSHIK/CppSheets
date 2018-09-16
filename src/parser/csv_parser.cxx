@@ -68,6 +68,27 @@ QVector<SheetItem> CsvParser::allItems(QString file, QString page) {
     return items;
 }
 
+void CsvParser::setData(QString file, QString page, QVector<SheetItem> items) {
+    int lastY = 0;
+    QString currentLn = "";
+    QStringList contents;
+    
+    for (SheetItem item : items) {
+        currentLn+=item.data+",";
+        
+        if (item.y!=lastY) {
+            contents.push_back(currentLn);
+            currentLn = "";
+            lastY = item.y;
+        }
+    }
+    
+    std::cout << "THE FILE" << std::endl;
+    for (QString ln : contents) {
+        std::cout << ln.toStdString() << std::endl;
+    }
+}
+
 QStringList CsvParser::fileLines(QString file) {
     QStringList lines;
     

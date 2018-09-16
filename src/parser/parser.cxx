@@ -100,6 +100,8 @@ void Parser::removePage(QString file, QString page) {
 void Parser::setData(QString file, QString page, QVector<SheetItem> items) {
 	if (isXlsx(file)) {
 		XlsxParser::setData(file,page,items);
+    } else if (file.endsWith(".csv")) {
+        CsvParser::setData(file,page,items);
 	} else {
 		XmlParser::setData(file,page,items);
 	}
