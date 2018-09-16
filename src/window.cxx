@@ -30,7 +30,7 @@
 #include <QMenuBar>
 
 #include "window.hh"
-#include "ribbon.hh"
+#include "maintoolbar.hh"
 #include "tabwidget.hh"
 
 StatusBar *Window::statusbar;
@@ -41,7 +41,7 @@ Window::Window() {
     this->resize(1000,800);
 
     TabWidget *tabs = new TabWidget;
-    Ribbon *ribbon = new Ribbon;
+    MainToolbar *toolbar = new MainToolbar;
 
     QWidget *centerWidget = new QWidget;
     QVBoxLayout *centerLayout = new QVBoxLayout;
@@ -49,7 +49,7 @@ Window::Window() {
     centerWidget->setLayout(centerLayout);
     this->setCentralWidget(centerWidget);
 
-    centerLayout->addWidget(ribbon,0,Qt::AlignTop);
+    this->addToolBar(Qt::TopToolBarArea,toolbar);
     centerLayout->addWidget(tabs);
 
     filemenu = new FileMenu;

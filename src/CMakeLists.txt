@@ -9,8 +9,6 @@ set(SRC
     window.cxx
     maintoolbar.cxx
     tabwidget.cxx
-    ribbon.cxx
-    cellbar.cxx
     statusbar.cxx
 )
 
