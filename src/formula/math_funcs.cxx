@@ -30,6 +30,20 @@
 #include "math_funcs.hh"
 #include "formula_utils.hh"
 
+//The logic for the SUM formula
+double MathFuncs::sum(QString equ, TableWidget *table) {
+    QStringList range = FormulaUtils::rangeContents(equ,table);
+
+    double answer = 0;
+
+    for (int i = 0; i<range.size(); i++) {
+        double c = QVariant(range.at(i)).toDouble();
+        answer+=c;
+    }
+
+    return answer;
+}
+
 //The logic for the AVERAGE formula
 double MathFuncs::average(QString equ, TableWidget *table) {
     //First, get our contents

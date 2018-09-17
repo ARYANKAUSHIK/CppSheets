@@ -50,17 +50,17 @@
             <td x="2" y="4" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">4</td>
             <td x="2" y="5" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">3</td>
             <td x="2" y="6" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">5</td>
-            <td x="2" y="7" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">98</td>
+            <td x="2" y="7" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">100</td>
             <td x="2" y="8" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border=""/>
             <td x="2" y="9" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border=""/>
             <td x="2" y="10" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border=""/>
             <td x="2" y="11" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border=""/>
             <td x="2" y="12" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border=""/>
             <td x="2" y="13" fgColor="#000000" bgColor="#f1f118" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border=""/>
-            <td x="2" y="14" fgColor="#000000" bgColor="#eaeaea" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">120</td>
-            <td x="2" y="15" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="1" bold="false" italic="false" underline="false" border="">95.23809523809523</td>
-            <td x="2" y="16" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="1" bold="false" italic="false" underline="false" border="">47.61904761904761</td>
-            <td x="2" y="17" fgColor="#aaaa00" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="5" spany="1" bold="true" italic="false" underline="false" border="">94.49404761904762</td>
+            <td x="2" y="14" fgColor="#000000" bgColor="#eaeaea" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">122</td>
+            <td x="2" y="15" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="1" bold="false" italic="false" underline="false" border="">96.82539682539682</td>
+            <td x="2" y="16" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="2" spany="1" bold="false" italic="false" underline="false" border="">48.41269841269841</td>
+            <td x="2" y="17" fgColor="#aaaa00" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="5" spany="1" bold="true" italic="false" underline="false" border="">95.2876984126984</td>
             <td x="3" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">5</td>
             <td x="3" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">5</td>
             <td x="3" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">5</td>
@@ -205,7 +205,7 @@
             <td x="21" y="5" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">100</td>
             <td x="21" y="14" fgColor="#000000" bgColor="#eaeaea" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">400</td>
             <td x="23" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="118" rowwidth="30" spanx="1" spany="1" bold="false" italic="true" underline="false" border="">Your average is:</td>
-            <td x="23" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">92.80099630361258</td>
+            <td x="23" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">93.06554656816284</td>
             <td x="23" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="true" border=""/>
             <td x="23" y="3" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="true" border=""/>
             <td x="23" y="4" fgColor="#000000" bgColor="#ffffff" colwidth="100" rowwidth="30" spanx="1" spany="1" bold="false" italic="false" underline="true" border=""/>

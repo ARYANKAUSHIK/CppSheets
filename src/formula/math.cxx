@@ -52,15 +52,7 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
 
     //The SUM function
     if (name=="SUM") {
-        QStringList range = FormulaUtils::rangeContents(equ,table);
-
-        double answer = 0;
-
-        for (int i = 0; i<range.size(); i++) {
-            double c = QVariant(range.at(i)).toDouble();
-            answer+=c;
-        }
-
+        double answer = MathFuncs::sum(equ,table);
         FormulaUtils::printResult(answer,current,table);
 
     //The AVERAGE function
