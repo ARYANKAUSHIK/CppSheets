@@ -31,6 +31,7 @@
 
 #include "math.hh"
 #include "formula_utils.hh"
+#include "math_funcs.hh"
 #include "../sheetwidget.hh"
 #include "../tabwidget.hh"
 
@@ -80,41 +81,7 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
 
         //The POWER function
         } else if (name=="POWER") {
-            //First, separate the string
-            QString part1 = "", part2 = "";
-            bool found = false;
-
-            for (QChar c : equ) {
-                if (c==',') {
-                    found = true;
-                } else {
-                    if (found) {
-                        part1+=c;
-                    } else {
-                        part2+=c;
-                    }
-                }
-            }
-
-            //If either of the strings start with a letter, we have a cell
-            //Otherwise, we have a number
-            if (part1.at(0).isLetter()) {
-                part1 = FormulaUtils::cellFromName(part1,table).content;
-            }
-
-            if (part2.at(0).isLetter()) {
-                part2 = FormulaUtils::cellFromName(part2,table).content;
-            }
-
-            //Now, convert both to numbers
-            //In case we have decimals, we want doubles
-            double no1 = QVariant(part1).toDouble();
-            double no2 = QVariant(part2).toDouble();
-
-            //Calculate
-            double result = std::pow(no2,no1);
-
-            //Print the result
+            double result = MathFuncs::pow(equ,table);
             FormulaUtils::printResult(result,current,table);
 
         //The LEN function (string length)

@@ -25,6 +25,7 @@ set(DIALOGS_SRC
 set(FORMULA_SRC
     formula/math.cxx
     formula/formula_utils.cxx
+    formula/math_funcs.cxx
 )
 
 set(MENUBAR_SRC
