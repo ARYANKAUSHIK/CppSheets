@@ -53,8 +53,13 @@ set(SRC_ALL
     ${PARSER_SRC}
 )
 
+set(WIN_SRC
+    ${SRC_ALL}
+    appicon.rc
+)
+
 if (WIN32)
-    add_executable(CppSheets WIN32 ${SRC_ALL})
+    add_executable(CppSheets WIN32 ${WIN_SRC})
 elseif(APPLE)
     add_executable(CppSheets MACOSX_BUNDLE ${SRC_ALL})
 else()
