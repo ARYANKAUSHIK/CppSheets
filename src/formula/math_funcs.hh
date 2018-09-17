@@ -32,6 +32,7 @@
 
 class MathFuncs {
 public:
+    static double average(QString equ, TableWidget *table);
     static double abs(QString equ, TableWidget *table);
     static double pow(QString equ, TableWidget *table);
 };

@@ -57,20 +57,8 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
            
         //The AVERAGE function
         } else if (name=="AVERAGE") {
-                QStringList range = FormulaUtils::rangeContents(equ,table);
-                
-                double sum = 0;
-                double answer = 0;
-                
-                for (int i = 0; i<range.size(); i++) {
-                        double c = QVariant(range.at(i)).toDouble();
-                        sum+=c;
-                }
-                
-                double len = range.size();
-                answer = sum/len;
-                
-                FormulaUtils::printResult(answer,current,table);
+            double answer = MathFuncs::average(equ,table);
+            FormulaUtils::printResult(answer,current,table);
 
         //The ABS function
         } else if (name=="ABS") {

@@ -25,9 +25,61 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <cmath>
+#include <iostream>
 
 #include "math_funcs.hh"
 #include "formula_utils.hh"
+
+//The logic for the AVERAGE formula
+double MathFuncs::average(QString equ, TableWidget *table) {
+    //First, get our contents
+    //We will push them all too a QStringList
+    QStringList contents;
+
+    //See if we have a range or a list, and go from there
+    if (equ.contains(":")) {
+        contents = FormulaUtils::rangeContents(equ,table);
+    } else {
+        //Break up the equation
+        QString current = "";
+
+        for (QChar c : equ) {
+            if (c==',') {
+                contents << current;
+                current = "";
+            } else {
+                current+=c;
+            }
+        }
+
+        contents << current;
+
+        //Now go through and make sure we aren't referencing cells
+        QStringList tmp;
+
+        for (QString ln : contents) {
+            if (ln.at(0).isLetter()) {
+                ln = FormulaUtils::cellFromName(ln,table).content;
+            }
+            tmp << ln;
+        }
+
+        contents = tmp;
+    }
+
+    //Average is the sum of all numbers divided by the number of numbers
+    //Now, calculate and return
+    double len = contents.size();
+    double sum = 0;
+
+    for (QString ln : contents) {
+        double no = QVariant(ln).toDouble();
+        sum+=no;
+    }
+
+    double result = sum/len;
+    return result;
+}
 
 //The logic for the ABS formula
 double MathFuncs::abs(QString equ, TableWidget *table) {
