@@ -24,7 +24,10 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <QTableWidgetItem>
+
 #include "tablewidget_delegate.hh"
+#include "tabwidget.hh"
 
 TableWidgetDelegate::TableWidgetDelegate(QObject *parent) : QItemDelegate(parent) {
 }
@@ -97,21 +100,32 @@ void TableWidgetDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         painter->restore();
 
         QItemDelegate::paint(painter,option,index);
+
+    //Controls the brush for currently-selected cells
     } else if (option.state & QStyle::State_Selected) {
+        //First, get the current cell and the saved state
+        bool saved = TabWidget::currentWidget()->isSaved();
+        QTableWidgetItem *item = TabWidget::currentWidget()->currentCell();
+
+        //Set the brush for the background
         painter->save();
         QPen pen(Qt::black, 2, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
         int w = pen.width()/2;
         painter->setPen(pen);
-        painter->setBrush(Qt::white);
-        painter->drawRect(option.rect.adjusted(w,w,-w,-w));
+        painter->setBrush(item->background());
+        painter->drawRect(option.rect.adjusted(w-1,w,-w,-w));
         painter->restore();
 
+        //Set the brush for the text
+        //TODO: Somehow add some padding around the text
         painter->save();
-        QPen pen2(Qt::black);
+        QPen pen2(item->textColor());
         painter->setPen(pen2);
         painter->setFont(option.font);
-        painter->drawText(option.rect,Qt::AlignCenter,index.data().toString());
+        painter->drawText(option.rect,Qt::AlignVCenter,index.data().toString());
         painter->restore();
+
+        TabWidget::currentWidget()->setSaved(saved);
     } else {
         QItemDelegate::paint(painter,option,index);
     }
