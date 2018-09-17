@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<sheet>
+    <page title="page 1">
+        <math>
+            <equ x="0" y="1">=POWER(2,3)</equ>
+            <equ x="1" y="2">=POWER(B2,2)</equ>
+            <equ x="3" y="3">=POWER(B4,C4)</equ>
+            <equ x="2" y="2">=POWER(2,B3)</equ>
+        </math>
+        <data>
+            <td x="0" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="125" rowwidth="31" spanx="1" spany="1" bold="true" italic="false" underline="false" border="">Raw numbers test:</td>
+            <td x="0" y="1" fgColor="#ff0000" bgColor="#ffffff" colwidth="105" rowwidth="31" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">8</td>
+            <td x="1" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="125" rowwidth="31" spanx="1" spany="1" bold="true" italic="false" underline="false" border="">Part-cell test 1:</td>
+            <td x="1" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="105" rowwidth="31" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">23</td>
+            <td x="1" y="2" fgColor="#ff0000" bgColor="#ffffff" colwidth="105" rowwidth="31" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">529</td>
+            <td x="2" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="125" rowwidth="31" spanx="1" spany="1" bold="true" italic="false" underline="false" border="">Part-cell test 2:</td>
+            <td x="2" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="105" rowwidth="31" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">5</td>
+            <td x="2" y="2" fgColor="#ff0000" bgColor="#ffffff" colwidth="105" rowwidth="31" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">32</td>
+            <td x="3" y="0" fgColor="#000000" bgColor="#ffffff" colwidth="125" rowwidth="31" spanx="1" spany="1" bold="true" italic="false" underline="false" border="">Both-cell test:</td>
+            <td x="3" y="1" fgColor="#000000" bgColor="#ffffff" colwidth="105" rowwidth="31" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">3</td>
+            <td x="3" y="2" fgColor="#000000" bgColor="#ffffff" colwidth="105" rowwidth="31" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">4</td>
+            <td x="3" y="3" fgColor="#ff0000" bgColor="#ffffff" colwidth="105" rowwidth="31" spanx="1" spany="1" bold="false" italic="false" underline="false" border="">81</td>
+        </data>
+    </page>
+</sheet>
