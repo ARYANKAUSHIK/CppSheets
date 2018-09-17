@@ -34,7 +34,12 @@
 QString FormulaUtils::formulaName(QString equation) {
     QString name = "";
 
-    for (int i = 1; i<equation.length(); i++) {
+    int start = 0;
+    if (equation.at(0)=='=') {
+        start = 1;
+    }
+
+    for (int i = start; i<equation.length(); i++) {
         if (equation.at(i)=='(') {
             break;
         }
@@ -50,16 +55,16 @@ QString FormulaUtils::formulaEqu(QString equation) {
     bool in = false;
 
     for (int i = 1; i<equation.length(); i++) {
-        if (equation.at(i)=='(') {
+        if (equation.at(i)=='(' && !in) {
             in = true;
-        } else if (equation.at(i)==')') {
-            break;
         } else {
             if (in) {
                 ret+=equation.at(i);
             }
         }
     }
+
+    ret = ret.remove(ret.length()-1,ret.length()-1);
 
     return ret;
 }
