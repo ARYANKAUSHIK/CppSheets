@@ -42,6 +42,8 @@ void DataActions::cut_data() {
         clipboard1.item.x = current->column();
         clipboard1.item.y = current->row();
         clipboard1.item.data = current->text();
+        clipboard1.item.bgColor = current->backgroundColor();
+        clipboard1.item.fgColor = current->textColor();
 
         clipboard1.original_col = current->column();
         clipboard1.original_row = current->row();
@@ -56,8 +58,12 @@ void DataActions::cut_data() {
             QTableWidgetItem *tb_item = sheet->currentTable()->item(current.row(),current.column());
             if (tb_item==nullptr) {
               item.item.data = "";
+              item.item.bgColor = Qt::white;
+              item.item.fgColor = Qt::black;
             } else {
               item.item.data = tb_item->text();  
+              item.item.bgColor = tb_item->backgroundColor();
+              item.item.fgColor = tb_item->textColor();
             }
             
             clipboard.push_back(item);
@@ -111,14 +117,13 @@ void DataActions::paste_data() {
               nitem = new QTableWidgetItem;
           }
           nitem->setText(item.item.data);
+          nitem->setBackgroundColor(item.item.bgColor);
+          nitem->setTextColor(item.item.fgColor);
           TabWidget::currentWidget()->currentTable()->setItem(dest_y,dest_x,nitem);
           
           //Erases the old item
           QTableWidgetItem *original = TabWidget::currentWidget()->currentTable()->item(oy,ox);
-          if (original==nullptr) {
-              original = new QTableWidgetItem;
-          }
-          original->setText("");
+          original = new QTableWidgetItem;
           TabWidget::currentWidget()->currentTable()->setItem(oy,ox,original);
           
           diff_x = 0;
@@ -137,6 +142,8 @@ void DataActions::paste_single_item(int dest_row, int dest_col) {
     }
 
     item->setText(clipboard1.item.data);
+    item->setBackgroundColor(clipboard1.item.bgColor);
+    item->setTextColor(clipboard1.item.fgColor);
     current->setItem(dest_row,dest_col,item);
 
     QTableWidgetItem *original = new QTableWidgetItem;
