@@ -42,67 +42,77 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
         QString name = FormulaUtils::formulaName(current.equation);
         QString equ = FormulaUtils::formulaEqu(current.equation);
 
-        //The SUM function
-        if (name=="SUM") {
-            QStringList range = FormulaUtils::rangeContents(equ,table);
+        interpret(name,equ,current,table);
+    }
+}
 
-            double answer = 0;
+//The main interpreter function
+bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *table) {
+    bool ret = true;
 
-            for (int i = 0; i<range.size(); i++) {
-                double c = QVariant(range.at(i)).toDouble();
-                answer+=c;
-            }
+    //The SUM function
+    if (name=="SUM") {
+        QStringList range = FormulaUtils::rangeContents(equ,table);
 
-            FormulaUtils::printResult(answer,current,table);
-           
-        //The AVERAGE function
-        } else if (name=="AVERAGE") {
-            double answer = MathFuncs::average(equ,table);
-            FormulaUtils::printResult(answer,current,table);
+        double answer = 0;
 
-        //The ABS function
-        } else if (name=="ABS") {
-            double answer = MathFuncs::abs(equ,table);
-            FormulaUtils::printResult(answer,current,table);
+        for (int i = 0; i<range.size(); i++) {
+            double c = QVariant(range.at(i)).toDouble();
+            answer+=c;
+        }
 
-        //The POWER function
-        } else if (name=="POWER") {
-            double result = MathFuncs::pow(equ,table);
-            FormulaUtils::printResult(result,current,table);
+        FormulaUtils::printResult(answer,current,table);
 
-        //The LEN function (string length)
-        } else if (name=="LEN") {
-            Cell c = FormulaUtils::cellFromName(equ,table);
-            int result = c.content.length();
-            QString answer = QVariant(result).toString();
-            FormulaUtils::printResult(answer,current,table);
+    //The AVERAGE function
+    } else if (name=="AVERAGE") {
+        double answer = MathFuncs::average(equ,table);
+        FormulaUtils::printResult(answer,current,table);
 
-        //Converts the contents of a cell to lowercase
-        } else if (name=="LOWER") {
-            Cell c = FormulaUtils::cellFromName(equ,table);
-            QString answer = c.content.toLower();
-            FormulaUtils::printResult(answer,current,table);
+    //The ABS function
+    } else if (name=="ABS") {
+        double answer = MathFuncs::abs(equ,table);
+        FormulaUtils::printResult(answer,current,table);
 
-        //Converts the contents of a cell to uppercase
-        } else if (name=="UPPER") {
-            Cell c = FormulaUtils::cellFromName(equ,table);
-            QString answer = c.content.toUpper();
-            FormulaUtils::printResult(answer,current,table);
+    //The POWER function
+    } else if (name=="POWER") {
+        double result = MathFuncs::pow(equ,table);
+        FormulaUtils::printResult(result,current,table);
 
-        //Other functions and utilities
-        //Note: Most formulas past this point are handeled by separate functions
-        } else if (name=="IF") {
-            solveIF(equ,current,table);
+    //The LEN function (string length)
+    } else if (name=="LEN") {
+        Cell c = FormulaUtils::cellFromName(equ,table);
+        int result = c.content.length();
+        QString answer = QVariant(result).toString();
+        FormulaUtils::printResult(answer,current,table);
+
+    //Converts the contents of a cell to lowercase
+    } else if (name=="LOWER") {
+        Cell c = FormulaUtils::cellFromName(equ,table);
+        QString answer = c.content.toLower();
+        FormulaUtils::printResult(answer,current,table);
+
+    //Converts the contents of a cell to uppercase
+    } else if (name=="UPPER") {
+        Cell c = FormulaUtils::cellFromName(equ,table);
+        QString answer = c.content.toUpper();
+        FormulaUtils::printResult(answer,current,table);
+
+    //Other functions and utilities
+    //Note: Most formulas past this point are handeled by separate functions
+    } else if (name=="IF") {
+        solveIF(equ,current,table);
+    } else {
+        //Used for column functions
+        if (equ.length()==0) {
+            solveColumn(current,table);
         } else {
-            //Used for column functions
-            if (equ.length()==0) {
-                solveColumn(current,table);
-            } else {
-                //Unknown formula name
-                std::cout << "Unknown formula" << std::endl;
-            }
+            //Unknown formula name
+            std::cout << "Unknown formula" << std::endl;
+            ret = false;
         }
     }
+
+    return ret;
 }
 
 //Solves and IF function
