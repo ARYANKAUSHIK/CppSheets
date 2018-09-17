@@ -5,6 +5,7 @@ set(SRC
     icons.qrc
     main.cxx
     tablewidget.cxx
+    tablewidget_delegate.cxx
     sheetwidget.cxx
     window.cxx
     maintoolbar.cxx
