@@ -8,7 +8,8 @@ Basic formatting (bold, italic, underline text; cell background color; text colo
 Cell merge   
 Custom XML-based file format   
 Basic xlsx (MS Excel) support   
-Formula support   
+CSV loading support
+Formula support (which is fairly good)
 
 For more information, see the wiki.
 
