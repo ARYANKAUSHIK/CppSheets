@@ -207,15 +207,16 @@ void Math::solveIF(QString statement, MathItem current, TableWidget *table) {
     }
 
     //Set the data
-    std::cout << "RESULT: " << result.toStdString() << std::endl;
-
     QString fName = FormulaUtils::formulaName(result);
     QString fEqu = FormulaUtils::formulaEqu(result);
 
-    std::cout << "FName: " << fName.toStdString() << std::endl;
-    std::cout << "FEQU: " << fEqu.toStdString() << std::endl;
-
-    FormulaUtils::printResult(result,current,table);
+    if (fName.length()>0 && fEqu.length()==0) {
+        FormulaUtils::printResult(result,current,table);
+    } else {
+        if (!interpret(fName,fEqu,current,table)) {
+            FormulaUtils::printResult(result,current,table);
+        }
+    }
 }
 
 //Solves a column
