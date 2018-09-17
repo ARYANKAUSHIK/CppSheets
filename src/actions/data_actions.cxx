@@ -44,8 +44,16 @@ void DataActions::load_clipboard(bool cut_data) {
         clipboard1.item.x = current->column();
         clipboard1.item.y = current->row();
         clipboard1.item.data = current->text();
-        clipboard1.item.bgColor = current->backgroundColor();
-        clipboard1.item.fgColor = current->textColor();
+
+        //TODO: Move this to its own function, probably in the table widget
+        QString bgRole = current->data(Qt::BackgroundRole).toString();
+        if (bgRole.isEmpty()) {
+            clipboard1.item.bgColor = Qt::white;
+        } else {
+            clipboard1.item.bgColor = current->background().color();
+        }
+        clipboard1.item.fgColor = current->foreground().color();
+
 
         clipboard1.original_col = current->column();
         clipboard1.original_row = current->row();
@@ -63,9 +71,16 @@ void DataActions::load_clipboard(bool cut_data) {
               item.item.bgColor = Qt::white;
               item.item.fgColor = Qt::black;
             } else {
-              item.item.data = tb_item->text();  
-              item.item.bgColor = tb_item->backgroundColor();
-              item.item.fgColor = tb_item->textColor();
+                item.item.data = tb_item->text();
+
+                //TODO: Move this to its own function, probably in the table widget
+                QString bgRole = tb_item->data(Qt::BackgroundRole).toString();
+                if (bgRole.isEmpty()) {
+                    item.item.bgColor = Qt::white;
+                } else {
+                    item.item.bgColor = tb_item->background().color();
+                }
+                item.item.fgColor = tb_item->foreground().color();
             }
             
             clipboard.push_back(item);
