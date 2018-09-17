@@ -126,7 +126,7 @@ void MainToolbar::onUnderlineClicked() {
 }
 
 void MainToolbar::onCutClicked() {
-    DataActions::cut_data();
+    DataActions::load_clipboard(true);
 }
 
 void MainToolbar::onPasteClicked() {

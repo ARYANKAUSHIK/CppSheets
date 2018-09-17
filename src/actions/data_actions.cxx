@@ -33,8 +33,10 @@
 
 DataItem DataActions::clipboard1;
 QVector<DataItem> DataActions::clipboard;
+bool DataActions::cut = false;
 
-void DataActions::cut_data() {
+void DataActions::load_clipboard(bool cut_data) {
+    cut = cut_data;
     SheetWidget *sheet = TabWidget::currentWidget();
 
     if (sheet->currentTable()->currentSelectedItems().size()==1) {
@@ -121,10 +123,12 @@ void DataActions::paste_data() {
           nitem->setTextColor(item.item.fgColor);
           TabWidget::currentWidget()->currentTable()->setItem(dest_y,dest_x,nitem);
           
-          //Erases the old item
-          QTableWidgetItem *original = TabWidget::currentWidget()->currentTable()->item(oy,ox);
-          original = new QTableWidgetItem;
-          TabWidget::currentWidget()->currentTable()->setItem(oy,ox,original);
+          if (cut) {
+              //Erases the old item
+              QTableWidgetItem *original = TabWidget::currentWidget()->currentTable()->item(oy,ox);
+              original = new QTableWidgetItem;
+              TabWidget::currentWidget()->currentTable()->setItem(oy,ox,original);
+          }
           
           diff_x = 0;
           diff_y = 0;
@@ -146,6 +150,8 @@ void DataActions::paste_single_item(int dest_row, int dest_col) {
     item->setTextColor(clipboard1.item.fgColor);
     current->setItem(dest_row,dest_col,item);
 
-    QTableWidgetItem *original = new QTableWidgetItem;
-    current->setItem(clipboard1.original_row,clipboard1.original_col,original);
+    if (cut) {
+        QTableWidgetItem *original = new QTableWidgetItem;
+        current->setItem(clipboard1.original_row,clipboard1.original_col,original);
+    }
 }

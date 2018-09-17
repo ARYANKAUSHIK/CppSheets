@@ -38,11 +38,12 @@ struct DataItem {
 
 class DataActions {
 public:
-    static void cut_data();
+    static void load_clipboard(bool cut_data);
     static void paste_data();
 private:
     static DataItem clipboard1;
     static QVector<DataItem> clipboard;
+    static bool cut;
 
     static void paste_single_item(int dest_row, int dest_col);
 };
