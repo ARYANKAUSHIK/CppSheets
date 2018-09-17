@@ -32,5 +32,6 @@
 
 class MathFuncs {
 public:
+    static double abs(QString equ, TableWidget *table);
     static double pow(QString equ, TableWidget *table);
 };

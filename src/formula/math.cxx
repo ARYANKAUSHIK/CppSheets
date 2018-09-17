@@ -74,9 +74,7 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
 
         //The ABS function
         } else if (name=="ABS") {
-            Cell c = FormulaUtils::cellFromName(equ,table);
-            double result = QVariant(c.content).toDouble();
-            double answer = std::abs(result);
+            double answer = MathFuncs::abs(equ,table);
             FormulaUtils::printResult(answer,current,table);
 
         //The POWER function

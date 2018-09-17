@@ -29,6 +29,22 @@
 #include "math_funcs.hh"
 #include "formula_utils.hh"
 
+//The logic for the ABS formula
+double MathFuncs::abs(QString equ, TableWidget *table) {
+    //First, see if we are referencing a number or a cell
+    if (equ.at(0).isLetter()) {
+        equ = FormulaUtils::cellFromName(equ,table).content;
+    }
+
+    //Convert to a number
+    double no = QVariant(equ).toDouble();
+
+    //Calculate and return
+    double result = std::abs(no);
+    return result;
+}
+
+//The logic for the POWER formula
 double MathFuncs::pow(QString equ, TableWidget *table) {
     //First, separate the string
     QString part1 = "", part2 = "";
