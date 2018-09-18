@@ -40,6 +40,7 @@ MainToolbar::MainToolbar()
       italic(new QToolButton),
       underline(new QToolButton),
       cut(new QToolButton),
+      copy(new QToolButton),
       paste(new QToolButton)
 {
     newFile->setIcon(QPixmap(":/icons/document-new.svg"));
@@ -50,6 +51,7 @@ MainToolbar::MainToolbar()
     italic->setIcon(QPixmap(":/icons/format-text-italic.svg"));
     underline->setIcon(QPixmap(":/icons/format-text-underline.svg"));
     cut->setIcon(QPixmap(":/icons/edit-cut.svg"));
+    copy->setIcon(QPixmap(":/icons/edit-copy.svg"));
     paste->setIcon(QPixmap(":/icons/edit-paste.svg"));
 
     newFile->setToolTip("New Speadsheet");
@@ -60,6 +62,7 @@ MainToolbar::MainToolbar()
     italic->setToolTip("Italic");
     underline->setToolTip("Underline");
     cut->setToolTip("Cut Cell Data");
+    copy->setToolTip("Copy Cell Data");
     paste->setToolTip("Paste Cell Data");
 
     connect(newFile,&QToolButton::clicked,this,&MainToolbar::onNewFileClicked);
@@ -70,6 +73,7 @@ MainToolbar::MainToolbar()
     connect(italic,&QToolButton::clicked,this,&MainToolbar::onItalicClicked);
     connect(underline,&QToolButton::clicked,this,&MainToolbar::onUnderlineClicked);
     connect(cut,&QToolButton::clicked,this,&MainToolbar::onCutClicked);
+    connect(copy,&QToolButton::clicked,this,&MainToolbar::onCopyClicked);
     connect(paste,&QToolButton::clicked,this,&MainToolbar::onPasteClicked);
 
     this->addWidget(newFile);
@@ -82,6 +86,7 @@ MainToolbar::MainToolbar()
     this->addWidget(underline);
     this->addSeparator();
     this->addWidget(cut);
+    this->addWidget(copy);
     this->addWidget(paste);
 }
 
@@ -94,6 +99,7 @@ MainToolbar::~MainToolbar() {
     delete italic;
     delete underline;
     delete cut;
+    delete copy;
     delete paste;
 }
 
@@ -127,6 +133,10 @@ void MainToolbar::onUnderlineClicked() {
 
 void MainToolbar::onCutClicked() {
     DataActions::load_clipboard(true);
+}
+
+void MainToolbar::onCopyClicked() {
+    DataActions::load_clipboard(false);
 }
 
 void MainToolbar::onPasteClicked() {

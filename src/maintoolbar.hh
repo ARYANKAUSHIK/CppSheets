@@ -37,7 +37,7 @@ public:
 private:
     QToolButton *newFile, *open, *save, *saveAs;
     QToolButton *bold, *italic, *underline;
-    QToolButton *cut, *paste;
+    QToolButton *cut, *copy, *paste;
 private slots:
     void onNewFileClicked();
     void onOpenClicked();
@@ -47,5 +47,6 @@ private slots:
     void onItalicClicked();
     void onUnderlineClicked();
     void onCutClicked();
+    void onCopyClicked();
     void onPasteClicked();
 };
