@@ -84,35 +84,7 @@ void SheetWidget::loadFile() {
         tabs->addTab(table,pageList.at(i));
 
         auto itemList = Parser::allItems(filePath,pageList.at(i));
-        for (int j = 0; j<itemList.size(); j++) {
-            int x = itemList.at(j).x;
-            int y = itemList.at(j).y;
-            QString text = itemList.at(j).data;
-
-            QTableWidgetItem *item = new QTableWidgetItem(text);
-            if (!itemList.at(j).tooltip.isNull()) {
-                item->setToolTip(itemList.at(j).tooltip);
-            }
-            item->setBackgroundColor(itemList.at(j).bgColor);
-            item->setTextColor(itemList.at(j).fgColor);
-            item->setFont(itemList.at(j).font);
-            table->setItem(x,y,item);
-
-            int width = itemList.at(j).colWidth;
-            int height = itemList.at(j).rowWidth;
-            if (width<70) {
-                width=70;
-            }
-            if (height<20) {
-                height=20;
-            }
-            table->setColumnWidth(y,width);
-            table->setRowHeight(x,height);
-
-            table->setSpan(x,y,itemList.at(j).spanx,itemList.at(j).spany);
-
-            item->setData(Qt::UserRole,QVariant(itemList.at(j).border));
-        }
+        setData(itemList,table);
     }
 }
 
@@ -122,6 +94,38 @@ QStringList SheetWidget::allPages() {
         items.push_back(tabs->tabText(i));
     }
     return items;
+}
+
+void SheetWidget::setData(QVector<SheetItem> itemList, TableWidget *table) {
+    for (int j = 0; j<itemList.size(); j++) {
+        int x = itemList.at(j).x;
+        int y = itemList.at(j).y;
+        QString text = itemList.at(j).data;
+
+        QTableWidgetItem *item = new QTableWidgetItem(text);
+        if (!itemList.at(j).tooltip.isNull()) {
+            item->setToolTip(itemList.at(j).tooltip);
+        }
+        item->setBackgroundColor(itemList.at(j).bgColor);
+        item->setTextColor(itemList.at(j).fgColor);
+        item->setFont(itemList.at(j).font);
+        table->setItem(x,y,item);
+
+        int width = itemList.at(j).colWidth;
+        int height = itemList.at(j).rowWidth;
+        if (width<70) {
+            width=70;
+        }
+        if (height<20) {
+            height=20;
+        }
+        table->setColumnWidth(y,width);
+        table->setRowHeight(x,height);
+
+        table->setSpan(x,y,itemList.at(j).spanx,itemList.at(j).spany);
+
+        item->setData(Qt::UserRole,QVariant(itemList.at(j).border));
+    }
 }
 
 QVector<SheetItem> SheetWidget::data(QString page) {

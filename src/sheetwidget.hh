@@ -46,6 +46,7 @@ public:
     ~SheetWidget();
     void loadFile();
     QStringList allPages();
+    void setData(QVector<SheetItem> itemList, TableWidget *table);
     QVector<SheetItem> data(QString page);
     QVector<MathItem> mathData(QString page);
     void setFile(QString path);
