@@ -54,9 +54,12 @@ SheetWidget::SheetWidget(QString path)
         tabs->addTab(table,"page 1");
     }
 
+    tabs->setContextMenuPolicy(Qt::CustomContextMenu);
+
     connect(currentData,&QLineEdit::returnPressed,this,&SheetWidget::onCurrentDataEnterPressed);
     connect(tabs,SIGNAL(tabBarDoubleClicked(int)),this,SLOT(onTabDoubleClick(int)));
     connect(tabs,SIGNAL(tabCloseRequested(int)),this,SLOT(onTabClose(int)));
+    connect(tabs,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(onCustomContextMenu(QPoint)));
 
     layout->addWidget(currentData,0,Qt::AlignTop);
     layout->addWidget(tabs);
@@ -391,5 +394,13 @@ void SheetWidget::onTabClose(int index) {
 
     saved = false;
     Window::setCurrentSaved(false);
+}
+
+//The function for the tab context menu
+void SheetWidget::onCustomContextMenu(QPoint pos) {
+    QMenu menu;
+    menu.addAction(new QAction("Option 1"));
+    menu.addAction(new QAction("Option 2"));
+    menu.exec(QCursor::pos());
 }
 

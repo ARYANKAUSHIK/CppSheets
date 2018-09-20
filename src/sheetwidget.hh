@@ -73,4 +73,5 @@ private slots:
     void onAddTabClicked();
     void onTabDoubleClick(int index);
     void onTabClose(int index);
+    void onCustomContextMenu(QPoint pos);
 };
