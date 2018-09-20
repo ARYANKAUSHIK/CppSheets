@@ -55,12 +55,12 @@ SheetWidget::SheetWidget(QString path)
         tabs->addTab(table,"page 1");
     }
 
-    tabs->setContextMenuPolicy(Qt::CustomContextMenu);
+    tabs->tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
 
     connect(currentData,&QLineEdit::returnPressed,this,&SheetWidget::onCurrentDataEnterPressed);
     connect(tabs,SIGNAL(tabBarDoubleClicked(int)),this,SLOT(onTabDoubleClick(int)));
     connect(tabs,SIGNAL(tabCloseRequested(int)),this,SLOT(onTabClose(int)));
-    connect(tabs,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(onCustomContextMenu(QPoint)));
+    connect(tabs->tabBar(),SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(onCustomContextMenu(QPoint)));
 
     layout->addWidget(currentData,0,Qt::AlignTop);
     layout->addWidget(tabs);
