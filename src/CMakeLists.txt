@@ -29,6 +29,10 @@ set(FORMULA_SRC
     formula/math_funcs.cxx
 )
 
+set(MENU_SRC
+    menu/page_menu.cxx
+)
+
 set(MENUBAR_SRC
     menubar/filemenu.cxx
     menubar/format_menu.cxx
@@ -49,6 +53,7 @@ set(SRC_ALL
     ${ACTIONS_SRC}
     ${DIALOGS_SRC}
     ${FORMULA_SRC}
+    ${MENU_SRC}
     ${MENUBAR_SRC}
     ${PARSER_SRC}
 )

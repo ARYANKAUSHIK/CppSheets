@@ -58,6 +58,8 @@ public:
     void unMergeSelected();
     TableWidget *currentTable();
     QTableWidgetItem *currentCell();
+    QString currentPage();
+    void insertPage();
 private:
     QVBoxLayout *layout;
     QLineEdit *currentData;

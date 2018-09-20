@@ -32,6 +32,7 @@
 #include "sheetwidget.hh"
 #include "tablewidget.hh"
 #include "parser/parser.hh"
+#include "menu/page_menu.hh"
 #include "window.hh"
 
 SheetWidget::SheetWidget(QString path)
@@ -296,6 +297,17 @@ QTableWidgetItem *SheetWidget::currentCell() {
     return item;
 }
 
+QString SheetWidget::currentPage() {
+    auto pages = allPages();
+    return pages.at(tabs->currentIndex());
+}
+
+void SheetWidget::insertPage() {
+    addNewTab(tabs->count()+1);
+    saved = false;
+    Window::setCurrentSaved(false);
+}
+
 void SheetWidget::addNewTab(int no) {
     int count = tabs->count();
     TableWidget *table = new TableWidget;
@@ -346,9 +358,7 @@ void SheetWidget::onCurrentDataEnterPressed() {
 }
 
 void SheetWidget::onAddTabClicked() {
-    addNewTab(tabs->count()+1);
-    saved = false;
-    Window::setCurrentSaved(false);
+    insertPage();
 }
 
 void SheetWidget::onTabDoubleClick(int index) {
@@ -398,9 +408,7 @@ void SheetWidget::onTabClose(int index) {
 
 //The function for the tab context menu
 void SheetWidget::onCustomContextMenu(QPoint pos) {
-    QMenu menu;
-    menu.addAction(new QAction("Option 1"));
-    menu.addAction(new QAction("Option 2"));
+    PageMenu menu;
     menu.exec(QCursor::pos());
 }
 
