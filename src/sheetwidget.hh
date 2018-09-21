@@ -60,6 +60,8 @@ public:
     QTableWidgetItem *currentCell();
     QString currentPage();
     void insertPage();
+    void renamePage(int index);
+    int currentIndex();
 private:
     QVBoxLayout *layout;
     QLineEdit *currentData;

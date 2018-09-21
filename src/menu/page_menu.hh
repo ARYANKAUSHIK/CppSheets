@@ -35,7 +35,8 @@ public:
     PageMenu();
     ~PageMenu();
 private:
-    QAction *copy;
+    QAction *copy, *rename;
 private slots:
     void onCopyClicked();
+    void onRenameClicked();
 };

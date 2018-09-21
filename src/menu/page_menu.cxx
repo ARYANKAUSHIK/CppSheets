@@ -30,14 +30,18 @@
 
 PageMenu::PageMenu() {
     copy = new QAction("Copy",this);
+    rename = new QAction("Rename",this);
 
     connect(copy,&QAction::triggered,this,&PageMenu::onCopyClicked);
+    connect(rename,&QAction::triggered,this,&PageMenu::onRenameClicked);
 
     this->addAction(copy);
+    this->addAction(rename);
 }
 
 PageMenu::~PageMenu() {
     delete copy;
+    delete rename;
 }
 
 void PageMenu::onCopyClicked() {
@@ -49,4 +53,9 @@ void PageMenu::onCopyClicked() {
     auto mathData = current->mathData(oldPage);
     current->setData(data,current->currentTable());
     current->currentTable()->setMathItems(mathData);
+}
+
+void PageMenu::onRenameClicked() {
+    int current = TabWidget::currentWidget()->currentIndex();
+    TabWidget::currentWidget()->renamePage(current);
 }

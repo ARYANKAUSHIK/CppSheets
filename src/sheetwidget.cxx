@@ -308,6 +308,30 @@ void SheetWidget::insertPage() {
     Window::setCurrentSaved(false);
 }
 
+void SheetWidget::renamePage(int index) {
+    if (index==-1) {
+        return;
+    }
+
+    QInputDialog dialog;
+    dialog.setWindowTitle("Rename Page");
+    dialog.setLabelText("Enter name for your page:");
+    dialog.setTextValue(tabs->tabText(index));
+
+    if (!dialog.exec()) {
+        return;
+    }
+
+    tabs->setTabText(index,dialog.textValue());
+
+    saved = false;
+    Window::setCurrentSaved(false);
+}
+
+int SheetWidget::currentIndex() {
+    return tabs->currentIndex();
+}
+
 void SheetWidget::addNewTab(int no) {
     int count = tabs->count();
     TableWidget *table = new TableWidget;
@@ -362,23 +386,7 @@ void SheetWidget::onAddTabClicked() {
 }
 
 void SheetWidget::onTabDoubleClick(int index) {
-    if (index==-1) {
-        return;
-    }
-
-    QInputDialog dialog;
-    dialog.setWindowTitle("Rename Page");
-    dialog.setLabelText("Enter name for your page:");
-    dialog.setTextValue(tabs->tabText(index));
-
-    if (!dialog.exec()) {
-        return;
-    }
-
-    tabs->setTabText(index,dialog.textValue());
-
-    saved = false;
-    Window::setCurrentSaved(false);
+    renamePage(index);
 }
 
 void SheetWidget::onTabClose(int index) {
