@@ -27,6 +27,7 @@ set(FORMULA_SRC
     formula/math.cxx
     formula/formula_utils.cxx
     formula/math_funcs.cxx
+    formula/str_funcs.cxx
 )
 
 set(MENU_SRC

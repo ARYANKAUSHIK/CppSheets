@@ -32,6 +32,7 @@
 #include "math.hh"
 #include "formula_utils.hh"
 #include "math_funcs.hh"
+#include "str_funcs.hh"
 #include "../sheetwidget.hh"
 #include "../tabwidget.hh"
 
@@ -72,10 +73,8 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
 
     //The LEN function (string length)
     } else if (name=="LEN") {
-        Cell c = FormulaUtils::cellFromName(equ,table);
-        int result = c.content.length();
-        QString answer = QVariant(result).toString();
-        FormulaUtils::printResult(answer,current,table);
+        double result = StrFuncs::len(equ,table);
+        FormulaUtils::printResult(result,current,table);
 
     //Converts the contents of a cell to lowercase
     } else if (name=="LOWER") {
