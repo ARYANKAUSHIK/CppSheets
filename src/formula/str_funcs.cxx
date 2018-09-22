@@ -38,6 +38,17 @@ QString StrFuncs::len(QString equ, TableWidget *table) {
     return ln;
 }
 
+//The code for the UPPER formula
+QString StrFuncs::upper(QString equ, TableWidget *table) {
+    QString ln = getInner(equ,table);
+
+    if (ln!="ERR") {
+        ln = ln.toUpper();
+    }
+
+    return ln;
+}
+
 //Returns the inside of String functions
 QString StrFuncs::getInner(QString equ, TableWidget *table) {
     QString ln = "";

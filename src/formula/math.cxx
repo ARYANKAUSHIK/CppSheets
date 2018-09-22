@@ -84,8 +84,7 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
 
     //Converts the contents of a cell to uppercase
     } else if (name=="UPPER") {
-        Cell c = FormulaUtils::cellFromName(equ,table);
-        QString answer = c.content.toUpper();
+        QString answer = StrFuncs::upper(equ,table);
         FormulaUtils::printResult(answer,current,table);
 
     //Other functions and utilities
