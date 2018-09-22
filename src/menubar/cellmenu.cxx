@@ -34,20 +34,24 @@ CellMenu::CellMenu() {
     merge = new QAction("Merge Cells",this);
     unMerge = new QAction("Unmerge Cells",this);
     insCol = new QAction("Insert Column",this);
+    insRow = new QAction("Insert Row",this);
     
     connect(merge,&QAction::triggered,this,&CellMenu::onMergeClicked);
     connect(unMerge,&QAction::triggered,this,&CellMenu::onUnMergeClicked);
     connect(insCol,&QAction::triggered,this,&CellMenu::onInsertCol);
+    connect(insRow,&QAction::triggered,this,&CellMenu::onInsertRow);
     
     this->addAction(merge);
     this->addAction(unMerge);
     this->addAction(insCol);
+    this->addAction(insRow);
 }
 
 CellMenu::~CellMenu() {
     delete merge;
     delete unMerge;
     delete insCol;
+    delete insRow;
 }
 
 void CellMenu::onMergeClicked() {
@@ -63,5 +67,11 @@ void CellMenu::onInsertCol() {
     int col = current->currentCell()->column();
     current->currentTable()->insertColumn(col+1);
     current->currentTable()->loadHeaders();
+}
+
+void CellMenu::onInsertRow() {
+    auto current = TabWidget::currentWidget();
+    int row = current->currentCell()->row();
+    current->currentTable()->insertRow(row+1);
 }
 
