@@ -49,6 +49,17 @@ QString StrFuncs::upper(QString equ, TableWidget *table) {
     return ln;
 }
 
+//The code for the LOWER formula
+QString StrFuncs::lower(QString equ, TableWidget *table) {
+    QString ln = getInner(equ,table);
+
+    if (ln!="ERR") {
+        ln = ln.toLower();
+    }
+
+    return ln;
+}
+
 //Returns the inside of String functions
 QString StrFuncs::getInner(QString equ, TableWidget *table) {
     QString ln = "";

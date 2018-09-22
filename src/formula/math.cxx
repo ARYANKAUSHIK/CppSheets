@@ -78,8 +78,7 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
 
     //Converts the contents of a cell to lowercase
     } else if (name=="LOWER") {
-        Cell c = FormulaUtils::cellFromName(equ,table);
-        QString answer = c.content.toLower();
+        QString answer = StrFuncs::lower(equ,table);
         FormulaUtils::printResult(answer,current,table);
 
     //Converts the contents of a cell to uppercase
