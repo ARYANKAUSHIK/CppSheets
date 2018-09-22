@@ -35,8 +35,9 @@ public:
     CellMenu();
     ~CellMenu();
 private:
-    QAction *merge, *unMerge;
+    QAction *merge, *unMerge, *insCol;
 private slots:
     void onMergeClicked();
     void onUnMergeClicked();
+    void onInsertCol();
 };

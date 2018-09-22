@@ -26,23 +26,28 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "cellmenu.hh"
 #include "../actions/format_actions.hh"
+#include "../tabwidget.hh"
 
 CellMenu::CellMenu() {
     this->setTitle("Cells");
     
     merge = new QAction("Merge Cells",this);
     unMerge = new QAction("Unmerge Cells",this);
+    insCol = new QAction("Insert Column",this);
     
     connect(merge,&QAction::triggered,this,&CellMenu::onMergeClicked);
     connect(unMerge,&QAction::triggered,this,&CellMenu::onUnMergeClicked);
+    connect(insCol,&QAction::triggered,this,&CellMenu::onInsertCol);
     
     this->addAction(merge);
     this->addAction(unMerge);
+    this->addAction(insCol);
 }
 
 CellMenu::~CellMenu() {
     delete merge;
     delete unMerge;
+    delete insCol;
 }
 
 void CellMenu::onMergeClicked() {
@@ -51,5 +56,12 @@ void CellMenu::onMergeClicked() {
 
 void CellMenu::onUnMergeClicked() {
     FormatActions::unMerge();
+}
+
+void CellMenu::onInsertCol() {
+    auto current = TabWidget::currentWidget();
+    int col = current->currentCell()->column();
+    current->currentTable()->insertColumn(col+1);
+    current->currentTable()->loadHeaders();
 }
 
