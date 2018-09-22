@@ -28,9 +28,8 @@
 #include "formula_utils.hh"
 
 //The code for the LEN formula
-int StrFuncs::len(QString equ, TableWidget *table) {
-    int ret = 0;
-
+QString StrFuncs::len(QString equ, TableWidget *table) {
+    QString ret = "";
     QString ln = "";
 
     if (equ.at(0).isLetter()) {
@@ -40,10 +39,10 @@ int StrFuncs::len(QString equ, TableWidget *table) {
         ln.remove(0,1);
         ln.remove(ln.length()-1,ln.length()-1);
     } else {
-        return -1;
+        return "ERR";
     }
 
-    ret = ln.length();
+    ret = QVariant(ln.length()).toString();
 
     return ret;
 }

@@ -73,7 +73,7 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
 
     //The LEN function (string length)
     } else if (name=="LEN") {
-        double result = StrFuncs::len(equ,table);
+        QString result = StrFuncs::len(equ,table);
         FormulaUtils::printResult(result,current,table);
 
     //Converts the contents of a cell to lowercase

@@ -32,5 +32,5 @@
 
 class StrFuncs {
 public:
-    static int len(QString equ, TableWidget *table);
+    static QString len(QString equ, TableWidget *table);
 };
