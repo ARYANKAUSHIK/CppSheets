@@ -33,4 +33,6 @@
 class StrFuncs {
 public:
     static QString len(QString equ, TableWidget *table);
+private:
+    static QString getInner(QString equ, TableWidget *table);
 };

@@ -29,20 +29,28 @@
 
 //The code for the LEN formula
 QString StrFuncs::len(QString equ, TableWidget *table) {
-    QString ret = "";
+    QString ln = getInner(equ,table);
+
+    if (ln!="ERR") {
+        ln = QVariant(ln.length()).toString();
+    }
+
+    return ln;
+}
+
+//Returns the inside of String functions
+QString StrFuncs::getInner(QString equ, TableWidget *table) {
     QString ln = "";
 
-    if (equ.at(0).isLetter()) {
-        ln = FormulaUtils::cellFromName(equ,table).content;
-    } else if (equ.at(0)=='\"' && equ.at(equ.length()-1)=='\"') {
+    if (equ.at(0)=='\"' && equ.at(equ.length()-1)=='\"') {
         ln = equ;
         ln.remove(0,1);
         ln.remove(ln.length()-1,ln.length()-1);
+    } else if (equ.at(0).isLetter()) {
+        ln = FormulaUtils::cellFromName(equ,table).content;
     } else {
-        return "ERR";
+        ln = "ERR";
     }
 
-    ret = QVariant(ln.length()).toString();
-
-    return ret;
+    return ln;
 }
