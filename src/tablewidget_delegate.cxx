@@ -118,23 +118,10 @@ void TableWidgetDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
         //Set the brush for the text
         //TODO: Somehow add some padding around the text
-        QFont font = option.font;
-        if (item->font().bold()) {
-            font.setBold(true);
-        }
-
-        if (item->font().italic()) {
-            font.setItalic(true);
-        }
-
-        if (item->font().underline()) {
-            font.setUnderline(true);
-        }
-
         painter->save();
         QPen pen2(item->textColor());
         painter->setPen(pen2);
-        painter->setFont(font);
+        painter->setFont(item->font());
         painter->drawText(option.rect,Qt::AlignVCenter,index.data().toString());
         painter->restore();
 
