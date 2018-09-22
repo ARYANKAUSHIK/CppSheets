@@ -145,12 +145,36 @@ QModelIndexList TableWidget::currentSelectedItems() {
 }
 
 void TableWidget::keyPressEvent(QKeyEvent *event) {
+    //Logic for the enter or return keys
     if ((event->key()==Qt::Key_Enter)||(event->key()==Qt::Key_Return)) {
         QTableWidget::keyPressEvent(event);
         int x = this->currentRow()+1;
         int y = this->currentColumn();
         this->setCurrentCell(x,y);
+
+    //Logic for the delete key
+    //Clear all cells when pressed
+    } else if (event->key()==Qt::Key_Delete) {
+        auto list = currentSelectedItems();
+
+        //Clear one cell
+        if (list.size()==1) {
+            QTableWidgetItem *item = currentItem();
+            item->setText("");
+            this->setItem(currentRow(),currentColumn(),item);
+
+        //Clear multiple cells
+        } else {
+            for (auto current : list) {
+                QTableWidgetItem *item = this->item(current.row(),current.column());
+                if (item!=nullptr) {
+                    item->setText("");
+                }
+                this->setItem(current.row(),current.column(),item);
+            }
+        }
     }
+
     QTableWidget::keyPressEvent(event);
 }
 
