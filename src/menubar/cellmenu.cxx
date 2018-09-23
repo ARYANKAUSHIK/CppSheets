@@ -63,17 +63,10 @@ void CellMenu::onUnMergeClicked() {
 }
 
 void CellMenu::onInsertCol() {
-    auto current = TabWidget::currentWidget();
-    int col = current->currentCell()->column();
-    current->currentTable()->insertColumn(col+1);
-    current->currentTable()->loadHeaders();
-    current->setSaved(false);
+    FormatActions::insertCol();
 }
 
 void CellMenu::onInsertRow() {
-    auto current = TabWidget::currentWidget();
-    int row = current->currentCell()->row();
-    current->currentTable()->insertRow(row+1);
-    current->setSaved(false);
+    FormatActions::insertRow();
 }
 

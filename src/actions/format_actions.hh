@@ -35,6 +35,8 @@ public:
     static void fgColor();
     static void merge();
     static void unMerge();
+    static void insertCol();
+    static void insertRow();
     static void dspBorderDialog();
 };
 

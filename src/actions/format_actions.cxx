@@ -118,6 +118,21 @@ void FormatActions::unMerge() {
     TabWidget::currentWidget()->unMergeSelected();
 }
 
+void FormatActions::insertCol() {
+    auto current = TabWidget::currentWidget();
+    int col = current->currentCell()->column();
+    current->currentTable()->insertColumn(col+1);
+    current->currentTable()->loadHeaders();
+    current->setSaved(false);
+}
+
+void FormatActions::insertRow() {
+    auto current = TabWidget::currentWidget();
+    int row = current->currentCell()->row();
+    current->currentTable()->insertRow(row+1);
+    current->setSaved(false);
+}
+
 void FormatActions::dspBorderDialog() {
     BorderDialog dialog;
     dialog.exec();
