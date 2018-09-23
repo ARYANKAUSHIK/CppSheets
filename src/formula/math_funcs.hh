@@ -39,6 +39,7 @@ public:
     static double acos(QString equ, TableWidget *table);
     static double acosh(QString equ, TableWidget *table);
     static double cos(QString equ, TableWidget *table);
+    static double sin(QString equ, TableWidget *table);
 private:
     static double getInner(QString equ, TableWidget *table);
 };

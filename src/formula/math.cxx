@@ -101,6 +101,11 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
         double result = MathFuncs::cos(equ,table);
         FormulaUtils::printResult(result,current,table);
 
+    //The SIN formula
+    } else if (name=="SIN") {
+        double result = MathFuncs::sin(equ,table);
+        FormulaUtils::printResult(result,current,table);
+
     //Other functions and utilities
     //Note: Most formulas past this point are handeled by separate functions
     } else if (name=="IF") {

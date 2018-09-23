@@ -161,6 +161,12 @@ double MathFuncs::cos(QString equ, TableWidget *table) {
     return std::cos(no);
 }
 
+//The logic for the SIN formula
+double MathFuncs::sin(QString equ, TableWidget *table) {
+    double no = getInner(equ,table);
+    return std::sin(no);
+}
+
 //Returns the equ part of a formula
 double MathFuncs::getInner(QString equ, TableWidget *table) {
     double ret = 0;
