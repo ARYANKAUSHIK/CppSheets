@@ -9,3 +9,7 @@ QTableWidget::item:selected {
 	border-style:solid;	
 	border-width:2px; 
 }
+
+QFontComboBox {
+    margin-right:5px;
+}

@@ -39,6 +39,8 @@ MainToolbar::MainToolbar()
       bold(new QToolButton),
       italic(new QToolButton),
       underline(new QToolButton),
+      fontCombo(new QFontComboBox),
+      fontSize(new QSpinBox),
       cut(new QToolButton),
       copy(new QToolButton),
       paste(new QToolButton)
@@ -65,6 +67,10 @@ MainToolbar::MainToolbar()
     copy->setToolTip("Copy Cell Data");
     paste->setToolTip("Paste Cell Data");
 
+    fontSize->setMinimum(1);
+    fontSize->setMaximum(100);
+    fontSize->setValue(12);
+
     connect(newFile,&QToolButton::clicked,this,&MainToolbar::onNewFileClicked);
     connect(open,&QToolButton::clicked,this,&MainToolbar::onOpenClicked);
     connect(save,&QToolButton::clicked,this,&MainToolbar::onSaveClicked);
@@ -72,6 +78,7 @@ MainToolbar::MainToolbar()
     connect(bold,&QToolButton::clicked,this,&MainToolbar::onBoldClicked);
     connect(italic,&QToolButton::clicked,this,&MainToolbar::onItalicClicked);
     connect(underline,&QToolButton::clicked,this,&MainToolbar::onUnderlineClicked);
+    connect(fontCombo,SIGNAL(currentFontChanged(QFont)),this,SLOT(onFontChanged(QFont)));
     connect(cut,&QToolButton::clicked,this,&MainToolbar::onCutClicked);
     connect(copy,&QToolButton::clicked,this,&MainToolbar::onCopyClicked);
     connect(paste,&QToolButton::clicked,this,&MainToolbar::onPasteClicked);
@@ -84,6 +91,9 @@ MainToolbar::MainToolbar()
     this->addWidget(bold);
     this->addWidget(italic);
     this->addWidget(underline);
+    this->addSeparator();
+    this->addWidget(fontCombo);
+    this->addWidget(fontSize);
     this->addSeparator();
     this->addWidget(cut);
     this->addWidget(copy);
@@ -98,6 +108,8 @@ MainToolbar::~MainToolbar() {
     delete bold;
     delete italic;
     delete underline;
+    delete fontCombo;
+    delete fontSize;
     delete cut;
     delete copy;
     delete paste;
@@ -129,6 +141,10 @@ void MainToolbar::onItalicClicked() {
 
 void MainToolbar::onUnderlineClicked() {
     FormatActions::underline();
+}
+
+void MainToolbar::onFontChanged(QFont font) {
+    FormatActions::setFontFamily(font.family());
 }
 
 void MainToolbar::onCutClicked() {

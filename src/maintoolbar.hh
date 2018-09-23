@@ -28,6 +28,8 @@
 
 #include <QToolBar>
 #include <QToolButton>
+#include <QFontComboBox>
+#include <QSpinBox>
 
 class MainToolbar : public QToolBar {
     Q_OBJECT
@@ -37,6 +39,8 @@ public:
 private:
     QToolButton *newFile, *open, *save, *saveAs;
     QToolButton *bold, *italic, *underline;
+    QFontComboBox *fontCombo;
+    QSpinBox *fontSize;
     QToolButton *cut, *copy, *paste;
 private slots:
     void onNewFileClicked();
@@ -46,6 +50,7 @@ private slots:
     void onBoldClicked();
     void onItalicClicked();
     void onUnderlineClicked();
+    void onFontChanged(QFont font);
     void onCutClicked();
     void onCopyClicked();
     void onPasteClicked();

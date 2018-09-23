@@ -26,6 +26,8 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
+#include <QString>
+
 class FormatActions {
 public:
     static void bold();
@@ -37,6 +39,7 @@ public:
     static void unMerge();
     static void insertCol();
     static void insertRow();
+    static void setFontFamily(QString family);
     static void dspBorderDialog();
 };
 
