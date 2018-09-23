@@ -168,11 +168,15 @@ QVector<SheetItem> XmlParser::allItems(QString file, QString page) {
         QString sBold = QString(td->Attribute("bold"));
         QString sItalic = QString(td->Attribute("italic"));
         QString sUnderline = QString(td->Attribute("underline"));
+        QString fontFamily = QString(td->Attribute("font-family"));
+        QString sFontSize = QString(td->Attribute("font-size"));
 
         QFont font;
         font.setBold(QVariant(sBold).toBool());
         font.setItalic(QVariant(sItalic).toBool());
         font.setUnderline(QVariant(sUnderline).toBool());
+        font.setFamily(fontFamily);
+        font.setPointSize(QVariant(sFontSize).toInt());
         item.font = font;
 
         item.border = QString(td->Attribute("border"));
@@ -350,6 +354,10 @@ void XmlParser::setData(QString file, QString page, QVector<SheetItem> items) {
         } else {
             td->SetAttribute("underline","false");
         }
+
+        td->SetAttribute("font-family",current.font.family().toStdString().c_str());
+        td->SetAttribute("font-size",QVariant(current.font.pointSize())
+                         .toString().toStdString().c_str());
 
         td->SetAttribute("border",current.border.toStdString().c_str());
     }
