@@ -79,6 +79,7 @@ MainToolbar::MainToolbar()
     connect(italic,&QToolButton::clicked,this,&MainToolbar::onItalicClicked);
     connect(underline,&QToolButton::clicked,this,&MainToolbar::onUnderlineClicked);
     connect(fontCombo,SIGNAL(currentFontChanged(QFont)),this,SLOT(onFontChanged(QFont)));
+    connect(fontSize,SIGNAL(valueChanged(int)),this,SLOT(onFontSizeChanged(int)));
     connect(cut,&QToolButton::clicked,this,&MainToolbar::onCutClicked);
     connect(copy,&QToolButton::clicked,this,&MainToolbar::onCopyClicked);
     connect(paste,&QToolButton::clicked,this,&MainToolbar::onPasteClicked);
@@ -145,6 +146,10 @@ void MainToolbar::onUnderlineClicked() {
 
 void MainToolbar::onFontChanged(QFont font) {
     FormatActions::setFontFamily(font.family());
+}
+
+void MainToolbar::onFontSizeChanged(int val) {
+    FormatActions::setFontSize(val);
 }
 
 void MainToolbar::onCutClicked() {

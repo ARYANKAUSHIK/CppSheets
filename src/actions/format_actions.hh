@@ -40,6 +40,7 @@ public:
     static void insertCol();
     static void insertRow();
     static void setFontFamily(QString family);
+    static void setFontSize(int size);
     static void dspBorderDialog();
 };
 

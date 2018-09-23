@@ -51,6 +51,7 @@ private slots:
     void onItalicClicked();
     void onUnderlineClicked();
     void onFontChanged(QFont font);
+    void onFontSizeChanged(int val);
     void onCutClicked();
     void onCopyClicked();
     void onPasteClicked();

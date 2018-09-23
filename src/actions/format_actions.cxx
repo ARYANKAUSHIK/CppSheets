@@ -157,6 +157,30 @@ void FormatActions::setFontFamily(QString family) {
     }
 }
 
+void FormatActions::setFontSize(int size) {
+    auto current = TabWidget::currentWidget();
+    auto list = current->currentTable()->currentSelectedItems();
+
+    if (list.size()==1) {
+        QFont font = current->currentCell()->font();
+        font.setPointSize(size);
+        current->currentCell()->setFont(font);
+    } else {
+        for (auto c : list) {
+            QTableWidgetItem *item = current->currentTable()->item(c.row(),c.column());
+            if (item==nullptr) {
+                item = new QTableWidgetItem;
+            }
+
+            QFont font = item->font();
+            font.setPointSize(size);
+            item->setFont(font);
+
+            current->currentTable()->setItem(c.row(),c.column(),item);
+        }
+    }
+}
+
 void FormatActions::dspBorderDialog() {
     BorderDialog dialog;
     dialog.exec();
