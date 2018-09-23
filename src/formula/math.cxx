@@ -96,6 +96,11 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
         double result = MathFuncs::acosh(equ,table);
         FormulaUtils::printResult(result,current,table);
 
+    //The COS formula
+    } else if (name=="COS") {
+        double result = MathFuncs::cos(equ,table);
+        FormulaUtils::printResult(result,current,table);
+
     //Other functions and utilities
     //Note: Most formulas past this point are handeled by separate functions
     } else if (name=="IF") {

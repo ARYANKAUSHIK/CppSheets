@@ -155,6 +155,12 @@ double MathFuncs::acosh(QString equ, TableWidget *table) {
     return std::acosh(no);
 }
 
+//The logic for the COS formula
+double MathFuncs::cos(QString equ, TableWidget *table) {
+    double no = getInner(equ,table);
+    return std::cos(no);
+}
+
 //Returns the equ part of a formula
 double MathFuncs::getInner(QString equ, TableWidget *table) {
     double ret = 0;
