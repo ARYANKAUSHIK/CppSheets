@@ -173,6 +173,12 @@ double MathFuncs::tan(QString equ, TableWidget *table) {
     return std::tan(no);
 }
 
+//The logic for the SQRT formula
+double MathFuncs::sqrt(QString equ, TableWidget *table) {
+    double no = getInner(equ,table);
+    return std::sqrt(no);
+}
+
 //Returns the equ part of a formula
 double MathFuncs::getInner(QString equ, TableWidget *table) {
     double ret = 0;

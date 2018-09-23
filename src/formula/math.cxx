@@ -111,6 +111,11 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
         double result = MathFuncs::tan(equ,table);
         FormulaUtils::printResult(result,current,table);
 
+    //The SQRT formula
+    } else if (name=="SQRT") {
+        double result = MathFuncs::sqrt(equ,table);
+        FormulaUtils::printResult(result,current,table);
+
     //Other functions and utilities
     //Note: Most formulas past this point are handeled by separate functions
     } else if (name=="IF") {
