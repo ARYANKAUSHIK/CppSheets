@@ -167,6 +167,12 @@ double MathFuncs::sin(QString equ, TableWidget *table) {
     return std::sin(no);
 }
 
+//The logic for the TAN formula
+double MathFuncs::tan(QString equ, TableWidget *table) {
+    double no = getInner(equ,table);
+    return std::tan(no);
+}
+
 //Returns the equ part of a formula
 double MathFuncs::getInner(QString equ, TableWidget *table) {
     double ret = 0;

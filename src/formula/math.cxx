@@ -106,6 +106,11 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
         double result = MathFuncs::sin(equ,table);
         FormulaUtils::printResult(result,current,table);
 
+    //The TAN formula
+    } else if (name=="TAN") {
+        double result = MathFuncs::tan(equ,table);
+        FormulaUtils::printResult(result,current,table);
+
     //Other functions and utilities
     //Note: Most formulas past this point are handeled by separate functions
     } else if (name=="IF") {
