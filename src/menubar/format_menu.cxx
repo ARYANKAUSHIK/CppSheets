@@ -26,9 +26,12 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QPixmap>
 #include <QKeySequence>
+#include <QFontDialog>
+#include <QTableWidgetItem>
 
 #include "format_menu.hh"
 #include "../actions/format_actions.hh"
+#include "../tabwidget.hh"
 
 FormatMenu::FormatMenu() {
     this->setTitle("Format");
@@ -37,6 +40,7 @@ FormatMenu::FormatMenu() {
     italic = new QAction("Italic",this);
     underline = new QAction("Underline",this);
     border = new QAction("Set Border",this);
+    setFont = new QAction("Set Font",this);
     
     colorMenu = new QMenu;
     colorMenu->setTitle("Color");
@@ -59,12 +63,14 @@ FormatMenu::FormatMenu() {
     connect(bg,&QAction::triggered,this,&FormatMenu::onBgColorClicked);
     connect(fg,&QAction::triggered,this,&FormatMenu::onFgColorClicked);
     connect(border,&QAction::triggered,this,&FormatMenu::onBorderClicked);
+    connect(setFont,&QAction::triggered,this,&FormatMenu::onSetFontClicked);
 
     this->addAction(bold);
     this->addAction(italic);
     this->addAction(underline);
     this->addMenu(colorMenu);
     this->addAction(border);
+    this->addAction(setFont);
 }
 
 FormatMenu::~FormatMenu() {
@@ -73,6 +79,7 @@ FormatMenu::~FormatMenu() {
     delete underline;
     delete colorMenu;
     delete border;
+    delete setFont;
 }
 
 void FormatMenu::onBoldClicked() {
@@ -97,5 +104,17 @@ void FormatMenu::onFgColorClicked() {
 
 void FormatMenu::onBorderClicked() {
     FormatActions::dspBorderDialog();
+}
+
+void FormatMenu::onSetFontClicked() {
+    QFontDialog dialog;
+
+    if (!dialog.exec()) {
+        return;
+    }
+
+    QFont font = dialog.selectedFont();
+    auto item = TabWidget::currentWidget()->currentCell();
+    item->setFont(font);
 }
 

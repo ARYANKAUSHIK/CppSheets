@@ -38,6 +38,7 @@ private:
     QAction *bold, *italic, *underline;
     QMenu *colorMenu;
     QAction *bg, *fg, *border;
+    QAction *setFont;
 private slots:
     void onBoldClicked();
     void onItalicClicked();
@@ -45,4 +46,5 @@ private slots:
     void onBgColorClicked();
     void onFgColorClicked();
     void onBorderClicked();
+    void onSetFontClicked();
 };
