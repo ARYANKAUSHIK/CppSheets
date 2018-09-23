@@ -97,13 +97,8 @@ double MathFuncs::average(QString equ, TableWidget *table) {
 
 //The logic for the ABS formula
 double MathFuncs::abs(QString equ, TableWidget *table) {
-    //First, see if we are referencing a number or a cell
-    if (equ.at(0).isLetter()) {
-        equ = FormulaUtils::cellFromName(equ,table).content;
-    }
-
     //Convert to a number
-    double no = QVariant(equ).toDouble();
+    double no = getInner(equ,table);
 
     //Calculate and return
     double result = std::abs(no);
@@ -146,4 +141,18 @@ double MathFuncs::pow(QString equ, TableWidget *table) {
     //Calculate
     double result = std::pow(no2,no1);
     return result;
+}
+
+//Returns the equ part of a formula
+double MathFuncs::getInner(QString equ, TableWidget *table) {
+    double ret = 0;
+    QString ln = equ;
+
+    if (equ.at(0).isLetter()) {
+        ln = FormulaUtils::cellFromName(equ,table).content;
+    }
+
+    ret = QVariant(ln).toDouble();
+
+    return ret;
 }
