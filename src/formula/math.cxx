@@ -86,6 +86,11 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
         QString answer = StrFuncs::upper(equ,table);
         FormulaUtils::printResult(answer,current,table);
 
+    //The ACOS formula
+    } else if (name=="ACOS") {
+        double result = MathFuncs::acos(equ,table);
+        FormulaUtils::printResult(result,current,table);
+
     //Other functions and utilities
     //Note: Most formulas past this point are handeled by separate functions
     } else if (name=="IF") {

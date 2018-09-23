@@ -143,6 +143,12 @@ double MathFuncs::pow(QString equ, TableWidget *table) {
     return result;
 }
 
+//The logic for the ACOS formula
+double MathFuncs::acos(QString equ, TableWidget *table) {
+    double no = getInner(equ,table);
+    return std::acos(no);
+}
+
 //Returns the equ part of a formula
 double MathFuncs::getInner(QString equ, TableWidget *table) {
     double ret = 0;
