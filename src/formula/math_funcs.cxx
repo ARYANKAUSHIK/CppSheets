@@ -149,6 +149,12 @@ double MathFuncs::acos(QString equ, TableWidget *table) {
     return std::acos(no);
 }
 
+//The logic for the ACOSH formula
+double MathFuncs::acosh(QString equ, TableWidget *table) {
+    double no = getInner(equ,table);
+    return std::acosh(no);
+}
+
 //Returns the equ part of a formula
 double MathFuncs::getInner(QString equ, TableWidget *table) {
     double ret = 0;

@@ -91,6 +91,11 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
         double result = MathFuncs::acos(equ,table);
         FormulaUtils::printResult(result,current,table);
 
+    //The ACOSH formula
+    } else if (name=="ACOSH") {
+        double result = MathFuncs::acosh(equ,table);
+        FormulaUtils::printResult(result,current,table);
+
     //Other functions and utilities
     //Note: Most formulas past this point are handeled by separate functions
     } else if (name=="IF") {
