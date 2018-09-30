@@ -3,11 +3,13 @@ project(CppSheets)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
 find_package(Qt5 REQUIRED COMPONENTS
     Core
     Widgets
     Gui
+    Charts
 )
 
 add_compile_options(-std=c++14)
