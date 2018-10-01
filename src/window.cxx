@@ -32,6 +32,7 @@
 #include "window.hh"
 #include "maintoolbar.hh"
 #include "tabwidget.hh"
+#include "graphwin.hh"
 
 StatusBar *Window::statusbar;
 
@@ -64,6 +65,9 @@ Window::Window() {
 
     statusbar = new StatusBar;
     this->setStatusBar(statusbar);
+
+    GraphWin *graphWin = new GraphWin;
+    this->addDockWidget(Qt::RightDockWidgetArea,graphWin);
 }
 
 Window::~Window() {

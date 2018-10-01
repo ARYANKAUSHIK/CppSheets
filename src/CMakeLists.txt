@@ -11,6 +11,7 @@ set(SRC
     maintoolbar.cxx
     tabwidget.cxx
     statusbar.cxx
+    graphwin.cxx
 )
 
 set(ACTIONS_SRC
