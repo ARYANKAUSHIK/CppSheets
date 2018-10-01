@@ -32,7 +32,6 @@
 #include "window.hh"
 #include "maintoolbar.hh"
 #include "tabwidget.hh"
-#include "graph/barchart.hh"
 
 StatusBar *Window::statusbar;
 
@@ -65,9 +64,6 @@ Window::Window() {
 
     statusbar = new StatusBar;
     this->setStatusBar(statusbar);
-
-    BarChart *chart = new BarChart;
-    this->addDockWidget(Qt::RightDockWidgetArea,chart);
 }
 
 Window::~Window() {

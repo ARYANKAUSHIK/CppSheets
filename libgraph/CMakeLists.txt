@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(CppSheets)
+project(libgraph)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -15,13 +15,12 @@ find_package(Qt5 REQUIRED COMPONENTS
 add_compile_options(-std=c++14)
 
 set(SRC
-    main.cxx
     bargraph.cxx
 )
 
-add_executable(graph_test WIN32 ${SRC})
+add_library(graph SHARED ${SRC})
 
-target_link_libraries(graph_test
+target_link_libraries(graph
     Qt5::Core
     Qt5::Widgets
     Qt5::Charts

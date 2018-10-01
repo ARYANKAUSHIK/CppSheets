@@ -30,11 +30,6 @@ set(FORMULA_SRC
     formula/str_funcs.cxx
 )
 
-set(GRAPH_SRC
-    graph/barchart.cxx
-    graph/barchart.ui
-)
-
 set(MENU_SRC
     menu/page_menu.cxx
 )
@@ -59,7 +54,6 @@ set(SRC_ALL
     ${ACTIONS_SRC}
     ${DIALOGS_SRC}
     ${FORMULA_SRC}
-    ${GRAPH_SRC}
     ${MENU_SRC}
     ${MENUBAR_SRC}
     ${PARSER_SRC}
@@ -83,6 +77,7 @@ target_link_libraries(CppSheets
     Qt5::Widgets
     Qt5::Charts
     xlnt
+    graph
 )
 
 if (UNIX)
