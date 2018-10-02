@@ -40,6 +40,7 @@ set(MENUBAR_SRC
     menubar/format_menu.cxx
     menubar/cellmenu.cxx
     menubar/helpmenu.cxx
+    menubar/graph_menu.cxx
 )
 
 set(PARSER_SRC

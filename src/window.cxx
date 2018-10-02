@@ -32,9 +32,9 @@
 #include "window.hh"
 #include "maintoolbar.hh"
 #include "tabwidget.hh"
-#include "graphwin.hh"
 
 StatusBar *Window::statusbar;
+GraphWin *Window::graphWin;
 
 Window::Window() {
     this->setWindowTitle("CppSheets");
@@ -56,17 +56,20 @@ Window::Window() {
     filemenu = new FileMenu;
     formatMenu = new FormatMenu;
     cellMenu = new CellMenu;
+    graphMenu = new GraphMenu;
     helpMenu = new HelpMenu;
 
     this->menuBar()->addMenu(filemenu);
     this->menuBar()->addMenu(formatMenu);
     this->menuBar()->addMenu(cellMenu);
+    this->menuBar()->addMenu(graphMenu);
     this->menuBar()->addMenu(helpMenu);
 
     statusbar = new StatusBar;
     this->setStatusBar(statusbar);
 
-    GraphWin *graphWin = new GraphWin;
+    graphWin = new GraphWin;
+    graphWin->hide();
     this->addDockWidget(Qt::RightDockWidgetArea,graphWin);
 }
 
@@ -83,6 +86,14 @@ void Window::setCurrentPath(QString path) {
 
 void Window::setCurrentSaved(bool saved) {
     statusbar->setSavedLabel(saved);
+}
+
+void Window::showGraphWin() {
+    if (graphWin->isVisible()) {
+        graphWin->hide();
+    } else {
+        graphWin->show();
+    }
 }
 
 bool Window::checkSave() {

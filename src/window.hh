@@ -32,8 +32,10 @@
 #include "menubar/filemenu.hh"
 #include "menubar/format_menu.hh"
 #include "menubar/cellmenu.hh"
+#include "menubar/graph_menu.hh"
 #include "menubar/helpmenu.hh"
 #include "statusbar.hh"
+#include "graphwin.hh"
 
 class Window : public QMainWindow {
     Q_OBJECT
@@ -42,6 +44,7 @@ public:
     ~Window();
     static void setCurrentPath(QString path);
     static void setCurrentSaved(bool saved);
+    static void showGraphWin();
     static bool checkSave();
 protected:
     void closeEvent(QCloseEvent *event);
@@ -49,6 +52,8 @@ private:
     FileMenu *filemenu;
     FormatMenu *formatMenu;
     CellMenu *cellMenu;
+    GraphMenu *graphMenu;
     HelpMenu *helpMenu;
     static StatusBar *statusbar;
+    static GraphWin *graphWin;
 };
