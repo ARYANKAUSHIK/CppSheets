@@ -1,6 +1,9 @@
 #include <bargraph.hh>
 #include <QDialog>
 #include <QList>
+#include <QPainter>
+#include <QOpenGLWidget>
+#include <iostream>
 
 #include "graphwin.hh"
 #include "tabwidget.hh"
@@ -104,10 +107,27 @@ void GraphWin::onShowGraph() {
 
     auto chart = graph->generateGraph();
 
+    QFrame *chartParent = new QFrame;
+    QVBoxLayout *chartParentLayout = new QVBoxLayout;
+    chartParentLayout->setContentsMargins(0,0,0,0);
+    chartParentLayout->addWidget(chart);
+    chartParent->setLayout(chartParentLayout);
+
     QDialog dialog;
     dialog.resize(550,400);
     QVBoxLayout *dLayout = new QVBoxLayout;
     dialog.setLayout(dLayout);
-    dLayout->addWidget(chart);
+    dLayout->addWidget(chartParent);
     dialog.exec();
+
+    QPixmap p = chart->grab();
+    QOpenGLWidget *glWidget  = chart->findChild<QOpenGLWidget*>();
+    if(glWidget){
+        QPainter painter(&p);
+        QPoint d = glWidget->mapToGlobal(QPoint())-chart->mapToGlobal(QPoint());
+        painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+        painter.drawImage(d, glWidget->grabFramebuffer());
+        painter.end();
+    }
+    p.save("test.png", "PNG");
 }
