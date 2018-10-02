@@ -7,6 +7,8 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QTabWidget>
+#include <QTreeWidget>
 #include <QListWidget>
 
 class GraphWin : public QDockWidget {
@@ -14,10 +16,16 @@ class GraphWin : public QDockWidget {
 public:
     GraphWin();
 private:
-    QFrame *parent, *addSetWidget;
+    QFrame *parent, *addSetWidget, *categoryWidget;
     QVBoxLayout *parentLayout;
-    QHBoxLayout *setLayout;
-    QLineEdit *name, *range;
-    QPushButton *set, *showGraph;
-    QListWidget *sets;
+    QHBoxLayout *setLayout, *categoryLayout;
+    QLineEdit *name, *range, *category;
+    QPushButton *set, *addCategory, *showGraph;
+    QTabWidget *tabs;
+    QTreeWidget *sets;
+    QListWidget *categories;
+private slots:
+    void onAddSet();
+    void onAddCategory();
+    void onShowGraph();
 };
