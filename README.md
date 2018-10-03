@@ -8,7 +8,7 @@ Basic formatting (bold, italic, underline text; cell background color; text colo
 Cell merge   
 Custom XML-based file format   
 Basic xlsx (MS Excel) support   
-CSV loading support
+CSV loading support   
 Formula support (which is fairly good)
 
 For more information, see the wiki.
@@ -20,12 +20,14 @@ Building is very easy; the only external dependency required is Qt5 (Core, Widge
 CppSheets is fully supported on Linux, Windows, and MacOS. It should work on other systems as well. I will list them here as I test them.
 
 #### Licensing
-CppSheets is licensed under BSD-3.   
+CppSheets is licensed under GPL-3.   
 The built-in TinyXML2 library is licensed under the zlib license.   
 The included xlnt library is licensed under MIT.   
-Qt5 is licensed under LGPL.   
+Qt5 is licensed under LGPL and GPL (the Qt Charts module).   
 The included Oxygen icons are licensed under LGPL.   
 
 See the wiki for more information.
 
+##### Licensing Update
 
+As of version 2, CppSheets is now licensed under the GNU General Public License, version 3. Originally, it was licensed under BSD-3. The change has to do with the libraries; for graphing support, CppSheets uses the Qt Charts library, which is licensed under the GPL. To keep using this library, the license change was necessary.
