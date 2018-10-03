@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CppSheets"
-#define MyAppVersion "1.0"
+#define MyAppVersion "2.0"
 #define MyAppPublisher "Patrick Flynn"
 #define MyAppURL "https://github.com/patrickf2000/CppSheets"
 #define MyAppExeName "CppSheets.exe"
@@ -46,9 +46,11 @@ Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\Qt5Core.dll"; D
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\Qt5Charts.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libgraph.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
