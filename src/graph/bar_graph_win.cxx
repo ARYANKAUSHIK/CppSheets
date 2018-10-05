@@ -24,6 +24,7 @@
 #include "bar_graph_win.hh"
 #include "../tabwidget.hh"
 #include "../formula/formula_utils.hh"
+#include "../dialogs/graph_dialog.hh"
 
 BarGraphWin::BarGraphWin()
     : parent(new QFrame),
@@ -189,17 +190,7 @@ void BarGraphWin::onShowGraph() {
 
     auto chart = graph->generateGraph();
 
-    QFrame *chartParent = new QFrame;
-    QVBoxLayout *chartParentLayout = new QVBoxLayout;
-    chartParentLayout->setContentsMargins(0,0,0,0);
-    chartParentLayout->addWidget(chart);
-    chartParent->setLayout(chartParentLayout);
-
-    QDialog dialog;
-    dialog.resize(550,400);
-    QVBoxLayout *dLayout = new QVBoxLayout;
-    dialog.setLayout(dLayout);
-    dLayout->addWidget(chartParent);
+    GraphDialog dialog(chart);
     dialog.exec();
 
     /*QPixmap p = chart->grab();

@@ -22,6 +22,7 @@ set(ACTIONS_SRC
 set(DIALOGS_SRC
     dialogs/border_dialog.cxx
     dialogs/graph_list_dialog.cxx
+    dialogs/graph_dialog.cxx
 )
 
 set(FORMULA_SRC
