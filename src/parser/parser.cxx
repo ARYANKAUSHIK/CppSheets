@@ -71,6 +71,16 @@ QVector<MathItem> Parser::allMathItems(QString file, QString page) {
 	}
 }
 
+QVector<GraphItem> Parser::allGraphItems(QString file, QString page) {
+    QVector<GraphItem> items;
+
+    if (!(file.endsWith(".csv") || file.endsWith(".xlsx"))) {
+        items = XmlParser::allGraphItems(file,page);
+    }
+
+    return items;
+}
+
 void Parser::createPage(QString file, QString page) {
 	if (isXlsx(file)) {
 		XlsxParser::createPage(file,page);

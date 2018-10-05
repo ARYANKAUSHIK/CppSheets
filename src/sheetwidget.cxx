@@ -79,6 +79,11 @@ void SheetWidget::loadFile() {
 
         auto itemList = Parser::allItems(filePath,pageList.at(i));
         setData(itemList,table);
+
+        auto graphList = Parser::allGraphItems(filePath,pageList.at(i));
+        for (GraphItem item: graphList) {
+            table->addGraphItem(item);
+        }
     }
 }
 

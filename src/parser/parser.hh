@@ -27,6 +27,7 @@ public:
 	static QStringList pages(QString file);
     static QVector<SheetItem> allItems(QString file, QString page);
     static QVector<MathItem> allMathItems(QString file, QString page);
+    static QVector<GraphItem> allGraphItems(QString file, QString page);
     static void createPage(QString file, QString page);
     static bool pageExists(QString file, QString pageName);
     static void removePage(QString file, QString page);

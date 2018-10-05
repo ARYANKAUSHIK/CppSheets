@@ -229,6 +229,79 @@ QVector<MathItem> XmlParser::allMathItems(QString file, QString page) {
     return items;
 }
 
+//Loads graph items
+QVector<GraphItem> XmlParser::allGraphItems(QString file, QString page) {
+    QVector<GraphItem> items;
+
+    XMLDocument *doc = new XMLDocument;
+    doc->LoadFile(file.toStdString().c_str());
+
+    XMLElement *root = doc->FirstChildElement("sheet");
+    if (root==nullptr) {
+        return items;
+    }
+
+    XMLElement *pageElement = getPageElement(root,page);
+    if (pageElement==nullptr) {
+        return items;
+    }
+
+    XMLElement *mathElement = pageElement->FirstChildElement("graph");
+    if (mathElement==nullptr) {
+        return items;
+    }
+
+    XMLElement *td = mathElement->FirstChildElement("item");
+    XMLElement *tdOld;
+
+    while (td!=nullptr) {
+        GraphItem item;
+
+        item.name = QString(td->Attribute("name"));
+
+        QString type = QString(td->Attribute("type"));
+        if (type=="bar") {
+            item.type = GraphType::BAR;
+        } else if (type=="pie") {
+            item.type = GraphType::PIE;
+        }
+
+        //Load categories
+        XMLElement *ctd = td->FirstChildElement("category");
+        XMLElement *ctdOld;
+
+        while (ctd!=nullptr) {
+            QString c = QString(ctd->GetText());
+            item.categories << c;
+
+            ctdOld = ctd;
+            ctd = ctdOld->NextSiblingElement("category");
+        }
+
+        //Now load sets
+        XMLElement *etd = td->FirstChildElement("set");
+        XMLElement *etdOld;
+
+        while (etd!=nullptr) {
+            QString name = QString(td->Attribute("name"));
+            QString range = QString(td->GetText());
+
+            GraphSet set;
+            set.name = name;
+            set.range = range;
+
+            etdOld = etd;
+            etd = etdOld->NextSiblingElement("set");
+        }
+
+        items << item;
+        tdOld = td;
+        td = tdOld->NextSiblingElement("equ");
+    }
+
+    return items;
+}
+
 void XmlParser::createPage(QString file, QString page) {
     XMLDocument *doc = new XMLDocument;
     doc->LoadFile(file.toStdString().c_str());
