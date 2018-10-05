@@ -45,6 +45,7 @@ private:
     QTreeWidget *sets;
     QListWidget *categories;
     QCheckBox *saveGraph;
+    QPoint clickedPoint;
 
     void writeGraphData();
     QStringList getCategories();
@@ -52,4 +53,7 @@ private slots:
     void onAddSet();
     void onAddCategory();
     void onShowGraph();
+    void onCustomContext(QPoint point);
+
+    void sets_onDeleteClicked();
 };

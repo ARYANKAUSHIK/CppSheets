@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sheet>
-    <page title="Sales 2018">
+    <page title="&amp;Sales 2018">
         <graph>
             <item name="Sales 2018" type="bar">
                 <category>Q1</category>
@@ -9,7 +9,6 @@
                 <category>Q4</category>
                 <set name="Dan">A1:A4</set>
                 <set name="Bob">B1:B4</set>
-                <set name="Pete">C1:C4</set>
                 <set name="Ed">D1:D4</set>
                 <set name="Joe">E1:E4</set>
                 <set name="Rob">F1:F4</set>

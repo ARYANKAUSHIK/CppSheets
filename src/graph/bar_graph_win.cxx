@@ -17,8 +17,8 @@
 #include <bargraph.hh>
 #include <QDialog>
 #include <QList>
-#include <QPainter>
-#include <QOpenGLWidget>
+#include <QMenu>
+#include <QAction>
 #include <iostream>
 
 #include "bar_graph_win.hh"
@@ -89,6 +89,9 @@ BarGraphWin::BarGraphWin()
     //The sets list
     sets->setHeaderLabels(QStringList() << "Name" << "Range");
     tabs->addTab(sets,"Sets");
+
+    sets->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(sets,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(onCustomContext(QPoint)));
 
     //The categories list
     tabs->addTab(categories,"Categories");
@@ -192,4 +195,27 @@ void BarGraphWin::onShowGraph() {
 
     GraphDialog dialog(chart);
     dialog.exec();
+}
+
+void BarGraphWin::onCustomContext(QPoint point) {
+    clickedPoint = point;
+
+    QMenu menu;
+
+    QAction *rename = new QAction("Rename",this);
+    QAction *editRange = new QAction("Edit Range",this);
+    QAction *deleteItem = new QAction("Delete",this);
+
+    connect(deleteItem,&QAction::triggered,this,&BarGraphWin::sets_onDeleteClicked);
+
+    menu.addAction(rename);
+    menu.addAction(editRange);
+    menu.addAction(deleteItem);
+
+    menu.exec(QCursor::pos());
+}
+
+void BarGraphWin::sets_onDeleteClicked() {
+    QTreeWidgetItem *item = sets->itemAt(clickedPoint);
+    delete item;
 }
