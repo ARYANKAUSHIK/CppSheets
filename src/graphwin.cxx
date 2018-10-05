@@ -27,11 +27,14 @@
 
 GraphWin::GraphWin()
     : parent(new QFrame),
+      nameWidget(new QFrame),
       addSetWidget(new QFrame),
       categoryWidget(new QFrame),
       parentLayout(new QVBoxLayout),
+      nameLayout(new QHBoxLayout),
       setLayout(new QHBoxLayout),
       categoryLayout(new QHBoxLayout),
+      graphName(new QLineEdit),
       name(new QLineEdit),
       range(new QLineEdit),
       category(new QLineEdit),
@@ -48,6 +51,13 @@ GraphWin::GraphWin()
     parentLayout->setContentsMargins(0,0,0,0);
     parent->setLayout(parentLayout);
     this->setWidget(parent);
+
+    //The graph name widget
+    nameWidget->setLayout(nameLayout);
+    parentLayout->addWidget(nameWidget);
+
+    nameLayout->addWidget(new QLabel("Graph name: "));
+    nameLayout->addWidget(graphName);
 
     //The graph set widget
     addSetWidget->setLayout(setLayout);
@@ -99,6 +109,7 @@ void GraphWin::onAddCategory() {
 
 void GraphWin::onShowGraph() {
     BarGraph *graph = new BarGraph;
+    graph->setName(graphName->text());
 
     //Get the categories
     for (int i = 0; i<categories->count(); i++) {

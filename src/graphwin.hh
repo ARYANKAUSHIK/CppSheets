@@ -32,10 +32,10 @@ class GraphWin : public QDockWidget {
 public:
     GraphWin();
 private:
-    QFrame *parent, *addSetWidget, *categoryWidget;
+    QFrame *parent, *nameWidget, *addSetWidget, *categoryWidget;
     QVBoxLayout *parentLayout;
-    QHBoxLayout *setLayout, *categoryLayout;
-    QLineEdit *name, *range, *category;
+    QHBoxLayout *nameLayout, *setLayout, *categoryLayout;
+    QLineEdit *graphName, *name, *range, *category;
     QPushButton *set, *addCategory, *showGraph;
     QTabWidget *tabs;
     QTreeWidget *sets;
