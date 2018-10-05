@@ -202,7 +202,7 @@ void BarGraphWin::onShowGraph() {
     dLayout->addWidget(chartParent);
     dialog.exec();
 
-    QPixmap p = chart->grab();
+    /*QPixmap p = chart->grab();
     QOpenGLWidget *glWidget  = chart->findChild<QOpenGLWidget*>();
     if(glWidget){
         QPainter painter(&p);
@@ -211,5 +211,5 @@ void BarGraphWin::onShowGraph() {
         painter.drawImage(d, glWidget->grabFramebuffer());
         painter.end();
     }
-    p.save("test.png", "PNG");
+    p.save("test.png", "PNG");*/
 }
