@@ -43,7 +43,8 @@ GraphWin::GraphWin()
       showGraph(new QPushButton("Show Graph")),
       tabs(new QTabWidget),
       sets(new QTreeWidget),
-      categories(new QListWidget)
+      categories(new QListWidget),
+      saveGraph(new QCheckBox)
 {
     this->setWindowTitle("Graph");
 
@@ -91,10 +92,43 @@ GraphWin::GraphWin()
     //The categories list
     tabs->addTab(categories,"Categories");
 
+    //The checkbox for saving a graph
+    saveGraph->setText("Save Graph Data");
+    parentLayout->addWidget(saveGraph);
+
     //This button generates the graph
     parentLayout->addWidget(showGraph);
 
     connect(showGraph,&QPushButton::clicked,this,&GraphWin::onShowGraph);
+}
+
+void GraphWin::writeGraphData() {
+    GraphItem item;
+    item.name = graphName->text();
+    item.type = GraphType::BAR;
+    item.categories = getCategories();
+
+    for (int i = 0; i<sets->topLevelItemCount(); i++) {
+        auto item = sets->topLevelItem(i);
+
+        GraphSet set;
+        set.name = item->text(0);
+        set.range = item->text(1);
+    }
+
+    //TODO: Add to sheet widget in some way
+}
+
+//This returns a list of the user's categories
+QStringList GraphWin::getCategories() {
+    QStringList ret;
+
+    for (int i = 0; i<categories->count(); i++) {
+        auto current = categories->item(i);
+        ret << current->text();
+    }
+
+    return ret;
 }
 
 void GraphWin::onAddSet() {
@@ -108,13 +142,17 @@ void GraphWin::onAddCategory() {
 }
 
 void GraphWin::onShowGraph() {
+    if (saveGraph->isChecked()) {
+        writeGraphData();
+    }
+
     BarGraph *graph = new BarGraph;
     graph->setName(graphName->text());
 
     //Get the categories
-    for (int i = 0; i<categories->count(); i++) {
-        auto current = categories->item(i);
-        graph->addCategory(current->text());
+    auto cl = getCategories();
+    for (QString ln : cl) {
+        graph->addCategory(ln);
     }
 
     //Get the sets

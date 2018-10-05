@@ -26,6 +26,7 @@
 #include <QTabWidget>
 #include <QTreeWidget>
 #include <QListWidget>
+#include <QCheckBox>
 
 class GraphWin : public QDockWidget {
     Q_OBJECT
@@ -40,6 +41,10 @@ private:
     QTabWidget *tabs;
     QTreeWidget *sets;
     QListWidget *categories;
+    QCheckBox *saveGraph;
+
+    void writeGraphData();
+    QStringList getCategories();
 private slots:
     void onAddSet();
     void onAddCategory();
