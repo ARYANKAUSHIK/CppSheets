@@ -19,6 +19,7 @@
 #include <QString>
 #include <QColor>
 #include <QFont>
+#include <QList>
 
 struct SheetItem {
     int x;
@@ -39,4 +40,23 @@ struct MathItem {
     int x;
     int y;
     QString equation;
+};
+
+//Graph types
+enum GraphType {
+    BAR = 1,
+    PIE = 2
+};
+
+//Graph sets
+struct GraphSet {
+    QString name;
+    QString range;
+};
+
+struct GraphItem {
+    QString name;
+    GraphType type;
+    QStringList categories;
+    QList<GraphSet> sets;
 };
