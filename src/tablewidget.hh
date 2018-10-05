@@ -49,6 +49,7 @@ private slots:
     void onCellChanged();
     void onItemChanged(QTableWidgetItem *item);
     void onCellClicked(int row, int col);
+    void onCurrentCellChanged(int currentRow, int currentCol, int oldRow, int oldCol);
 signals:
     void cellModified();
 };

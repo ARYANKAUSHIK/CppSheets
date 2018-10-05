@@ -24,8 +24,8 @@
 #include "formula/math.hh"
 
 TableWidget::TableWidget() {
-    this->setColumnCount(1000);
-    this->setRowCount(1000);
+    this->setColumnCount(30);
+    this->setRowCount(30);
     this->loadHeaders();
 
     this->setItemDelegate(new TableWidgetDelegate(this));
@@ -33,6 +33,7 @@ TableWidget::TableWidget() {
     connect(this,&TableWidget::cellChanged,this,&TableWidget::onCellChanged);
     connect(this,SIGNAL(itemChanged(QTableWidgetItem*)),this,SLOT(onItemChanged(QTableWidgetItem*)));
     connect(this,SIGNAL(cellClicked(int,int)),this,SLOT(onCellClicked(int,int)));
+    connect(this,SIGNAL(currentCellChanged(int,int,int,int)),this,SLOT(onCurrentCellChanged(int,int,int,int)));
 }
 
 void TableWidget::loadHeaders() {
@@ -198,4 +199,20 @@ void TableWidget::onItemChanged(QTableWidgetItem *item) {
         addMathItem(mitem);
     }
     updateMath();
+}
+
+void TableWidget::onCurrentCellChanged(int currentRow, int currentCol, int oldRow, int oldCol) {
+    if (currentRow == this->rowCount()-1) {
+        for (int i = 0; i<10; i++) {
+            this->insertRow(currentRow+i);
+        }
+    }
+    if (currentCol == this->columnCount()-1) {
+        for (int i = 0; i<10; i++) {
+            this->insertColumn(currentCol+i);
+        }
+    }
+
+    this->setCurrentCell(currentRow,currentCol);
+    loadHeaders();
 }
