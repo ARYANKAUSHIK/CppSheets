@@ -11,7 +11,6 @@ set(SRC
     maintoolbar.cxx
     tabwidget.cxx
     statusbar.cxx
-    graphwin.cxx
 )
 
 set(ACTIONS_SRC
@@ -30,6 +29,10 @@ set(FORMULA_SRC
     formula/formula_utils.cxx
     formula/math_funcs.cxx
     formula/str_funcs.cxx
+)
+
+set(GRAPH_SRC
+    graph/bar_graph_win.cxx
 )
 
 set(MENU_SRC
@@ -57,6 +60,7 @@ set(SRC_ALL
     ${ACTIONS_SRC}
     ${DIALOGS_SRC}
     ${FORMULA_SRC}
+    ${GRAPH_SRC}
     ${MENU_SRC}
     ${MENUBAR_SRC}
     ${PARSER_SRC}

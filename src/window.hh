@@ -25,7 +25,7 @@
 #include "menubar/graph_menu.hh"
 #include "menubar/helpmenu.hh"
 #include "statusbar.hh"
-#include "graphwin.hh"
+#include "graph/bar_graph_win.hh"
 
 class Window : public QMainWindow {
     Q_OBJECT
@@ -37,7 +37,7 @@ public:
     static void showGraphWin();
     static bool checkSave();
 
-    static GraphWin *graphWin;
+    static BarGraphWin *graphWin;
 protected:
     void closeEvent(QCloseEvent *event);
 private:

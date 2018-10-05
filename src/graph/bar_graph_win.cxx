@@ -21,11 +21,11 @@
 #include <QOpenGLWidget>
 #include <iostream>
 
-#include "graphwin.hh"
-#include "tabwidget.hh"
-#include "formula/formula_utils.hh"
+#include "bar_graph_win.hh"
+#include "../tabwidget.hh"
+#include "../formula/formula_utils.hh"
 
-GraphWin::GraphWin()
+BarGraphWin::BarGraphWin()
     : parent(new QFrame),
       nameWidget(new QFrame),
       addSetWidget(new QFrame),
@@ -70,7 +70,7 @@ GraphWin::GraphWin()
     setLayout->addWidget(range);
     setLayout->addWidget(set);
 
-    connect(set,&QPushButton::clicked,this,&GraphWin::onAddSet);
+    connect(set,&QPushButton::clicked,this,&BarGraphWin::onAddSet);
 
     //The categories widget
     categoryWidget->setLayout(categoryLayout);
@@ -80,7 +80,7 @@ GraphWin::GraphWin()
     categoryLayout->addWidget(category);
     categoryLayout->addWidget(addCategory);
 
-    connect(addCategory,&QPushButton::clicked,this,&GraphWin::onAddCategory);
+    connect(addCategory,&QPushButton::clicked,this,&BarGraphWin::onAddCategory);
 
     //The tab pane
     parentLayout->addWidget(tabs);
@@ -99,11 +99,11 @@ GraphWin::GraphWin()
     //This button generates the graph
     parentLayout->addWidget(showGraph);
 
-    connect(showGraph,&QPushButton::clicked,this,&GraphWin::onShowGraph);
+    connect(showGraph,&QPushButton::clicked,this,&BarGraphWin::onShowGraph);
 }
 
 //Loads saved graph data for viewing
-void GraphWin::loadGraphData(GraphItem item) {
+void BarGraphWin::loadGraphData(GraphItem item) {
     graphName->setText(item.name);
 
     categories->clear();
@@ -117,7 +117,7 @@ void GraphWin::loadGraphData(GraphItem item) {
     }
 }
 
-void GraphWin::writeGraphData() {
+void BarGraphWin::writeGraphData() {
     GraphItem item;
     item.name = graphName->text();
     item.type = GraphType::BAR;
@@ -137,7 +137,7 @@ void GraphWin::writeGraphData() {
 }
 
 //This returns a list of the user's categories
-QStringList GraphWin::getCategories() {
+QStringList BarGraphWin::getCategories() {
     QStringList ret;
 
     for (int i = 0; i<categories->count(); i++) {
@@ -148,17 +148,17 @@ QStringList GraphWin::getCategories() {
     return ret;
 }
 
-void GraphWin::onAddSet() {
+void BarGraphWin::onAddSet() {
     QTreeWidgetItem *item = new QTreeWidgetItem(sets);
     item->setText(0,name->text());
     item->setText(1,range->text());
 }
 
-void GraphWin::onAddCategory() {
+void BarGraphWin::onAddCategory() {
     categories->addItem(category->text());
 }
 
-void GraphWin::onShowGraph() {
+void BarGraphWin::onShowGraph() {
     if (saveGraph->isChecked()) {
         writeGraphData();
     }

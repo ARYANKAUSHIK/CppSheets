@@ -24,7 +24,7 @@
 #include "tabwidget.hh"
 
 StatusBar *Window::statusbar;
-GraphWin *Window::graphWin;
+BarGraphWin *Window::graphWin;
 
 Window::Window() {
     this->setWindowTitle("CppSheets");
@@ -58,7 +58,7 @@ Window::Window() {
     statusbar = new StatusBar;
     this->setStatusBar(statusbar);
 
-    graphWin = new GraphWin;
+    graphWin = new BarGraphWin;
     graphWin->hide();
     this->addDockWidget(Qt::RightDockWidgetArea,graphWin);
 }
