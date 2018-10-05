@@ -283,12 +283,14 @@ QVector<GraphItem> XmlParser::allGraphItems(QString file, QString page) {
         XMLElement *etdOld;
 
         while (etd!=nullptr) {
-            QString name = QString(td->Attribute("name"));
-            QString range = QString(td->GetText());
+            QString name = QString(etd->Attribute("name"));
+            QString range = QString(etd->GetText());
 
             GraphSet set;
             set.name = name;
             set.range = range;
+
+            item.sets << set;
 
             etdOld = etd;
             etd = etdOld->NextSiblingElement("set");

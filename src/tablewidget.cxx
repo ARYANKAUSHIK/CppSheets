@@ -135,7 +135,13 @@ QModelIndexList TableWidget::currentSelectedItems() {
 }
 
 void TableWidget::addGraphItem(GraphItem item) {
-    graphItems.push_back(item);
+    for (int i = 0; i<graphItems.size(); i++) {
+        if (graphItems.at(i).name == item.name) {
+            graphItems.remove(i);
+        }
+    }
+
+    graphItems << item;
 }
 
 QVector<GraphItem> TableWidget::allGraphItems() {

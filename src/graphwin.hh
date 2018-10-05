@@ -28,10 +28,13 @@
 #include <QListWidget>
 #include <QCheckBox>
 
+#include "parser/sheet_item.hh"
+
 class GraphWin : public QDockWidget {
     Q_OBJECT
 public:
     GraphWin();
+    void loadGraphData(GraphItem item);
 private:
     QFrame *parent, *nameWidget, *addSetWidget, *categoryWidget;
     QVBoxLayout *parentLayout;

@@ -36,6 +36,8 @@ public:
     static void setCurrentSaved(bool saved);
     static void showGraphWin();
     static bool checkSave();
+
+    static GraphWin *graphWin;
 protected:
     void closeEvent(QCloseEvent *event);
 private:
@@ -45,5 +47,4 @@ private:
     GraphMenu *graphMenu;
     HelpMenu *helpMenu;
     static StatusBar *statusbar;
-    static GraphWin *graphWin;
 };

@@ -17,6 +17,7 @@
 #include "graph_list_dialog.hh"
 #include "../tabwidget.hh"
 #include "../tablewidget.hh"
+#include "../window.hh"
 
 GraphListDialog::GraphListDialog()
     : layout(new QVBoxLayout),
@@ -37,7 +38,26 @@ GraphListDialog::GraphListDialog()
     for (GraphItem item : gList) {
         graphs->addItem(item.name);
     }
+
+    connect(graphs,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onDoubleClick(QListWidgetItem *)));
 }
 
 GraphListDialog::~GraphListDialog() {
+}
+
+void GraphListDialog::onDoubleClick(QListWidgetItem *item) {
+    QString name = item->text();
+
+    auto list = TabWidget::currentWidget()->currentTable()->allGraphItems();
+    for (GraphItem item : list) {
+        if (item.name==name) {
+            if (!Window::graphWin->isVisible()) {
+                Window::graphWin->show();
+            }
+
+            Window::graphWin->loadGraphData(item);
+        }
+    }
+
+    this->close();
 }

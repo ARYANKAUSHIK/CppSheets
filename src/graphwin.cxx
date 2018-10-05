@@ -102,6 +102,21 @@ GraphWin::GraphWin()
     connect(showGraph,&QPushButton::clicked,this,&GraphWin::onShowGraph);
 }
 
+//Loads saved graph data for viewing
+void GraphWin::loadGraphData(GraphItem item) {
+    graphName->setText(item.name);
+
+    categories->clear();
+    categories->addItems(item.categories);
+
+    sets->clear();
+    for (GraphSet s : item.sets) {
+        QTreeWidgetItem *item = new QTreeWidgetItem(sets);
+        item->setText(0,s.name);
+        item->setText(1,s.range);
+    }
+}
+
 void GraphWin::writeGraphData() {
     GraphItem item;
     item.name = graphName->text();

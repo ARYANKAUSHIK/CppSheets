@@ -28,4 +28,6 @@ public:
 private:
     QVBoxLayout *layout;
     QListWidget *graphs;
+private slots:
+    void onDoubleClick(QListWidgetItem *item);
 };
