@@ -18,6 +18,8 @@
 
 #include <QDialog>
 #include <QVBoxLayout>
+#include <QToolBar>
+#include <QToolButton>
 #include <QtCharts/QChartView>
 
 QT_CHARTS_USE_NAMESPACE
@@ -28,5 +30,11 @@ public:
     explicit GraphDialog(QChartView *graph);
     ~GraphDialog();
 private:
+    QChartView *chart;
     QVBoxLayout *layout;
+    QToolBar *toolbar;
+    QToolButton *save, *fullscreen, *exit;
+private slots:
+    void onSaveClicked();
+    void onFullscreenClicked();
 };

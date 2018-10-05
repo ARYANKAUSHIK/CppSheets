@@ -192,15 +192,4 @@ void BarGraphWin::onShowGraph() {
 
     GraphDialog dialog(chart);
     dialog.exec();
-
-    /*QPixmap p = chart->grab();
-    QOpenGLWidget *glWidget  = chart->findChild<QOpenGLWidget*>();
-    if(glWidget){
-        QPainter painter(&p);
-        QPoint d = glWidget->mapToGlobal(QPoint())-chart->mapToGlobal(QPoint());
-        painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
-        painter.drawImage(d, glWidget->grabFramebuffer());
-        painter.end();
-    }
-    p.save("test.png", "PNG");*/
 }
