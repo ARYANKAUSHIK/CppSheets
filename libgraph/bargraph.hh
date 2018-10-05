@@ -28,10 +28,12 @@ QT_CHARTS_USE_NAMESPACE
 class BarGraph {
 public:
     BarGraph();
-    QChartView *generateGraph();
+    void setName(QString n);
     void addCategory(QString name);
     void addSet(QString name, QList<qreal> contents);
+    QChartView *generateGraph();
 private:
+    QString name = "";
     QBarSeries *series;
     QStringList categories;
 };

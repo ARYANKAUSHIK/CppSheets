@@ -18,6 +18,11 @@
 
 BarGraph::BarGraph() {
     series = new QBarSeries();
+    name = "My Bar Graph";
+}
+
+void BarGraph::setName(QString n) {
+    name = n;
 }
 
 void BarGraph::addCategory(QString name) {
@@ -33,7 +38,7 @@ void BarGraph::addSet(QString name, QList<qreal> contents) {
 QChartView *BarGraph::generateGraph() {
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("My Bar Graph");
+    chart->setTitle(name);
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QBarCategoryAxis *axis = new QBarCategoryAxis();
