@@ -38,10 +38,13 @@ public:
     bool isMath(int row, int col);
     QString formula(int row, int col);
     QModelIndexList currentSelectedItems();
+    void addGraphItem(GraphItem item);
+    QVector<GraphItem> allGraphItems();
 private:
     void keyPressEvent(QKeyEvent *event);
 private:
     QVector<MathItem> mathItems;
+    QVector<GraphItem> graphItems;
 private slots:
     void onCellChanged();
     void onItemChanged(QTableWidgetItem *item);

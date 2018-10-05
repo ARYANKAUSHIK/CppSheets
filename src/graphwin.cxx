@@ -116,7 +116,8 @@ void GraphWin::writeGraphData() {
         set.range = item->text(1);
     }
 
-    //TODO: Add to sheet widget in some way
+    auto table = TabWidget::currentWidget()->currentTable();
+    table->addGraphItem(item);
 }
 
 //This returns a list of the user's categories

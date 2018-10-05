@@ -59,6 +59,7 @@ private:
     QToolButton *addTab;
     QString filePath;
     bool saved = true;
+
     void addNewTab(int no);
 private slots:
     void onCellChanged();

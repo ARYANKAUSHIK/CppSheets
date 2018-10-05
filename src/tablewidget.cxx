@@ -134,6 +134,14 @@ QModelIndexList TableWidget::currentSelectedItems() {
     return this->selectedIndexes();
 }
 
+void TableWidget::addGraphItem(GraphItem item) {
+    graphItems.push_back(item);
+}
+
+QVector<GraphItem> TableWidget::allGraphItems() {
+    return graphItems;
+}
+
 void TableWidget::keyPressEvent(QKeyEvent *event) {
     //Logic for the enter or return keys
     if ((event->key()==Qt::Key_Enter)||(event->key()==Qt::Key_Return)) {
