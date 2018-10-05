@@ -14,19 +14,30 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with CppSheets. If not, see <https://www.gnu.org/licenses/>.
-#pragma once
+#include "graph_list_dialog.hh"
+#include "../tabwidget.hh"
+#include "../tablewidget.hh"
 
-#include <QMenu>
-#include <QAction>
+GraphListDialog::GraphListDialog()
+    : layout(new QVBoxLayout),
+      graphs(new QListWidget)
+{
+    this->setWindowTitle("Saved Graphs");
+    this->resize(600,400);
 
-class GraphMenu : public QMenu {
-    Q_OBJECT
-public:
-    GraphMenu();
-    ~GraphMenu();
-private:
-    QAction *showGraph, *savedGraphs;
-private slots:
-    void onShowGraph();
-    void onShowSavedGraphs();
-};
+    layout->setContentsMargins(0,0,0,0);
+    this->setLayout(layout);
+
+    //The list widget-> Displays graphs
+    layout->addWidget(graphs);
+
+    auto table = TabWidget::currentWidget()->currentTable();
+    auto gList = table->allGraphItems();
+
+    for (GraphItem item : gList) {
+        graphs->addItem(item.name);
+    }
+}
+
+GraphListDialog::~GraphListDialog() {
+}

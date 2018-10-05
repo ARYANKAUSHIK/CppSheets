@@ -16,21 +16,31 @@
 // along with CppSheets. If not, see <https://www.gnu.org/licenses/>.
 #include "graph_menu.hh"
 #include "../window.hh"
+#include "../dialogs/graph_list_dialog.hh"
 
 GraphMenu::GraphMenu() {
     this->setTitle("Graph");
 
     showGraph = new QAction("Show Graph Designer",this);
+    savedGraphs = new QAction("Show Saved Graphs",this);
 
     connect(showGraph,&QAction::triggered,this,&GraphMenu::onShowGraph);
+    connect(savedGraphs,&QAction::triggered,this,&GraphMenu::onShowSavedGraphs);
 
     this->addAction(showGraph);
+    this->addAction(savedGraphs);
 }
 
 GraphMenu::~GraphMenu() {
     delete showGraph;
+    delete savedGraphs;
 }
 
 void GraphMenu::onShowGraph() {
     Window::showGraphWin();
+}
+
+void GraphMenu::onShowSavedGraphs() {
+    GraphListDialog d;
+    d.exec();
 }

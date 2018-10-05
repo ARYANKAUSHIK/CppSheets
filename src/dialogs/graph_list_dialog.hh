@@ -16,17 +16,16 @@
 // along with CppSheets. If not, see <https://www.gnu.org/licenses/>.
 #pragma once
 
-#include <QMenu>
-#include <QAction>
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QListWidget>
 
-class GraphMenu : public QMenu {
+class GraphListDialog : public QDialog {
     Q_OBJECT
 public:
-    GraphMenu();
-    ~GraphMenu();
+    GraphListDialog();
+    ~GraphListDialog();
 private:
-    QAction *showGraph, *savedGraphs;
-private slots:
-    void onShowGraph();
-    void onShowSavedGraphs();
+    QVBoxLayout *layout;
+    QListWidget *graphs;
 };
