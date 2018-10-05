@@ -38,5 +38,6 @@ public:
     static void removePage(QString file, QString page);
     static void setData(QString file, QString page, QVector<SheetItem> items);
     static void setMathData(QString file, QString page, QVector<MathItem> items);
+    static void setGraphData(QString file, QString page, QVector<GraphItem> items);
     static XMLElement *getPageElement(XMLElement *root, QString title);
 };

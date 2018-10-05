@@ -248,6 +248,9 @@ void XmlParser::createPage(QString file, QString page) {
     XMLElement *newMath = doc->NewElement("math");
     newPage->InsertFirstChild(newMath);
 
+    XMLElement *newGraph = doc->NewElement("graph");
+    newPage->InsertFirstChild(newGraph);
+
     doc->SaveFile(file.toStdString().c_str());
 }
 
@@ -386,6 +389,60 @@ void XmlParser::setMathData(QString file, QString page, QVector<MathItem> items)
         td->SetAttribute("x",sx.toStdString().c_str());
         td->SetAttribute("y",sy.toStdString().c_str());
         td->SetText(current.equation.toStdString().c_str());
+    }
+
+    doc->SaveFile(file.toStdString().c_str());
+}
+
+void XmlParser::setGraphData(QString file, QString page, QVector<GraphItem> items) {
+    XMLDocument *doc = new XMLDocument;
+    doc->LoadFile(file.toStdString().c_str());
+
+    XMLElement *root = doc->FirstChildElement("sheet");
+    if (root==nullptr) {
+        return;
+    }
+
+    XMLElement *pageElement = getPageElement(root,page);
+    if (pageElement==nullptr) {
+        return;
+    }
+
+    XMLElement *graphElement = pageElement->FirstChildElement("graph");
+    if (graphElement==nullptr) {
+        return;
+    }
+    graphElement->DeleteChildren();
+
+    for (int i = 0; i<items.size(); i++) {
+        GraphItem current = items.at(i);
+
+        XMLElement *graphItem = doc->NewElement("item");
+        graphItem->SetAttribute("name",current.name.toStdString().c_str());
+        graphElement->InsertEndChild(graphItem);
+
+        if (current.type==GraphType::BAR) {
+            graphItem->SetAttribute("type","bar");
+        } else if (current.type==GraphType::PIE) {
+            graphItem->SetAttribute("type","pie");
+        }
+
+        //Write the categories
+        for (QString cat : current.categories) {
+            XMLElement *category = doc->NewElement("category");
+            graphItem->InsertEndChild(category);
+
+            category->SetText(cat.toStdString().c_str());
+        }
+
+        //Write the sets
+        for (GraphSet set : current.sets) {
+            XMLElement *setE = doc->NewElement("set");
+            graphItem->InsertEndChild(setE);
+
+            setE->SetAttribute("name",set.name.toStdString().c_str());
+            setE->SetText(set.range.toStdString().c_str());
+        }
     }
 
     doc->SaveFile(file.toStdString().c_str());

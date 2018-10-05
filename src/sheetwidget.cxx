@@ -186,6 +186,20 @@ QVector<MathItem> SheetWidget::mathData(QString page) {
     return items;
 }
 
+QVector<GraphItem> SheetWidget::graphData(QString page) {
+    QVector<GraphItem> items;
+
+    for (int i = 0; i<tabs->count(); i++ ) {
+        if (tabs->tabText(i)==page) {
+            TableWidget *table = static_cast<TableWidget *>(tabs->widget(i));
+            items = table->allGraphItems();
+            break;
+        }
+    }
+
+    return items;
+}
+
 void SheetWidget::setFile(QString path) {
     filePath = path;
     Window::setCurrentPath(path);

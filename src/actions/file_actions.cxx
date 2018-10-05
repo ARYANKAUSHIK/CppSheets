@@ -57,11 +57,15 @@ void FileActions::saveFile() {
     for (int i = 0; i<pages.size(); i++) {
         auto data = TabWidget::currentWidget()->data(pages.at(i));
         auto mathData = TabWidget::currentWidget()->mathData(pages.at(i));
+        auto graphData = TabWidget::currentWidget()->graphData(pages.at(i));
+
         if (!Parser::pageExists(filePath,pages.at(i))) {
             Parser::createPage(filePath,pages.at(i));
         }
+
         Parser::setData(filePath,pages.at(i),data);
         Parser::setMathData(filePath,pages.at(i),mathData);
+        Parser::setGraphData(filePath,pages.at(i),graphData);
     }
 
     auto filePages = Parser::pages(filePath);

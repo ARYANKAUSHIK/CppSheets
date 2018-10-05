@@ -109,11 +109,12 @@ void GraphWin::writeGraphData() {
     item.categories = getCategories();
 
     for (int i = 0; i<sets->topLevelItemCount(); i++) {
-        auto item = sets->topLevelItem(i);
+        auto current = sets->topLevelItem(i);
 
         GraphSet set;
-        set.name = item->text(0);
-        set.range = item->text(1);
+        set.name = current->text(0);
+        set.range = current->text(1);
+        item.sets << set;
     }
 
     auto table = TabWidget::currentWidget()->currentTable();

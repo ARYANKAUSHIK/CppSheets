@@ -32,6 +32,7 @@ public:
     static void removePage(QString file, QString page);
     static void setData(QString file, QString page, QVector<SheetItem> items);
     static void setMathData(QString file, QString page, QVector<MathItem> items);
+    static void setGraphData(QString file, QString page, QVector<GraphItem> items);
 private:
 	static bool isXlsx(QString file);
 };

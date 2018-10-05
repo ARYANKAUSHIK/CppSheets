@@ -105,6 +105,12 @@ void Parser::setMathData(QString file, QString page, QVector<MathItem> items) {
 	}
 }
 
+void Parser::setGraphData(QString file, QString page, QVector<GraphItem> items) {
+    if (!(file.endsWith(".csv") || file.endsWith(".xlsx"))) {
+        XmlParser::setGraphData(file,page,items);
+    }
+}
+
 bool Parser::isXlsx(QString file) {
 	if (file.endsWith(".xlsx")) {
 		return true;
