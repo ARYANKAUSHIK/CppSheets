@@ -139,6 +139,8 @@ void BarGraphWin::writeGraphData() {
 
     auto table = TabWidget::currentWidget()->currentTable();
     table->addGraphItem(item);
+
+    TabWidget::currentWidget()->setSaved(false);
 }
 
 //This returns a list of the user's categories
