@@ -56,5 +56,6 @@ private slots:
     void onCustomContext(QPoint point);
 
     void sets_onRenameClicked();
+    void sets_onEditClicked();
     void sets_onDeleteClicked();
 };

@@ -208,6 +208,7 @@ void BarGraphWin::onCustomContext(QPoint point) {
     QAction *deleteItem = new QAction("Delete",this);
 
     connect(rename,&QAction::triggered,this,&BarGraphWin::sets_onRenameClicked);
+    connect(editRange,&QAction::triggered,this,&BarGraphWin::sets_onEditClicked);
     connect(deleteItem,&QAction::triggered,this,&BarGraphWin::sets_onDeleteClicked);
 
     menu.addAction(rename);
@@ -225,6 +226,17 @@ void BarGraphWin::sets_onRenameClicked() {
 
     if (ok && !name.isEmpty()) {
         item->setText(0,name);
+    }
+}
+
+void BarGraphWin::sets_onEditClicked() {
+    QTreeWidgetItem *item = sets->itemAt(clickedPoint);
+
+    bool ok = false;
+    QString range = QInputDialog::getText(this,"Edit Range","Enter new range:",QLineEdit::Normal,item->text(1),&ok);
+
+    if (ok && !range.isEmpty()) {
+        item->setText(1,range);
     }
 }
 
