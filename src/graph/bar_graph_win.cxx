@@ -203,17 +203,9 @@ void BarGraphWin::onCustomContext(QPoint point) {
 
     QMenu menu;
 
-    QAction *rename = new QAction("Rename",this);
-    QAction *editRange = new QAction("Edit Range",this);
-    QAction *deleteItem = new QAction("Delete",this);
-
-    connect(rename,&QAction::triggered,this,&BarGraphWin::sets_onRenameClicked);
-    connect(editRange,&QAction::triggered,this,&BarGraphWin::sets_onEditClicked);
-    connect(deleteItem,&QAction::triggered,this,&BarGraphWin::sets_onDeleteClicked);
-
-    menu.addAction(rename);
-    menu.addAction(editRange);
-    menu.addAction(deleteItem);
+    menu.addAction("Rename",this,&BarGraphWin::sets_onRenameClicked);
+    menu.addAction("Edit Range",this,&BarGraphWin::sets_onEditClicked);
+    menu.addAction("Delete",this,&BarGraphWin::sets_onDeleteClicked);
 
     menu.exec(QCursor::pos());
 }
