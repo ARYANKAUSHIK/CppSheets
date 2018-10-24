@@ -55,5 +55,6 @@ private slots:
     void onShowGraph();
     void onCustomContext(QPoint point);
 
+    void sets_onRenameClicked();
     void sets_onDeleteClicked();
 };

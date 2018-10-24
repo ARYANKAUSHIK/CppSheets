@@ -19,6 +19,7 @@
 #include <QList>
 #include <QMenu>
 #include <QAction>
+#include <QInputDialog>
 #include <iostream>
 
 #include "bar_graph_win.hh"
@@ -206,6 +207,7 @@ void BarGraphWin::onCustomContext(QPoint point) {
     QAction *editRange = new QAction("Edit Range",this);
     QAction *deleteItem = new QAction("Delete",this);
 
+    connect(rename,&QAction::triggered,this,&BarGraphWin::sets_onRenameClicked);
     connect(deleteItem,&QAction::triggered,this,&BarGraphWin::sets_onDeleteClicked);
 
     menu.addAction(rename);
@@ -213,6 +215,17 @@ void BarGraphWin::onCustomContext(QPoint point) {
     menu.addAction(deleteItem);
 
     menu.exec(QCursor::pos());
+}
+
+void BarGraphWin::sets_onRenameClicked() {
+    QTreeWidgetItem *item = sets->itemAt(clickedPoint);
+
+    bool ok = false;
+    QString name = QInputDialog::getText(this,"Rename","Enter new name:",QLineEdit::Normal,item->text(0),&ok);
+
+    if (ok && !name.isEmpty()) {
+        item->setText(0,name);
+    }
 }
 
 void BarGraphWin::sets_onDeleteClicked() {
