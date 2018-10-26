@@ -236,6 +236,8 @@ void Math::solveColumn(MathItem current, TableWidget *table) {
     for (int i = 1; i<current.equation.length(); i++) {
         QChar c = current.equation.at(i);
         if (c=='+' || c=='-' || c=='*' || c=='/') {
+            currentS = currentS.trimmed();
+
             QChar c1 = currentS.at(0);
             if (c1.isLetter()) {
                 Cell cell = FormulaUtils::cellFromName(currentS,table);
