@@ -112,16 +112,8 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
     } else if (name=="IF") {
         solveIF(equ,current,table);
     } else {
+        //TODO: Add some kind of check rather than just defaulting to zero
         solveColumn(current,table);
-
-        //Used for column functions
-        /*if (!name.at(0).isLetter()) {
-            solveColumn(current,table);
-        } else {
-            //Unknown formula name
-            std::cout << "Unknown formula" << std::endl;
-            ret = false;
-        }*/
     }
 
     return ret;
