@@ -86,6 +86,7 @@ target_link_libraries(CppSheets
     Qt5::Charts
     xlnt
     graph
+	math
 )
 
 if (UNIX)

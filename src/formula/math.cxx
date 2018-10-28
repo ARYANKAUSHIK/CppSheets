@@ -18,6 +18,7 @@
 #include <QMessageBox>
 #include <iostream>
 #include <cmath>
+#include <math.hh>
 
 #include "math.hh"
 #include "formula_utils.hh"
@@ -111,14 +112,16 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
     } else if (name=="IF") {
         solveIF(equ,current,table);
     } else {
+        solveColumn(current,table);
+
         //Used for column functions
-        if (equ.length()==0) {
+        /*if (!name.at(0).isLetter()) {
             solveColumn(current,table);
         } else {
             //Unknown formula name
             std::cout << "Unknown formula" << std::endl;
             ret = false;
-        }
+        }*/
     }
 
     return ret;
@@ -230,7 +233,7 @@ void Math::solveIF(QString statement, MathItem current, TableWidget *table) {
 
 //Solves a column
 void Math::solveColumn(MathItem current, TableWidget *table) {
-    QStringList objects;
+    QString problem = "";
 
     QString currentS = "";
     for (int i = 1; i<current.equation.length(); i++) {
@@ -243,12 +246,11 @@ void Math::solveColumn(MathItem current, TableWidget *table) {
                 Cell cell = FormulaUtils::cellFromName(currentS,table);
                 currentS = cell.content;
             }
-            objects.push_back(currentS);
-            currentS = "";
 
-            QString sym = "";
-            sym+=c;
-            objects.push_back(c);
+            problem+=currentS;
+            problem+=c;
+
+            currentS = "";
         } else {
             currentS+=c;
         }
@@ -259,8 +261,8 @@ void Math::solveColumn(MathItem current, TableWidget *table) {
         Cell cell = FormulaUtils::cellFromName(currentS,table);
         currentS = cell.content;
     }
-    objects.push_back(currentS);
+    problem+=currentS;
 
-    double answer = FormulaUtils::solve(objects);
+    double answer = solve_chain(problem.toStdString());
     FormulaUtils::printResult(answer,current,table);
 }

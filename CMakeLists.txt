@@ -13,9 +13,12 @@ find_package(Qt5 REQUIRED COMPONENTS
 )
 
 add_compile_options(-std=c++14)
+
 include_directories(xlnt/include)
 include_directories(libgraph)
+include_directories(libmath)
 
 add_subdirectory(xlnt)
 add_subdirectory(libgraph)
+add_subdirectory(libmath)
 add_subdirectory(src)
