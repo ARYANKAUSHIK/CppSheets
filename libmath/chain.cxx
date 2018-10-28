@@ -58,7 +58,7 @@ double solve_chain(std::string problem) {
     int current_layer = layers;
     std::vector<std::string> n_objects;
 
-    while (current_layer>1) {
+    while (current_layer>0) {
         int cp = 1;
         std::vector<std::string> objects_tmp;
 
