@@ -69,14 +69,14 @@ double solve_chain(std::string problem) {
             to_parse = n_objects;
         }
 
-        for (int i = 0; i<to_parse.size(); i++) {
+        for (unsigned int i = 0; i<to_parse.size(); i++) {
             if (to_parse.at(i) == "(") {
                 ++cp;
 
                 if (cp == current_layer) {
                     std::string prob = "";
 
-                    for (int j = i+1; j<to_parse.size(); j++) {
+                    for (unsigned int j = i+1; j<to_parse.size(); j++) {
                         if (to_parse.at(j) == ")") {
                             double answer = solve_column(prob);
                             objects_tmp.push_back(std::to_string(answer));
