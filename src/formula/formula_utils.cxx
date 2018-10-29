@@ -217,3 +217,13 @@ bool FormulaUtils::isRange(QString equation) {
     return false;
 }
 
+//Checks to see if we have a column equation
+bool FormulaUtils::isColumnEqu(QString equation) {
+    if (equation.contains("+") || equation.contains("-")
+            || equation.contains("*") || equation.contains("/")) {
+        return true;
+    }
+
+    return false;
+}
+

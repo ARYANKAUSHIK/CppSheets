@@ -111,8 +111,11 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
     } else if (name=="IF") {
         solveIF(equ,current,table);
     } else {
-        //TODO: Add some kind of check rather than just defaulting to zero
-        solveColumn(current,table);
+        if (FormulaUtils::isColumnEqu(equ)) {
+            solveColumn(current,table);
+        } else {
+            std::cout << "Error: Unknown equation." << std::endl;
+        }
     }
 
     return ret;
