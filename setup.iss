@@ -41,6 +41,7 @@ Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\D3Dcompiler_47.
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libGLESV2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libxlnt.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\libmath.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\patrick\Projects_public\CppSheets\build\winbin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion

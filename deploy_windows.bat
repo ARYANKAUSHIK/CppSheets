@@ -6,6 +6,7 @@ mkdir winbin
 copy src\CppSheets.exe .\winbin
 copy src\libxlnt.dll .\winbin
 copy src\libgraph.dll .\winbin
+copy src\libmath.dll .\winbin
 
 cd winbin
 windeployqt --release --compiler-runtime CppSheets.exe
