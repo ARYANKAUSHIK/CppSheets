@@ -21,8 +21,13 @@
 #include "formula_utils.hh"
 
 //The logic for the SUM formula
-double MathFuncs::sum(QString equ, TableWidget *table) {
+void MathFuncs::sum(QString equ, MathItem current, TableWidget *table) {
     QStringList range = FormulaUtils::rangeContents(equ,table);
+    if (range.length() == 0) {
+        QString err = "#!SYNTAX ERROR";
+        FormulaUtils::printResult(err,current,table);
+        return;
+    }
 
     double answer = 0;
 
@@ -31,7 +36,7 @@ double MathFuncs::sum(QString equ, TableWidget *table) {
         answer+=c;
     }
 
-    return answer;
+    FormulaUtils::printResult(answer,current,table);
 }
 
 //The logic for the AVERAGE formula

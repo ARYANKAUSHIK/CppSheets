@@ -22,7 +22,7 @@
 
 class MathFuncs {
 public:
-    static double sum(QString equ, TableWidget *table);
+    static void sum(QString equ, MathItem current, TableWidget *table);
     static double average(QString equ, TableWidget *table);
     static double abs(QString equ, TableWidget *table);
     static double pow(QString equ, TableWidget *table);

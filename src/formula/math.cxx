@@ -44,8 +44,7 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
 
     //The SUM function
     if (name=="SUM") {
-        double answer = MathFuncs::sum(equ,table);
-        FormulaUtils::printResult(answer,current,table);
+        MathFuncs::sum(equ,current,table);
 
     //The AVERAGE function
     } else if (name=="AVERAGE") {
