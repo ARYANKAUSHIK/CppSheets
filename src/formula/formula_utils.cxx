@@ -162,28 +162,6 @@ Cell FormulaUtils::cellFromName(QString name, TableWidget *table) {
     return c;
 }
 
-//Solves a column of objects
-double FormulaUtils::solve(QStringList objects) {
-    double result = QVariant(objects.at(0)).toDouble();
-
-    int len = objects.length();
-    for (int i = 1; i<len; i+=2) {
-        double no = QVariant(objects.at(i+1)).toDouble();
-        QString op = objects.at(i);
-        if (op=="+") {
-            result+=no;
-        } else if (op=="-") {
-            result-=no;
-        } else if (op=="*") {
-            result*=no;
-        } else if (op=="/") {
-            result/=no;
-        }
-    }
-
-    return result;
-}
-
 //This prints the results of our calculations to the table
 void FormulaUtils::printResult(QString answer, MathItem current, TableWidget *table) {
     QTableWidgetItem *item = table->item(current.x,current.y);

@@ -27,7 +27,6 @@ public:
     static QString formulaEqu(QString equation);
     static QStringList rangeContents(QString range, TableWidget *table);
     static Cell cellFromName(QString name, TableWidget *table);
-    static double solve(QStringList objects);
     static void printResult(QString answer, MathItem current, TableWidget *table);
     static void printResult(double answer, MathItem current, TableWidget *table);
 };
