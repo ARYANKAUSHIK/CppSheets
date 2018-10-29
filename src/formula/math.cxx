@@ -114,7 +114,7 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
         if (FormulaUtils::isColumnEqu(equ)) {
             solveColumn(current,table);
         } else {
-            std::cout << "Error: Unknown equation." << std::endl;
+            FormulaUtils::printResult("#!UNKN FORMULA",current,table);
         }
     }
 
