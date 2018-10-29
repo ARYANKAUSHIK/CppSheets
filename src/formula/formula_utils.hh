@@ -29,4 +29,5 @@ public:
     static Cell cellFromName(QString name, TableWidget *table);
     static void printResult(QString answer, MathItem current, TableWidget *table);
     static void printResult(double answer, MathItem current, TableWidget *table);
+    static bool isRange(QString equation);
 };

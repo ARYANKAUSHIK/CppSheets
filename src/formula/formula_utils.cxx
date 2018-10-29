@@ -125,6 +125,9 @@ QStringList FormulaUtils::rangeContents(QString range, TableWidget *table) {
 Cell FormulaUtils::cellFromName(QString name, TableWidget *table) {
     Cell c;
 
+    //Make sure the name is trimmed
+    name = name.trimmed();
+
     //Separate the string into parts
     QString part1 = "";
     QString part2 = "";
@@ -175,5 +178,42 @@ void FormulaUtils::printResult(QString answer, MathItem current, TableWidget *ta
 void FormulaUtils::printResult(double answer, MathItem current, TableWidget *table) {
     QString answerStr = QVariant(answer).toString();
     printResult(answerStr,current,table);
+}
+
+//Checks to see if an equation is a range
+bool FormulaUtils::isRange(QString equation) {
+   //First, see if we have a colon
+    if (!equation.contains(":") || equation.count(":") > 1) {
+        return false;
+    }
+
+    //So we have a single colon
+    //Now break up the string and make sure we have valid cells
+    QString part1 = "";
+    QString part2 = "";
+    bool found = false;
+
+    for (QChar c : equation) {
+        if (c == ':') {
+            found = true;
+        } else {
+            if (found) {
+                part2 += c;
+            } else {
+                part1 += c;
+            }
+        }
+    }
+
+    part1 = part1.trimmed();
+    part2 = part2.trimmed();
+
+    if (part1.at(0).isLetter() && part1.at(part1.length()-1).isNumber()) {
+        if (part2.at(0).isLetter() && part2.at(part2.length()-1).isNumber()) {
+           return true;
+        }
+    }
+
+    return false;
 }
 

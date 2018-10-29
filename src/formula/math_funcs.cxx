@@ -22,12 +22,13 @@
 
 //The logic for the SUM formula
 void MathFuncs::sum(QString equ, MathItem current, TableWidget *table) {
-    QStringList range = FormulaUtils::rangeContents(equ,table);
-    if (range.length() == 0) {
+    if (!FormulaUtils::isRange(equ)) {
         QString err = "#!SYNTAX ERROR";
         FormulaUtils::printResult(err,current,table);
         return;
     }
+
+    QStringList range = FormulaUtils::rangeContents(equ,table);
 
     double answer = 0;
 
