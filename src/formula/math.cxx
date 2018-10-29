@@ -31,8 +31,8 @@ void Math::updateMath(QVector<MathItem> mathItems, TableWidget *table) {
 
     for (int i = 0; i<mathItems.size(); i++) {
         MathItem current = mathItems.at(i);
-        QString name = FormulaUtils::formulaName(current.equation);
-        QString equ = FormulaUtils::formulaEqu(current.equation);
+        QString name = FormulaUtils::formulaName(current.equation).trimmed();
+        QString equ = FormulaUtils::formulaEqu(current.equation).trimmed();
 
         interpret(name,equ,current,table);
     }
