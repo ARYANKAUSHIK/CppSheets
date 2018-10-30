@@ -37,36 +37,39 @@ TableWidget::TableWidget() {
 }
 
 void TableWidget::loadHeaders() {
-    QStringList letters;
     QStringList headers;
+    QStringList letters;
 
-    QFile file(":/headers.txt");
-    if (file.open(QFile::ReadOnly)) {
-        QTextStream reader(&file);
-        while (!reader.atEnd()) {
-            letters.push_back(reader.readLine());
-        }
+    QString first = "";
+    QString current = "";
+
+    for (char c = 'A'; c <= 'Z'; c++) {
+        current += c;
+        letters.push_back(current);
+        current = "";
     }
 
-    int index = 0;
     int len = letters.length();
-    int currentFirst = -1;
+    int index = 0;
+    int fIndex = 0;
+
     for (int i = 0; i<1000; i++) {
-        if (i>0) {
-            if (i%len==0) {
-                currentFirst++;
-                index = 0;
+        if (index == len) {
+            index = 0;
+
+            first = letters.at(fIndex);
+            fIndex++;
+
+            if (fIndex == len) {
+                fIndex = 0;
             }
         }
-        QString result = "";
-        if (currentFirst>-1) {
-            if (currentFirst==len) {
-                break;
-            }
-            result+=letters.at(currentFirst);
-        }
-        result+=letters.at(index);
-        headers.push_back(result);
+\
+        current = first;
+        current += letters.at(index);
+        headers.push_back(current);
+        current = "";
+
         index++;
     }
 
