@@ -111,7 +111,7 @@ bool Math::interpret(QString name, QString equ, MathItem current, TableWidget *t
     } else if (name=="IF") {
         solveIF(equ,current,table);
     } else {
-        if (FormulaUtils::isColumnEqu(equ)) {
+        if (FormulaUtils::isColumnEqu(name)) {
             solveColumn(current,table);
         } else {
             FormulaUtils::printResult("#!UNKN FORMULA",current,table);
