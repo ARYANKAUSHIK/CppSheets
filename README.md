@@ -9,7 +9,8 @@ Cell merge
 Custom XML-based file format   
 Basic xlsx (MS Excel) support   
 CSV loading support   
-Formula support (which is fairly good)
+Formula support (which is fairly good)   
+Basic graphing support
 
 For more information, see the wiki.
 
